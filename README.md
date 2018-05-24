@@ -1,8 +1,8 @@
 # EVM Analyzer Benchmark Suite
 
-This repo keeps a collection of benchmarks for evaluating the precision of EVM code analysis tools.
+This repo keeps benchmarks for evaluating the precision of EVM code analysis tools.
 
-The results of running popular tools on these benchmarks can be viewed here:
+A report comparing some of the popular tools on these benchmarks can be found here:
 
 https://diligence.consensys.net/evm-analyzer-benchmark-suite
 
