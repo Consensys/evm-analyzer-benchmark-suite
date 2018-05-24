@@ -4,7 +4,7 @@ This repo keeps a collection of benchmarks for evaluating the precision of EVM c
 
 The results of running popular tools on these benchmarks can be viewed here:
 
-https://consensys.net/diligence/evm-analyzer-benchmark-suite
+https://diligence.consensys.net/evm-analyzer-benchmark-suite
 
 Please submit as a pull request if you have a benchmark that you would like contribute.
 
