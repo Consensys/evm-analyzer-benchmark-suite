@@ -1,0 +1,14 @@
+==== Transaction order dependence ====
+Type: Warning
+Contract: Benchmark
+Function name: setReward()
+PC address: 316
+A possible transaction order independence vulnerability exists in function setReward(). The value or direction of the call statement is determined from a tainted storage location
+--------------------
+In file: /home/vagrant/host/benchmarks/./eth_tx_order_dependence_2.sol:14
+
+owner.transfer(reward)
+
+--------------------
+
+

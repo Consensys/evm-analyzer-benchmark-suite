@@ -1,0 +1,9 @@
+2018-05-24 17:36:23,489: [9325] m.main:INFO: Beginning analysis
+2018-05-24 17:36:23,884: [9325] m.ethereum:INFO: Starting symbolic transaction: 1
+2018-05-24 17:36:24,130: [9325] m.ethereum:INFO: Generated testcase No. 0 - REVERT
+2018-05-24 17:36:25,422: [9325] m.ethereum:WARNING: Integer underflow at SUB instruction
+2018-05-24 17:36:25,492: [9325] m.ethereum:INFO: Generated testcase No. 1 - REVERT
+2018-05-24 17:36:26,693: [9325] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 3 | Alive States: 1
+2018-05-24 17:36:26,702: [9588] m.ethereum:INFO: Generated testcase No. 2 - STOP
+2018-05-24 17:36:27,987: [9325] m.ethereum:INFO: Results in /home/vagrant/mcore_zO_UNU
+EXITSTATUS=0

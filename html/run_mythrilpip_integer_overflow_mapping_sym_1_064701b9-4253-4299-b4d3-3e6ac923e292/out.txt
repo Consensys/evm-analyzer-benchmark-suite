@@ -1,0 +1,15 @@
+==== Integer Underflow ====
+Type: Warning
+Contract: Benchmark
+Function name: init(uint256,uint256)
+PC address: 145
+A possible integer underflow exists in the function `init(uint256,uint256)`.
+The subtraction may result in a value < 0.
+--------------------
+In file: /home/vagrant/host/benchmarks/./integer_overflow_mapping_sym_1.sol:7
+
+map[k] -= v
+
+--------------------
+
+

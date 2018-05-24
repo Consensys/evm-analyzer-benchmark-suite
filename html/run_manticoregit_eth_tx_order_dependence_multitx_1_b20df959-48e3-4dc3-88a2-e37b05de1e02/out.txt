@@ -1,0 +1,17 @@
+2018-05-24 17:39:38,870: [20489] m.main:INFO: Beginning analysis
+2018-05-24 17:39:41,326: [20489] m.ethereum:INFO: Starting symbolic transaction: 1
+2018-05-24 17:39:41,637: [20489] m.ethereum:INFO: Generated testcase No. 0 - REVERT
+2018-05-24 17:39:42,531: [20489] m.ethereum:INFO: Generated testcase No. 1 - REVERT
+2018-05-24 17:39:43,860: [20489] m.ethereum:INFO: Generated testcase No. 2 - REVERT
+2018-05-24 17:39:45,131: [20489] m.ethereum:INFO: Generated testcase No. 3 - REVERT
+2018-05-24 17:39:45,994: [20489] m.ethereum:INFO: Generated testcase No. 4 - REVERT
+2018-05-24 17:39:47,364: [20489] m.ethereum:INFO: Generated testcase No. 5 - REVERT
+2018-05-24 17:39:48,243: [20489] m.ethereum:INFO: Generated testcase No. 6 - REVERT
+2018-05-24 17:39:49,038: [20489] m.ethereum:INFO: Generated testcase No. 7 - REVERT
+2018-05-24 17:39:49,854: [20489] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 9 | Alive States: 4
+2018-05-24 17:39:49,881: [21485] m.ethereum:INFO: Generated testcase No. 8 - RETURN
+2018-05-24 17:39:50,592: [21485] m.ethereum:INFO: Generated testcase No. 9 - RETURN
+2018-05-24 17:39:51,331: [21485] m.ethereum:INFO: Generated testcase No. 10 - RETURN
+2018-05-24 17:39:52,182: [21485] m.ethereum:INFO: Generated testcase No. 11 - STOP
+2018-05-24 17:39:52,989: [20489] m.ethereum:INFO: Results in /home/vagrant/mcore_RztUb5
+EXITSTATUS=0

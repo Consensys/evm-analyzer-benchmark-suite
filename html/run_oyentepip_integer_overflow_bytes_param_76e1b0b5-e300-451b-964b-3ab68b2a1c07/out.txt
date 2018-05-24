@@ -1,0 +1,13 @@
+WARNING:root:You are using an untested version of z3. 4.5.0 is the officially tested version
+WARNING:root:You are using evm version 1.8.2. The supported version is 1.6.6
+WARNING:root:You are using solc version 0.4.21, The latest supported version is 0.4.17
+INFO:root:Contract /home/vagrant/host/benchmarks/./integer_overflow_bytes_param.sol:Benchmark:
+INFO:oyente.symExec:Running, please wait...
+INFO:oyente.symExec:	============ Results ===========
+INFO:oyente.symExec:	  EVM code coverage: 	 65.9%
+INFO:oyente.symExec:	  Callstack bug: 	 False
+INFO:oyente.symExec:	  Money concurrency bug: False
+INFO:oyente.symExec:	  Time dependency bug: 	 False
+INFO:oyente.symExec:	  Reentrancy bug: 	 False
+INFO:oyente.symExec:	  Assertion failure: 	 False
+INFO:oyente.symExec:	====== Analysis Completed ======

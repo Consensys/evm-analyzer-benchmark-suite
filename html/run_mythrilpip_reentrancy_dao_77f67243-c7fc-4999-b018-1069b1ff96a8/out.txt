@@ -1,0 +1,69 @@
+==== Message call to external contract ====
+Type: Warning
+Contract: Benchmark
+Function name: withdrawAll()
+PC address: 247
+This contract executes a message call to the address of the transaction sender. Generally, it is not recommended to call user-supplied addresses using Solidity's call() construct. Note that attackers might leverage reentrancy attacks to exploit race conditions or manipulate this contract's state.
+--------------------
+In file: /home/vagrant/host/benchmarks/./reentrancy_dao.sol:11
+
+msg.sender.call.value(oCredit)()
+
+--------------------
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Benchmark
+Function name: deposit()
+PC address: 407
+A possible integer overflow exists in the function `deposit()`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: /home/vagrant/host/benchmarks/./reentrancy_dao.sol:18
+
+credit[msg.sender] += msg.value
+
+--------------------
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Benchmark
+Function name: deposit()
+PC address: 423
+A possible integer overflow exists in the function `deposit()`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: /home/vagrant/host/benchmarks/./reentrancy_dao.sol:19
+
+balance += msg.value
+
+--------------------
+
+==== State change after external call ====
+Type: Warning
+Contract: Benchmark
+Function name: withdrawAll()
+PC address: 332
+The contract account state is changed after an external call. Consider that the called contract could re-enter the function before this state change takes place. This can lead to business logic vulnerabilities.
+--------------------
+In file: /home/vagrant/host/benchmarks/./reentrancy_dao.sol:13
+
+credit[msg.sender] = 0
+
+--------------------
+
+==== Integer Underflow ====
+Type: Warning
+Contract: Benchmark
+Function name: withdrawAll()
+PC address: 200
+A possible integer underflow exists in the function `withdrawAll()`.
+The subtraction may result in a value < 0.
+--------------------
+In file: /home/vagrant/host/benchmarks/./reentrancy_dao.sol:10
+
+balance -= oCredit
+
+--------------------
+
+

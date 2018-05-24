@@ -1,0 +1,11 @@
+2018-05-24 17:35:19,770: [6103] m.main:INFO: Beginning analysis
+2018-05-24 17:35:20,230: [6103] m.ethereum:INFO: Starting symbolic transaction: 1
+2018-05-24 17:35:20,701: [6103] m.ethereum:INFO: Generated testcase No. 0 - REVERT
+2018-05-24 17:35:21,314: [6103] m.ethereum:INFO: Generated testcase No. 1 - REVERT
+2018-05-24 17:35:21,965: [6103] m.ethereum:INFO: Generated testcase No. 2 - REVERT
+2018-05-24 17:35:23,235: [6103] m.ethereum:WARNING: Integer overflow at MUL instruction
+2018-05-24 17:35:23,254: [6103] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 4 | Alive States: 2
+2018-05-24 17:35:23,274: [6368] m.ethereum:INFO: Generated testcase No. 3 - RETURN
+2018-05-24 17:35:23,830: [6368] m.ethereum:INFO: Generated testcase No. 4 - STOP
+2018-05-24 17:35:24,940: [6103] m.ethereum:INFO: Results in /home/vagrant/mcore_5EYOmD
+EXITSTATUS=0

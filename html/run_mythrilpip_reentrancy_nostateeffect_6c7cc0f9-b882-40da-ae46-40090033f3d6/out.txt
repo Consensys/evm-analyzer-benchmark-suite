@@ -1,0 +1,14 @@
+==== Message call to external contract ====
+Type: Warning
+Contract: Benchmark
+Function name: run(address,uint256)
+PC address: 261
+This contract executes a message call to an address provided as a function argument. Generally, it is not recommended to call user-supplied addresses using Solidity's call() construct. Note that attackers might leverage reentrancy attacks to exploit race conditions or manipulate this contract's state.
+--------------------
+In file: /home/vagrant/host/benchmarks/./reentrancy_nostateeffect.sol:10
+
+Runner(base).run(param)
+
+--------------------
+
+

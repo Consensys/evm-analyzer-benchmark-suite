@@ -1,0 +1,8 @@
+2018-05-24 17:38:17,634: [15955] m.main:INFO: Beginning analysis
+2018-05-24 17:38:17,911: [15955] m.ethereum:INFO: Starting symbolic transaction: 1
+2018-05-24 17:38:18,158: [15955] m.ethereum:INFO: Generated testcase No. 0 - REVERT
+2018-05-24 17:38:18,863: [15955] m.ethereum:INFO: Generated testcase No. 1 - THROW
+2018-05-24 17:38:19,414: [15955] m.ethereum:INFO: Generated testcase No. 2 - REVERT
+2018-05-24 17:38:20,012: [15955] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 4 | Alive States: 0
+2018-05-24 17:38:20,028: [15955] m.ethereum:INFO: Results in /home/vagrant/mcore_D45xsR
+EXITSTATUS=0

@@ -1,0 +1,4439 @@
+<html>
+
+    <style>
+        table, th, td {
+            border: 1px solid #cccccc;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        body {
+            font-family: "Arial";
+        }
+    </style>
+
+    <h1>EVM Code Analysis Tool Evaluation</h1>
+
+    <p>This page evaluates the precision of EVM code analysis tools on a set of micro-benchmarks.
+    <br>
+    Please contribute new benchmarks and submit issues on the <a href="https://github.com/ConsenSys/evm-analyzer-benchmark-suite">Github</a> repo.
+    <br>
+    <br>
+
+    <h3 id="results">Results</h3>
+    Green means the tool gives the expected result, and red means it did not.
+    <br>
+    Click on the benchmark name to see its Solidity code.
+    <br>
+    See the <a href="#terms">terminology</a> section for definitions.
+    <br>
+    <br>
+    <table style="font-size: 12px">
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+        
+            <td align="center" width="150px">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center" width="150px">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center" width="150px">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+        
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#fccf66721cc079718b32d2978618a79a718ff84c2c2d0b13ec0e96201f55447a">minimal</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_minimal_7a6af87d-f06f-42be-a249-198156c6a22c/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_minimal_c7aff662-d06e-4cbb-84de-74de1e0049fa/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_minimal_45179c1d-1c09-4adf-adf4-e7c08256eaf9/out.txt">False Negative</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#8c4f0e03b79f0c94d5d084e6d3a952908487f419c6acbfcd9df0a9c2727777a7">add</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_add_ea90f677-9535-43fd-9d7f-1bb9a54f08d5/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_add_705032e4-1ccf-4521-990c-a49bfca91903/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_add_7a932dee-ccbb-4004-b6b3-614fc0e041ab/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#35c729449c98ea38b4dd5ceba51a678e9e986125bfd8ef9dcc1eb88b5cc21218">mul</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_mul_4f311d40-2d7f-4392-bec4-c6ecb2893f81/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_mul_01adcc26-80e7-42c5-9985-cd6ffd9a0ebb/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_mul_2c7194cd-9146-48e3-b958-6bea2f3df3bb/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#8c1c6bf4ac94d216ad6a41b379cf30f7cb9d0d1c0ecc9158d1d4123ada81bb12">path 1</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_path_1_4fe5e769-3231-4104-b11d-482d86cf1e9f/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_path_1_4a52ffba-4f65-49d9-9a9e-b0b16d04c64b/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_path_1_6c9d58d1-7a74-43e8-8999-09c104ecd1c2/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#1a53a16551c8b86fba217107cc5cadfbcc22c52b37b13b9ea3f947eabaaefef2">benign 1</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_benign_1_b3eaf6b7-ea3e-43a8-87eb-92e7028de696/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_benign_1_f6740651-2cdd-4601-b557-b00519e62c2f/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_benign_1_18bbc797-f3f2-41a0-90c6-8c72141a62fe/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#34a2383c341023e900d181eec41d258ac3a2c6dcc970a3007ffabf8e1ce5ef5e">benign 2</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_benign_2_4c62ea0e-e4a8-48b8-af92-ee5d37fd91d0/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_benign_2_05b13a6e-2889-4d3b-8725-cd30d84210a2/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_benign_2_64417a86-c3e5-4eca-b6cc-3ebf7cf5a628/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#5575606091da92671cf350b27aeac7dacb6e6f22cdfae760a7250d2536e840e5">multi-tx 1</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_multitx_onefunc_feasible_5f36bb18-6192-4d9e-856e-10d50af5a158/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_multitx_onefunc_feasible_74553f48-88d7-482c-b4b5-1a3acb34b8fc/out.txt">False Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_multitx_onefunc_feasible_7edb0ad9-a2ee-4a5d-98c0-d381bbfe6e45/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#2573a371ff7904354dbb7620245f9fa08b1e295b8a81c3db0d0c43f00c8fc712">multi-tx 2</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_multitx_onefunc_infeasible_6b9d64a3-ee03-4b14-87ea-4a9a1d23c2a0/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_multitx_onefunc_infeasible_fac3086a-26b1-4591-b0aa-023be61e7686/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_multitx_onefunc_infeasible_c6de633c-0868-4187-ac82-eea27da1692a/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#302743c849baf3b9435becf0c8c48897fbd5fde13c9b2c841a28fa3bb0e21ffc">multi-tx 3</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_multitx_multifunc_feasible_e705745f-0e49-4931-88dd-38c4e4c2f22b/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_multitx_multifunc_feasible_87dd44e9-7e42-412a-9992-dea91036fee9/out.txt">False Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_multitx_multifunc_feasible_881a1a4e-48bb-4faa-9028-be4b41211d8a/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#722e86205e06858738c4b82548626b5d787f6fa42993621021c0dfddb33d8bdf">storage inv</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_storageinvariant_21167a8f-1e43-4784-82b9-1a2de964a0cb/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_storageinvariant_2f1e83b8-42f6-4235-9c02-d71b5bd6252a/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_storageinvariant_ae85cabe-ff82-4ab5-a701-7dd25092311f/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#2a7b96df5273bafb0fe59f1d85f5a3563681e6da1af992020062117785d34b01">symbolic storage 1</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_mapping_sym_1_064701b9-4253-4299-b4d3-3e6ac923e292/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_mapping_sym_1_b681b0a3-e66c-4aaa-8101-2c5a6a1dc4ee/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_mapping_sym_1_66d4adc9-8b67-484d-9398-bebdbc9b15c7/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#e9def76deb0b7f791e195ed0f9965ca34f9927559484b24c9c0d437aa32a3fcb">symbolic storage 2</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_mapping_sym_2_4e884b75-19ea-4757-9528-2ed08e5e5bb6/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_mapping_sym_2_626210c6-257c-4a07-a5b8-dbc8fb504faa/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_mapping_sym_2_82d9e92d-3152-412a-a744-255c340d93ed/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#ae92a7d8320d4c8c6186e06f71d32a28fe78787172c7f28d5526483db03e7497">attribute store</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_attribute_store_eca5c65f-0951-42ed-a21b-e20ceb637198/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(253, 195, 83, .4)">
+                        
+                            <a href="run_manticoregit_attribute_store_1676c676-cadb-48d0-b9dc-fa1785cb3f56/out.txt">Analysis Failed</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_attribute_store_b42b2a92-3307-488e-b526-0818e41bffe7/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#674315c7f5911176df30a8d94a12e9f93a47237b6481fc4d887ec54385c68ded">mapping string key</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_mapping_strkey_1ac8db10-c690-4166-ab04-91947b2b692f/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(253, 195, 83, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_mapping_strkey_b04dbe79-b3cf-44b5-919d-84a6c12e424e/out.txt">Analysis Failed</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_mapping_strkey_00c775d7-7b19-479b-8ea0-b2a79d3bf54b/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#84bf46437772ec0b586861ce9687e828e087f9a38646d440b0138c0ef3f9c74f">fixed storage packing</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_storagepacking_e23bc27a-d131-43eb-b40c-8d9b38b368ec/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_storagepacking_7fb88339-0d0a-48b2-953b-52b54c744b84/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_storagepacking_b1e07b12-2804-4358-8b2d-d517ef53a783/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#e04acb336627960f2191e802522bb0b401e77e986c9965c93d5c6699cab7bb8c">bytes parameter</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_bytes_param_0d6b60de-ae0f-49f4-8422-ea173d920ff0/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(253, 195, 83, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_bytes_param_16d6b8b6-934c-4ba8-b99a-2211d5763820/out.txt">Analysis Failed</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_bytes_param_76e1b0b5-e300-451b-964b-3ab68b2a1c07/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#92dbef76c2a432e96ce0cf6191685dccb3e8469d13a1a09f6e125db755f8762a">static array</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_staticarray_0ec2886b-a710-47b0-ae54-8bc72ebae4ea/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_staticarray_c8e66512-ab73-4964-8475-e366c1656f9e/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_staticarray_899e8379-84bb-4166-89e5-5212041e980a/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#d0b5581208bf2b022e7b85663b18d9b618d79700d7b3dbbf51d08589dceae0d0">mapping words</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_mapping_word_a8dc79d7-6757-4804-b99f-8bd0950e3fb2/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_mapping_word_856cbc26-010d-4b9e-b336-029af2f7e260/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_mapping_word_c6289032-d1c3-450c-9e2b-527bd325c9e1/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#d3411cd8c6b22d6f2f3624428676ce3e2aa618d1c715563490e6933ab5329aa1">mapping structs 1</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_mapping_struct_4bd1f855-8a65-4363-b3d5-7a1b16ffe74b/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_mapping_struct_8a67c8f7-1a46-4cb8-a2d8-bf96d1ee710b/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_mapping_struct_9c1e4314-c9cd-4d02-a06d-42f35f346df4/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#286a6d3814fee34e56ebf46c431c62ce56c4692fa0fb14332bc1e0924e5d4588">mapping structs 2</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_mapping_mapping_199d3dba-f771-46d4-9569-b64f071b599d/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_mapping_mapping_e3c89cbd-7ad8-446e-a135-8ccc02b3123b/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_mapping_mapping_4a618d98-ddac-449c-8645-ed2d7c676bcd/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#37121c3754cb8b476cc91d17ae8ddbf66d31298268b4d931462e91f49e3e61c8">mapping static arr</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_mapping_staticarray_ece4d259-f086-4b53-bd6c-0e2d488ee0a7/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_mapping_staticarray_37cccb9c-ccbc-4329-86e1-ab5556ac4ff9/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_mapping_staticarray_988ee0d4-dd45-4d9a-942c-5b920a1906cf/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Integer Overflow</td>
+                    <td><a href="#14b728e5e768509bab098ef8f2918490c1edb89bd17de478a2f1dd4310cf1f18">dynamic array</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_integer_overflow_dynarray_f33d1a1d-33d8-422c-b0be-01ebdba823a3/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_integer_overflow_dynarray_ee6c1c0a-e6a1-41ec-91cb-d334635e103c/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_integer_overflow_dynarray_a52f0e4b-3e99-4c3a-b552-9f01fe4e6be1/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+        
+            
+
+                <tr  height="40px">
+                    <td>Callback Effect-Free</td>
+                    <td><a href="#7eabf5696a6a47d2391cef0f130e8116fbdd214b53ad1cb6375219e306f5ff76">dao</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_reentrancy_dao_77f67243-c7fc-4999-b018-1069b1ff96a8/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_reentrancy_dao_0e2feb0e-d2b4-44f0-ad3c-97f41eb00cd3/out.txt">False Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_reentrancy_dao_53bf9f3a-8a0c-49c1-b880-6cc39975fa0c/out.txt">True Positive</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Callback Effect-Free</td>
+                    <td><a href="#d37c65605ab73bb64d598cb94ef3f1ce4ab3eac67f116fbb13b68eeb900432b3">dao fixed</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_reentrancy_dao_fixed_124cdf63-b8a9-4ca5-b2a0-62a7946d63d5/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_reentrancy_dao_fixed_646e1ba2-a739-4a59-8f4d-571522619074/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_reentrancy_dao_fixed_b042dc1f-8f97-4471-a9cb-b5b9c3545844/out.txt">True Negative</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Callback Effect-Free</td>
+                    <td><a href="#382c09f6102cb850df4fde23b21cc43d4cbe49571b05eb680858ab8a0121f452">effect-free</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_reentrancy_nostateeffect_6c7cc0f9-b882-40da-ae46-40090033f3d6/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_reentrancy_nostateeffect_058bc89e-37bf-489e-9338-3e205e71169b/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_reentrancy_nostateeffect_410e7b12-0ddf-428f-8f0e-f8f95d23748c/out.txt">True Negative</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+        
+            
+
+                <tr  height="40px">
+                    <td>Assertion</td>
+                    <td><a href="#267ab1d48e3a52a40229342caed0c595aca649b3f76e8350c24107c2e8623f78">minimal</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_assert_minimal_7e4898fa-b55c-41e6-a8bc-ce6fe2b4f8b2/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_assert_minimal_2b1c742b-c80a-44b9-ac94-443e1f55536e/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_assert_minimal_85aecf62-6216-454b-80ac-f5e1bc49b2a3/out.txt">True Positive</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Assertion</td>
+                    <td><a href="#f46439cd901bb55f62c4331e37e10b27021a2a50c3c7331b001b83ce54738041">constructor</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_assert_constructor_321453cf-47aa-4124-b893-bb485ffe3d09/out.txt">False Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(253, 195, 83, .4)">
+                        
+                            <a href="run_manticoregit_assert_constructor_2a590fb3-5a4e-49e2-bc94-3497c29c5ac3/out.txt">Analysis Failed</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_assert_constructor_0f071cbd-7dda-48e0-bc66-808f0d7a0256/out.txt">False Negative</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Assertion</td>
+                    <td><a href="#5249ef7d5747f2293538d152a6b7f347d2869728d829d0024fa9163ec977c619">symbolic </a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_assert_sym_7f01396f-8c81-4628-8e1e-e57595ed39b4/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_assert_sym_236dbbf5-55d2-45f1-ae80-58645a9b30b5/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_assert_sym_418cc2d2-625e-46cd-a3fa-23bdba7f4307/out.txt">True Positive</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Assertion</td>
+                    <td><a href="#2b1991538e427b77cb800e3575120b8c9f3b0ee31d773b6d535f75917685b2eb">require </a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_assert_require_d977d095-7c01-43dd-acf0-0d23be352ed9/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_manticoregit_assert_require_11ff664a-2282-4fe7-816e-db8109aca109/out.txt">True Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_assert_require_56b7de96-8d57-4da0-a149-d1beba0b0a24/out.txt">True Negative</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Assertion</td>
+                    <td><a href="#d216a1ebc7a564c2034df0f172cef069d7a9cde5ba2fe38b2ae5c7c7cf39bcb3">multi tx 1</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_assert_multitx_1_a7829247-3cf7-42eb-a47c-84331bd3ebbd/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(253, 195, 83, .4)">
+                        
+                            <a href="run_manticoregit_assert_multitx_1_9892f4f1-87f1-4733-9668-b717ad3582ba/out.txt">Analysis Failed</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_assert_multitx_1_5a865002-02a4-4b83-95da-9739ac3e750a/out.txt">False Positive</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Assertion</td>
+                    <td><a href="#e4db92ece2e32749e45601f966f660404c85435562e3281341139d647575c66c">multi tx 2</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_assert_multitx_2_e520b1c9-0793-4ea2-98d2-3828768a1b38/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(253, 195, 83, .4)">
+                        
+                            <a href="run_manticoregit_assert_multitx_2_e921b8dc-9b47-43e0-be2b-1f8affd41333/out.txt">Analysis Failed</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_assert_multitx_2_84c101df-6ef3-4594-89bd-9cd3e99e6d15/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+        
+            
+
+                <tr  height="40px">
+                    <td>Eth Tx-Order Dependence</td>
+                    <td><a href="#4aba60dde207b27c04d18902b4e9389fa414836792e9ce98cadb842dae1d4a51">minimal 1</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_eth_tx_order_dependence_minimal_26ca4434-c510-4c44-b544-5cc82b2a1464/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_eth_tx_order_dependence_minimal_e7b579f5-4a84-46b4-afc2-bbfc67cc5a21/out.txt">False Negative</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_eth_tx_order_dependence_minimal_4b3fc469-5cf7-4dce-9d65-55a0f59e3c2e/out.txt">True Positive</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Eth Tx-Order Dependence</td>
+                    <td><a href="#093f4efd674bfc335db17904e13289e30d8ab0e9c7086b4d202ed96109987935">minimal 2</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_eth_tx_order_dependence_2_cf4734a1-effd-4831-a51b-5b2f1f5fbe2f/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_eth_tx_order_dependence_2_0cd8a357-98fd-4934-9186-fdcec3e8c853/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_eth_tx_order_dependence_2_ea758025-c8c1-4564-9d27-ca45ea9a2c5e/out.txt">True Negative</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Eth Tx-Order Dependence</td>
+                    <td><a href="#bd97899a83b08a452a46df2ed3bde7328c24c4ae8470728157f58c6eebd87cdd">multi tx 1</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_mythrilpip_eth_tx_order_dependence_multitx_1_a2a7e6d2-fcd6-4bd1-a5c5-43dd02825883/out.txt">False Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_manticoregit_eth_tx_order_dependence_multitx_1_b20df959-48e3-4dc3-88a2-e37b05de1e02/out.txt">Unsupported</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(255, 145, 164, .4)">
+                        
+                            <a href="run_oyentepip_eth_tx_order_dependence_multitx_1_4aa5152c-2e12-48e1-8623-916d8f9a0cfc/out.txt">False Positive</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+
+                <tr  height="40px">
+                    <td>Eth Tx-Order Dependence</td>
+                    <td><a href="#d61df998ba82e9250d9344ed5cf497608ae476368af7e71ca690139b92f3a5cb">puzzle</a></td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_mythrilpip_eth_tx_order_dependence_puzzle_06614296-6630-47a4-aa49-90112e16fdbb/out.txt">True Positive</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(253, 195, 83, .4)">
+                        
+                            <a href="run_manticoregit_eth_tx_order_dependence_puzzle_29773d2f-87e4-4d99-8e0c-8459d6cd13ff/out.txt">Analysis Failed</a>
+                        
+                    </td>
+                
+                    
+                    
+
+                    <td  align="center" style="font-size: 12px; background-color: rgba(80, 200, 120, .4)">
+                        
+                            <a href="run_oyentepip_eth_tx_order_dependence_puzzle_c0b5dcaf-c87a-4957-99ca-8f72786650ce/out.txt">True Positive</a>
+                        
+                    </td>
+                
+
+                </tr>
+            
+        
+    </table>
+
+    <br>
+    <br>
+
+    <h3 id="terms">Terminology</h3>
+    <div style="font-size: 10px">
+        <table>
+            <tr>
+                <td style="font-weight: bold">Term</td>
+                <td style="font-weight: bold">Description</td>
+            </tr>
+            <tr>
+                <td>True Positive</td>
+                <td>Benchmark actually has the bug, and the tool reports that the benchmark has the bug.</td>
+            </tr>
+            <tr>
+                <td>True Negative</td>
+                <td>Benchmark does not actually have the bug, and the tool does not report that the benchmark has the bug.</td>
+            </tr>
+            <tr>
+                <td>False Positive</td>
+                <td>Benchmark does not actually have the bug, but the tool reports that the benchmark has the bug.</td>
+            </tr>
+            <tr>
+                <td>False Negative</td>
+                <td>Benchmark actually has the bug, but the tool does not report that the benchmark has the bug.</td>
+            </tr>
+            <tr>
+                <td>False Negative</td>
+                <td>Benchmark actually has the bug, but the tool does not report that the benchmark has the bug.</td>
+            </tr>
+            <tr>
+                <td>Unsupported</td>
+                <td>The tool does not support this particular bug type.</td>
+            </tr>
+            <tr>
+                <td>Analysis Failed</td>
+                <td>The tool prints an exception.</td>
+            </tr>
+            <tr>
+                <td>Timed out</td>
+                <td>The tool did not terminate within the specified time limit.</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <h3>Details<h3>
+    
+    
+    <div style="page-break-after: always" id="fccf66721cc079718b32d2978618a79a718ff84c2c2d0b13ec0e96201f55447a">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>minimal</td>
+                <td width="100px"><span style="font-size: 8px">minimal, sub instruction</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_minimal_7a6af87d-f06f-42be-a249-198156c6a22c/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_minimal_c7aff662-d06e-4cbb-84de-74de1e0049fa/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_minimal_45179c1d-1c09-4adf-adf4-e7c08256eaf9/out.txt">False Negative</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_minimal.sol<br>
+//Single transaction overflow<br>
+//Post-transaction effect: overflow escapes to publicly-readable storage<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint public count = 1;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count -= input;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="8c4f0e03b79f0c94d5d084e6d3a952908487f419c6acbfcd9df0a9c2727777a7">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>add</td>
+                <td width="100px"><span style="font-size: 8px">add instruction</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_add_ea90f677-9535-43fd-9d7f-1bb9a54f08d5/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_add_705032e4-1ccf-4521-990c-a49bfca91903/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_add_7a932dee-ccbb-4004-b6b3-614fc0e041ab/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_add.sol<br>
+//Single transaction overflow<br>
+//Post-transaction effect: overflow escapes to publicly-readable storage<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint public count = 1;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += input;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="35c729449c98ea38b4dd5ceba51a678e9e986125bfd8ef9dcc1eb88b5cc21218">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>mul</td>
+                <td width="100px"><span style="font-size: 8px">mul instruction</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_mul_4f311d40-2d7f-4392-bec4-c6ecb2893f81/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_mul_01adcc26-80e7-42c5-9985-cd6ffd9a0ebb/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_mul_2c7194cd-9146-48e3-b958-6bea2f3df3bb/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_mul.sol<br>
+//Single transaction overflow<br>
+//Post-transaction effect: overflow escapes to publicly-readable storage<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint public count = 2;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count *= input;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="8c1c6bf4ac94d216ad6a41b379cf30f7cb9d0d1c0ecc9158d1d4123ada81bb12">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>path 1</td>
+                <td width="100px"><span style="font-size: 8px">path-sensitivity, pre-check</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_path_1_4fe5e769-3231-4104-b11d-482d86cf1e9f/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_path_1_4a52ffba-4f65-49d9-9a9e-b0b16d04c64b/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_path_1_6c9d58d1-7a74-43e8-8999-09c104ecd1c2/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_path_1.sol<br>
+//Single transaction overflow<br>
+//Post-transaction effect: overflow nevers escapes to publicly-readable storage<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint public count = 1;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count = sub(count, input);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//from SafeMath<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function sub(uint256 a, uint256 b) internal pure returns (uint256) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(b &lt;= a);//SafeMath uses assert here<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return a - b;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="1a53a16551c8b86fba217107cc5cadfbcc22c52b37b13b9ea3f947eabaaefef2">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>benign 1</td>
+                <td width="100px"><span style="font-size: 8px">minimal benign</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_benign_1_b3eaf6b7-ea3e-43a8-87eb-92e7028de696/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_benign_1_f6740651-2cdd-4601-b557-b00519e62c2f/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_benign_1_18bbc797-f3f2-41a0-90c6-8c72141a62fe/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_benign_1.sol<br>
+//Single transaction overflow<br>
+//Post-transaction effect: overflow never escapes function<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint public count = 1;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint res = count - input;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="34a2383c341023e900d181eec41d258ac3a2c6dcc970a3007ffabf8e1ce5ef5e">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>benign 2</td>
+                <td width="100px"><span style="font-size: 8px">overflow, path-sensitive, post-check</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_benign_2_4c62ea0e-e4a8-48b8-af92-ee5d37fd91d0/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_benign_2_05b13a6e-2889-4d3b-8725-cd30d84210a2/out.txt">Unsupported</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_benign_2_64417a86-c3e5-4eca-b6cc-3ebf7cf5a628/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_benign_2.sol<br>
+//Single transaction overflow<br>
+//Post-transaction effect: overflow nevers escapes to publicly-readable storage<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint public count;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bool err;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint256 res = 1;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(err, res) = minus(res, input);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(!err);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count = res;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//from BasicMathLib<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function minus(uint256 a, uint256 b) private pure returns (bool err,uint256 res) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assembly {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;res := sub(a,b)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch eq(and(eq(add(res,b), a), or(lt(res,a), eq(res,a))), 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 0 {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;err := 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;res := 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="5575606091da92671cf350b27aeac7dacb6e6f22cdfae760a7250d2536e840e5">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>multi-tx 1</td>
+                <td width="100px"><span style="font-size: 8px">multi-tx, one-fn, feasible</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_multitx_onefunc_feasible_5f36bb18-6192-4d9e-856e-10d50af5a158/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_multitx_onefunc_feasible_74553f48-88d7-482c-b4b5-1a3acb34b8fc/out.txt">False Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_multitx_onefunc_feasible_7edb0ad9-a2ee-4a5d-98c0-d381bbfe6e45/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_multitx_onefunc_feasible.sol<br>
+//Multi-transactional, single function<br>
+//Arithmetic instruction reachable<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 private initialized = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 public count = 1;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (initialized == 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initialized = 1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count -= input;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="2573a371ff7904354dbb7620245f9fa08b1e295b8a81c3db0d0c43f00c8fc712">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>multi-tx 2</td>
+                <td width="100px"><span style="font-size: 8px">multi-tx, one-fn, infeasible</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_multitx_onefunc_infeasible_6b9d64a3-ee03-4b14-87ea-4a9a1d23c2a0/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_multitx_onefunc_infeasible_fac3086a-26b1-4591-b0aa-023be61e7686/out.txt">Unsupported</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_multitx_onefunc_infeasible_c6de633c-0868-4187-ac82-eea27da1692a/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_multitx_onefunc_infeasible.sol<br>
+//Multi-transactional, single function<br>
+//Overflow infeasible because arithmetic instruction not reachable<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 private initialized = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 public count = 1;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (initialized == 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count -= input;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="302743c849baf3b9435becf0c8c48897fbd5fde13c9b2c841a28fa3bb0e21ffc">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>multi-tx 3</td>
+                <td width="100px"><span style="font-size: 8px">multi-tx, multi-fn, feasible</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_multitx_multifunc_feasible_e705745f-0e49-4931-88dd-38c4e4c2f22b/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_multitx_multifunc_feasible_87dd44e9-7e42-412a-9992-dea91036fee9/out.txt">False Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_multitx_multifunc_feasible_881a1a4e-48bb-4faa-9028-be4b41211d8a/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_multitx_multifunc_feasible.sol<br>
+//Multi-transactional, multi-function<br>
+//Arithmetic instruction reachable<br>
+<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 private initialized = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 public count = 1;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function init() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initialized = 1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 input) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (initialized == 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count -= input;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="722e86205e06858738c4b82548626b5d787f6fa42993621021c0dfddb33d8bdf">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>storage inv</td>
+                <td width="100px"><span style="font-size: 8px">relationship between storage variables prevents underflow</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_storageinvariant_21167a8f-1e43-4784-82b9-1a2de964a0cb/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_storageinvariant_2f1e83b8-42f6-4235-9c02-d71b5bd6252a/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_storageinvariant_ae85cabe-ff82-4ab5-a701-7dd25092311f/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_storageinvariant.sol<br>
+//No underflow because of credit/balance invariant: sum (credit.values) = balance<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping (address =&gt; uint) credit;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint balance;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function withdrawAll() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint oCredit = credit[msg.sender];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (oCredit &gt; 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;credit[msg.sender] = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balance -= oCredit;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msg.sender.transfer(oCredit);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function deposit() public payable {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;credit[msg.sender] += msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balance += msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(balance &lt; 1000);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="2a7b96df5273bafb0fe59f1d85f5a3563681e6da1af992020062117785d34b01">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>symbolic storage 1</td>
+                <td width="100px"><span style="font-size: 8px">store with symbolic variable underflow</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_mapping_sym_1_064701b9-4253-4299-b4d3-3e6ac923e292/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_mapping_sym_1_b681b0a3-e66c-4aaa-8101-2c5a6a1dc4ee/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_mapping_sym_1_66d4adc9-8b67-484d-9398-bebdbc9b15c7/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_mapping_sym_1.sol<br>
+pragma solidity ^0.4.11;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping(uint256 =&gt; uint256) map;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function init(uint256 k, uint256 v) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map[k] -= v;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="e9def76deb0b7f791e195ed0f9965ca34f9927559484b24c9c0d437aa32a3fcb">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>symbolic storage 2</td>
+                <td width="100px"><span style="font-size: 8px">store with symbolic variable underflow</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_mapping_sym_2_4e884b75-19ea-4757-9528-2ed08e5e5bb6/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_mapping_sym_2_626210c6-257c-4a07-a5b8-dbc8fb504faa/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_mapping_sym_2_82d9e92d-3152-412a-a744-255c340d93ed/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_mapping_sym_2.sol<br>
+pragma solidity ^0.4.11;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping(uint256 =&gt; uint256) map;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function init(uint256 k, uint256 v) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(v &lt; 10);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map[k] = 10;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map[k] -= v;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="ae92a7d8320d4c8c6186e06f71d32a28fe78787172c7f28d5526483db03e7497">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>attribute store</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_attribute_store_eca5c65f-0951-42ed-a21b-e20ceb637198/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(253, 195, 83, .4)">
+                    
+                        <a href="run_manticoregit_attribute_store_1676c676-cadb-48d0-b9dc-fa1785cb3f56/out.txt">Analysis Failed</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_attribute_store_b42b2a92-3307-488e-b526-0818e41bffe7/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//attribute_store.sol<br>
+pragma solidity ^0.4.8;<br>
+<br>
+library AttributeStore {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;struct Data {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mapping(bytes32 =&gt; uint) store;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function getAttribute(Data storage self, bytes32 _UUID, string _attrName) public view returns (uint) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bytes32 key = keccak256(_UUID, _attrName);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return self.store[key];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function attachAttribute(Data storage self, bytes32 _UUID, string _attrName, uint _attrVal) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bytes32 key = keccak256(_UUID, _attrName);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.store[key] = _attrVal;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="674315c7f5911176df30a8d94a12e9f93a47237b6481fc4d887ec54385c68ded">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>mapping string key</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_mapping_strkey_1ac8db10-c690-4166-ab04-91947b2b692f/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(253, 195, 83, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_mapping_strkey_b04dbe79-b3cf-44b5-919d-84a6c12e424e/out.txt">Analysis Failed</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_mapping_strkey_00c775d7-7b19-479b-8ea0-b2a79d3bf54b/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_mapping_strkey.sol<br>
+pragma solidity ^0.4.8;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping(string =&gt; uint256) map;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function get(string key) public view returns (uint256) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return map[key];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="84bf46437772ec0b586861ce9687e828e087f9a38646d440b0138c0ef3f9c74f">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>fixed storage packing</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_storagepacking_e23bc27a-d131-43eb-b40c-8d9b38b368ec/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_storagepacking_7fb88339-0d0a-48b2-953b-52b54c744b84/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_storagepacking_b1e07b12-2804-4358-8b2d-d517ef53a783/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_storagepacking.sol<br>
+//Storage packing optimization stores a,b in a single 32-byte storage slot.<br>
+//solc generates MUL instruction that operates on compile-time constants to<br>
+//  extract variable a (or b) from packed storage slot.<br>
+pragma solidity ^0.4.11;<br>
+contract C {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint128 a;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint128 b;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function C() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a = 1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b = 2;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br>
+</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="e04acb336627960f2191e802522bb0b401e77e986c9965c93d5c6699cab7bb8c">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>bytes parameter</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_bytes_param_0d6b60de-ae0f-49f4-8422-ea173d920ff0/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(253, 195, 83, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_bytes_param_16d6b8b6-934c-4ba8-b99a-2211d5763820/out.txt">Analysis Failed</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_bytes_param_76e1b0b5-e300-451b-964b-3ab68b2a1c07/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_bytes_param.sol<br>
+pragma solidity ^0.4.8;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function get(bytes key) public pure returns (bytes32) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return keccak256(key);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="92dbef76c2a432e96ce0cf6191685dccb3e8469d13a1a09f6e125db755f8762a">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>static array</td>
+                <td width="100px"><span style="font-size: 8px">static array</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_staticarray_0ec2886b-a710-47b0-ae54-8bc72ebae4ea/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_staticarray_c8e66512-ab73-4964-8475-e366c1656f9e/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_staticarray_899e8379-84bb-4166-89e5-5212041e980a/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_staticarray.sol<br>
+pragma solidity ^0.4.11;<br>
+contract C {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256[6] private numbers;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function get(uint256 i) public returns(uint256) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(i &lt; 6);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return numbers[i];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="d0b5581208bf2b022e7b85663b18d9b618d79700d7b3dbbf51d08589dceae0d0">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>mapping words</td>
+                <td width="100px"><span style="font-size: 8px">mapping to words</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_mapping_word_a8dc79d7-6757-4804-b99f-8bd0950e3fb2/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_mapping_word_856cbc26-010d-4b9e-b336-029af2f7e260/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_mapping_word_c6289032-d1c3-450c-9e2b-527bd325c9e1/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_mapping_word.sol<br>
+//storage key for tuples[i].a calculated as<br>
+//  keccak(bytes32(i) + bytes32(position['tuples']))+offset[a]<br>
+pragma solidity ^0.4.11;<br>
+<br>
+contract C {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping(uint256 =&gt; uint256) tuples;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//tuple variable offset added to keccak(bytes32(key) + bytes32(position))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function init(uint256 key) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tuples[key] = 0x1A;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//tuples[key].b = 0x1B;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//tuples[key].c = 0x1C;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="d3411cd8c6b22d6f2f3624428676ce3e2aa618d1c715563490e6933ab5329aa1">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>mapping structs 1</td>
+                <td width="100px"><span style="font-size: 8px">mapping to structs</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_mapping_struct_4bd1f855-8a65-4363-b3d5-7a1b16ffe74b/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_mapping_struct_8a67c8f7-1a46-4cb8-a2d8-bf96d1ee710b/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_mapping_struct_9c1e4314-c9cd-4d02-a06d-42f35f346df4/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_mapping_struct.sol<br>
+//storage key for tuples[k].a calculated as<br>
+//  keccak(bytes32(k) + bytes32(position['tuples']))+offset['a']<br>
+pragma solidity ^0.4.11;<br>
+<br>
+contract C {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping(uint256 =&gt; Tuple) tuples;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;struct Tuple {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint256 a;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint256 b;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function init(uint256 k) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tuples[k].b = 0x1A;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="286a6d3814fee34e56ebf46c431c62ce56c4692fa0fb14332bc1e0924e5d4588">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>mapping structs 2</td>
+                <td width="100px"><span style="font-size: 8px">mappings</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_mapping_mapping_199d3dba-f771-46d4-9569-b64f071b599d/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_mapping_mapping_e3c89cbd-7ad8-446e-a135-8ccc02b3123b/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_mapping_mapping_4a618d98-ddac-449c-8645-ed2d7c676bcd/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_mapping_mapping.sol<br>
+//storage key for tuples[k].a calculated as<br>
+//  keccak(bytes32(k) + bytes32(position['tuples']))+offset['a']<br>
+pragma solidity ^0.4.11;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping(uint256 =&gt; mapping (uint256 =&gt; Tuple)) maps;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;struct Tuple {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint256 a;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint256 b;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function init(uint256 k) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maps[k][k].b = 0x1A;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="37121c3754cb8b476cc91d17ae8ddbf66d31298268b4d931462e91f49e3e61c8">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>mapping static arr</td>
+                <td width="100px"><span style="font-size: 8px">mapping to static arrays</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_mapping_staticarray_ece4d259-f086-4b53-bd6c-0e2d488ee0a7/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_mapping_staticarray_37cccb9c-ccbc-4329-86e1-ab5556ac4ff9/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_mapping_staticarray_988ee0d4-dd45-4d9a-942c-5b920a1906cf/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_mapping_staticarray.sol<br>
+//storage key for tuples[k].a calculated as<br>
+//  keccak(bytes32(k) + bytes32(position['map']))+offset['a']<br>
+pragma solidity ^0.4.11;<br>
+<br>
+contract C {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping(uint256 =&gt; bytes2) map;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function init(uint256 k) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map[k] = 0x1A;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="14b728e5e768509bab098ef8f2918490c1edb89bd17de478a2f1dd4310cf1f18">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Integer Overflow</td>
+                <td>dynamic array</td>
+                <td width="100px"><span style="font-size: 8px">dynamic arrays</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_integer_overflow_dynarray_f33d1a1d-33d8-422c-b0be-01ebdba823a3/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_integer_overflow_dynarray_ee6c1c0a-e6a1-41ec-91cb-d334635e103c/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_integer_overflow_dynarray_a52f0e4b-3e99-4c3a-b552-9f01fe4e6be1/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//integer_overflow_dynarray.sol<br>
+//Dynamic storage array with packing<br>
+//<br>
+pragma solidity ^0.4.11;<br>
+<br>
+contract Benchmark {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint128[] private s;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function init() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s.length = 4;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s[0] = 0xAA;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s[1] = 0xBB;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s[2] = 0xCC;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s[3] = 0xDD;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+
+
+    
+    
+    <div style="page-break-after: always" id="7eabf5696a6a47d2391cef0f130e8116fbdd214b53ad1cb6375219e306f5ff76">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Callback Effect-Free</td>
+                <td>dao</td>
+                <td width="100px"><span style="font-size: 8px">dao</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_reentrancy_dao_77f67243-c7fc-4999-b018-1069b1ff96a8/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_reentrancy_dao_0e2feb0e-d2b4-44f0-ad3c-97f41eb00cd3/out.txt">False Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_reentrancy_dao_53bf9f3a-8a0c-49c1-b880-6cc39975fa0c/out.txt">True Positive</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//reentrancy_dao.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping (address =&gt; uint) credit;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint balance;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function withdrawAll() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint oCredit = credit[msg.sender];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (oCredit &gt; 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balance -= oCredit;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bool callResult = msg.sender.call.value(oCredit)();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (callResult);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;credit[msg.sender] = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function deposit() public payable {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;credit[msg.sender] += msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balance += msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="d37c65605ab73bb64d598cb94ef3f1ce4ab3eac67f116fbb13b68eeb900432b3">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Callback Effect-Free</td>
+                <td>dao fixed</td>
+                <td width="100px"><span style="font-size: 8px">dao fixed</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_reentrancy_dao_fixed_124cdf63-b8a9-4ca5-b2a0-62a7946d63d5/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_reentrancy_dao_fixed_646e1ba2-a739-4a59-8f4d-571522619074/out.txt">Unsupported</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_reentrancy_dao_fixed_b042dc1f-8f97-4471-a9cb-b5b9c3545844/out.txt">True Negative</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//reentrancy_dao_fixed.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;mapping (address =&gt; uint) credit;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint balance;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function withdrawAll() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uint oCredit = credit[msg.sender];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (oCredit &gt; 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balance -= oCredit;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;credit[msg.sender] = 0;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bool callResult = msg.sender.call.value(oCredit)();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (callResult);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function deposit() public payable {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;credit[msg.sender] += msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;balance += msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="382c09f6102cb850df4fde23b21cc43d4cbe49571b05eb680858ab8a0121f452">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Callback Effect-Free</td>
+                <td>effect-free</td>
+                <td width="100px"><span style="font-size: 8px">effect-free</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_reentrancy_nostateeffect_6c7cc0f9-b882-40da-ae46-40090033f3d6/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_reentrancy_nostateeffect_058bc89e-37bf-489e-9338-3e205e71169b/out.txt">Unsupported</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_reentrancy_nostateeffect_410e7b12-0ddf-428f-8f0e-f8f95d23748c/out.txt">True Negative</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//reentrancy_nostateeffect.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+interface Runner {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 param) external;<br>
+}<br>
+<br>
+contract Benchmark {<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(address base, uint256 param) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runner(base).run(param);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+
+
+    
+    
+    <div style="page-break-after: always" id="267ab1d48e3a52a40229342caed0c595aca649b3f76e8350c24107c2e8623f78">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Assertion</td>
+                <td>minimal</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_assert_minimal_7e4898fa-b55c-41e6-a8bc-ce6fe2b4f8b2/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_assert_minimal_2b1c742b-c80a-44b9-ac94-443e1f55536e/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_assert_minimal_85aecf62-6216-454b-80ac-f5e1bc49b2a3/out.txt">True Positive</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//assert_minimal.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert(false);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="f46439cd901bb55f62c4331e37e10b27021a2a50c3c7331b001b83ce54738041">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Assertion</td>
+                <td>constructor</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_assert_constructor_321453cf-47aa-4124-b893-bb485ffe3d09/out.txt">False Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(253, 195, 83, .4)">
+                    
+                        <a href="run_manticoregit_assert_constructor_2a590fb3-5a4e-49e2-bc94-3497c29c5ac3/out.txt">Analysis Failed</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_assert_constructor_0f071cbd-7dda-48e0-bc66-808f0d7a0256/out.txt">False Negative</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//assert_constructor.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function Benchmark() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert(false);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="5249ef7d5747f2293538d152a6b7f347d2869728d829d0024fa9163ec977c619">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Assertion</td>
+                <td>symbolic </td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_assert_sym_7f01396f-8c81-4628-8e1e-e57595ed39b4/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_assert_sym_236dbbf5-55d2-45f1-ae80-58645a9b30b5/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_assert_sym_418cc2d2-625e-46cd-a3fa-23bdba7f4307/out.txt">True Positive</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//assert_sym.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 param) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert(param &gt; 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="2b1991538e427b77cb800e3575120b8c9f3b0ee31d773b6d535f75917685b2eb">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Assertion</td>
+                <td>require </td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_assert_require_d977d095-7c01-43dd-acf0-0d23be352ed9/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_manticoregit_assert_require_11ff664a-2282-4fe7-816e-db8109aca109/out.txt">True Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_assert_require_56b7de96-8d57-4da0-a149-d1beba0b0a24/out.txt">True Negative</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//assert_require.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run(uint256 _param) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(_param &gt; 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert(_param &gt; 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="d216a1ebc7a564c2034df0f172cef069d7a9cde5ba2fe38b2ae5c7c7cf39bcb3">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Assertion</td>
+                <td>multi tx 1</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_assert_multitx_1_a7829247-3cf7-42eb-a47c-84331bd3ebbd/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(253, 195, 83, .4)">
+                    
+                        <a href="run_manticoregit_assert_multitx_1_9892f4f1-87f1-4733-9668-b717ad3582ba/out.txt">Analysis Failed</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_assert_multitx_1_5a865002-02a4-4b83-95da-9739ac3e750a/out.txt">False Positive</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//assert_multitx_1.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 private param;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function Benchmark(uint256 _param) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(_param &gt; 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;param = _param;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert(param &gt; 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="e4db92ece2e32749e45601f966f660404c85435562e3281341139d647575c66c">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Assertion</td>
+                <td>multi tx 2</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_assert_multitx_2_e520b1c9-0793-4ea2-98d2-3828768a1b38/out.txt">Unsupported</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(253, 195, 83, .4)">
+                    
+                        <a href="run_manticoregit_assert_multitx_2_e921b8dc-9b47-43e0-be2b-1f8affd41333/out.txt">Analysis Failed</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_assert_multitx_2_84c101df-6ef3-4594-89bd-9cd3e99e6d15/out.txt">Unsupported</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//assert_multitx_2.sol<br>
+pragma solidity ^0.4.19;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 private param;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function Benchmark(uint256 _param) public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(_param &gt; 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;param = _param;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function run() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;assert(param &gt; 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function set(uint256 _param) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;param = _param;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+
+
+    
+    
+    <div style="page-break-after: always" id="4aba60dde207b27c04d18902b4e9389fa414836792e9ce98cadb842dae1d4a51">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Eth Tx-Order Dependence</td>
+                <td>minimal 1</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_eth_tx_order_dependence_minimal_26ca4434-c510-4c44-b544-5cc82b2a1464/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_eth_tx_order_dependence_minimal_e7b579f5-4a84-46b4-afc2-bbfc67cc5a21/out.txt">False Negative</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_eth_tx_order_dependence_minimal_4b3fc469-5cf7-4dce-9d65-55a0f59e3c2e/out.txt">True Positive</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//eth_tx_order_dependence_minimal.sol<br>
+pragma solidity ^0.4.16;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;address public owner;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool public claimed;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint public reward;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function Benchmark() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner = msg.sender;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function setReward() public payable {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (!claimed);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(msg.sender == owner);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner.transfer(reward);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reward = msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function claimReward(uint256 submission) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (!claimed);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(submission &lt; 10);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msg.sender.transfer(reward);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;claimed = true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="093f4efd674bfc335db17904e13289e30d8ab0e9c7086b4d202ed96109987935">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Eth Tx-Order Dependence</td>
+                <td>minimal 2</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_eth_tx_order_dependence_2_cf4734a1-effd-4831-a51b-5b2f1f5fbe2f/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_eth_tx_order_dependence_2_0cd8a357-98fd-4934-9186-fdcec3e8c853/out.txt">Unsupported</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_eth_tx_order_dependence_2_ea758025-c8c1-4564-9d27-ca45ea9a2c5e/out.txt">True Negative</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//eth_tx_order_dependence_2.sol<br>
+pragma solidity ^0.4.16;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 public reward;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;address owner;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function Benchmark() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner = msg.sender;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function setReward() public payable {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(msg.sender == owner);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner.transfer(reward); //refund previous reward<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reward = msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="bd97899a83b08a452a46df2ed3bde7328c24c4ae8470728157f58c6eebd87cdd">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Eth Tx-Order Dependence</td>
+                <td>multi tx 1</td>
+                <td width="100px"><span style="font-size: 8px"></span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_mythrilpip_eth_tx_order_dependence_multitx_1_a2a7e6d2-fcd6-4bd1-a5c5-43dd02825883/out.txt">False Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_manticoregit_eth_tx_order_dependence_multitx_1_b20df959-48e3-4dc3-88a2-e37b05de1e02/out.txt">Unsupported</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(255, 145, 164, .4)">
+                    
+                        <a href="run_oyentepip_eth_tx_order_dependence_multitx_1_4aa5152c-2e12-48e1-8623-916d8f9a0cfc/out.txt">False Positive</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//eth_tx_order_dependence_multitx_1.sol<br>
+pragma solidity ^0.4.16;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;address public owner;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool public claimed;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 public reward;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool public freezeReward;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function Benchmark() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner = msg.sender;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function setReward() public payable {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (!claimed);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (!freezeReward);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(msg.sender == owner);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner.transfer(reward);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reward = msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function freezeReward() public {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;freezeReward = true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function claimReward(uint256 submission) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (freezeReward);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (!claimed);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require(submission &lt; 10);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msg.sender.transfer(reward);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;claimed = true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+    <div style="page-break-after: always" id="d61df998ba82e9250d9344ed5cf497608ae476368af7e71ca690139b92f3a5cb">
+    <table>
+        <tr>
+            <td align="center"><span style="font-weight: normal">Bug Type</span></td>
+            <td align="center"><span style="font-weight: normal">Benchmark</span></td>
+            <td align="center"><span style="font-weight: normal">Description</span></td>
+        
+            <td align="center">
+                <span style="font-weight: normal">MythrilPip</span>
+                <br>
+                <span style="font-size: 10px">0.17.12</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">ManticoreGit</span>
+                <br>
+                <span style="font-size: 10px">2018-05-18 18:01:09</span>
+             </td>
+        
+            <td align="center">
+                <span style="font-weight: normal">OyentePip</span>
+                <br>
+                <span style="font-size: 10px">0.2.7</span>
+             </td>
+        
+        </tr>
+
+
+        <tr  height="40px">
+                <td>Eth Tx-Order Dependence</td>
+                <td>puzzle</td>
+                <td width="100px"><span style="font-size: 8px">oyente</span></td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_mythrilpip_eth_tx_order_dependence_puzzle_06614296-6630-47a4-aa49-90112e16fdbb/out.txt">True Positive</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(253, 195, 83, .4)">
+                    
+                        <a href="run_manticoregit_eth_tx_order_dependence_puzzle_29773d2f-87e4-4d99-8e0c-8459d6cd13ff/out.txt">Analysis Failed</a>
+                    
+                </td>
+            
+                
+                
+
+                <td  align="center" width="120px" style="background-color: rgba(80, 200, 120, .4)">
+                    
+                        <a href="run_oyentepip_eth_tx_order_dependence_puzzle_c0b5dcaf-c87a-4957-99ca-8f72786650ce/out.txt">True Positive</a>
+                    
+                </td>
+            
+        </tr>
+    </table>
+
+    <br>
+    <div style="font-family: courier new; font-size: 12px">
+//eth_tx_order_dependence_puzzle.sol<br>
+//Adapted from Oyente paper<br>
+pragma solidity ^0.4.16;<br>
+<br>
+contract Benchmark {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;address public owner ;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool public locked ;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint public reward ;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes32 public diff ;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes public solution;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function Puzzle() public payable {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner = msg.sender;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reward = msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locked = false ;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;diff = bytes32 (11111); // pre - defined difficulty<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function () public payable { // main code , runs at every invocation<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( msg.sender == owner ){ // update reward<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (!locked);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner.transfer(reward);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reward = msg.value;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (msg.data.length &gt; 0) { // submit a solution<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;require (!locked);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( sha256 (msg.data ) &lt; diff ){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msg.sender.transfer(reward); // send reward<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;solution = msg.data;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;locked = true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}</div>
+    </div>
+    
+            <br>
+            <br>
+    
+    
+
+
+    
+
+</html>

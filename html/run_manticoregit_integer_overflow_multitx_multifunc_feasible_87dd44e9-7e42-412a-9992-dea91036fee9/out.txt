@@ -1,0 +1,12 @@
+2018-05-24 17:36:06,797: [8282] m.main:INFO: Beginning analysis
+2018-05-24 17:36:07,387: [8282] m.ethereum:INFO: Starting symbolic transaction: 1
+2018-05-24 17:36:07,862: [8282] m.ethereum:INFO: Generated testcase No. 0 - REVERT
+2018-05-24 17:36:08,691: [8282] m.ethereum:INFO: Generated testcase No. 1 - REVERT
+2018-05-24 17:36:09,887: [8282] m.ethereum:INFO: Generated testcase No. 2 - REVERT
+2018-05-24 17:36:10,524: [8282] m.ethereum:INFO: Generated testcase No. 3 - REVERT
+2018-05-24 17:36:11,189: [8282] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 5 | Alive States: 3
+2018-05-24 17:36:11,211: [8606] m.ethereum:INFO: Generated testcase No. 4 - RETURN
+2018-05-24 17:36:11,778: [8606] m.ethereum:INFO: Generated testcase No. 5 - STOP
+2018-05-24 17:36:12,870: [8606] m.ethereum:INFO: Generated testcase No. 6 - STOP
+2018-05-24 17:36:13,489: [8282] m.ethereum:INFO: Results in /home/vagrant/mcore_laFqHd
+EXITSTATUS=0

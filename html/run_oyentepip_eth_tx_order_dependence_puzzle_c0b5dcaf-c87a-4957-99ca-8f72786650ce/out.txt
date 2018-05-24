@@ -1,0 +1,21 @@
+WARNING:root:You are using an untested version of z3. 4.5.0 is the officially tested version
+WARNING:root:You are using evm version 1.8.2. The supported version is 1.6.6
+WARNING:root:You are using solc version 0.4.21, The latest supported version is 0.4.17
+INFO:root:Contract /home/vagrant/host/benchmarks/./eth_tx_order_dependence_puzzle.sol:Benchmark:
+INFO:oyente.symExec:Running, please wait...
+INFO:oyente.symExec:	============ Results ===========
+INFO:oyente.symExec:	  EVM code coverage: 	 88.9%
+INFO:oyente.symExec:	  Callstack bug: 	 False
+INFO:oyente.symExec:	  Money concurrency bug: True
+Flow 1:
+/home/vagrant/host/benchmarks/./eth_tx_order_dependence_puzzle.sol:Benchmark:27:21
+msg.sender.transfer(reward)
+^
+Flow 2:
+/home/vagrant/host/benchmarks/./eth_tx_order_dependence_puzzle.sol:Benchmark:21:13
+owner.transfer(reward)
+^
+INFO:oyente.symExec:	  Time dependency bug: 	 False
+INFO:oyente.symExec:	  Reentrancy bug: 	 False
+INFO:oyente.symExec:	  Assertion failure: 	 False
+INFO:oyente.symExec:	====== Analysis Completed ======

@@ -1,0 +1,31 @@
+2018-05-24 17:39:04,522: [18533] m.main:INFO: Beginning analysis
+2018-05-24 17:39:09,178: [18533] m.ethereum:INFO: Starting symbolic transaction: 1
+2018-05-24 17:39:09,664: [18533] m.ethereum:INFO: Generated testcase No. 0 - REVERT
+2018-05-24 17:39:10,592: [18533] m.ethereum:INFO: Generated testcase No. 1 - REVERT
+2018-05-24 17:39:11,345: [18533] m.ethereum:INFO: Generated testcase No. 2 - REVERT
+2018-05-24 17:39:24,338: [18533] m.c.executor:ERROR: Exception: 2L
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/manticore/core/executor.py", line 459, in run
+    if not current_state.execute():
+  File "/usr/local/lib/python2.7/dist-packages/manticore/core/state.py", line 126, in execute
+    result = self._platform.execute()
+  File "/usr/local/lib/python2.7/dist-packages/manticore/platforms/evm.py", line 2221, in execute
+    self.CALL(ex.gas, ex.to, ex.value, ex.data)
+  File "/usr/local/lib/python2.7/dist-packages/manticore/platforms/evm.py", line 2437, in CALL
+    bytecode = self.get_code(to)
+  File "/usr/local/lib/python2.7/dist-packages/manticore/platforms/evm.py", line 2122, in get_code
+    return self.storage[address]['code']
+KeyError: 2L
+
+2018-05-24 17:39:24,980: [18533] m.ethereum:INFO: Generated testcase No. 3 - REVERT
+2018-05-24 17:39:26,323: [18533] m.ethereum:INFO: Generated testcase No. 4 - REVERT
+2018-05-24 17:39:27,692: [18533] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 6 | Alive States: 7
+2018-05-24 17:39:27,724: [20390] m.ethereum:INFO: Generated testcase No. 5 - RETURN
+2018-05-24 17:39:28,933: [20390] m.ethereum:INFO: Generated testcase No. 6 - STOP
+2018-05-24 17:39:30,265: [20390] m.ethereum:INFO: Generated testcase No. 7 - RETURN
+2018-05-24 17:39:31,550: [20390] m.ethereum:INFO: Generated testcase No. 8 - 2
+2018-05-24 17:39:32,929: [20390] m.ethereum:INFO: Generated testcase No. 9 - RETURN
+2018-05-24 17:39:34,241: [20390] m.ethereum:INFO: Generated testcase No. 10 - RETURN
+2018-05-24 17:39:35,502: [20390] m.ethereum:INFO: Generated testcase No. 11 - RETURN
+2018-05-24 17:39:36,867: [18533] m.ethereum:INFO: Results in /home/vagrant/mcore_Gz1TcZ
+EXITSTATUS=0

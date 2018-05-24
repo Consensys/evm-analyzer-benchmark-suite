@@ -1,0 +1,11 @@
+2018-05-24 17:35:05,318: [5423] m.main:INFO: Beginning analysis
+2018-05-24 17:35:05,776: [5423] m.ethereum:INFO: Starting symbolic transaction: 1
+2018-05-24 17:35:06,255: [5423] m.ethereum:INFO: Generated testcase No. 0 - REVERT
+2018-05-24 17:35:06,858: [5423] m.ethereum:INFO: Generated testcase No. 1 - REVERT
+2018-05-24 17:35:07,509: [5423] m.ethereum:INFO: Generated testcase No. 2 - REVERT
+2018-05-24 17:35:08,756: [5423] m.ethereum:WARNING: Integer underflow at SUB instruction
+2018-05-24 17:35:08,775: [5423] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 4 | Alive States: 2
+2018-05-24 17:35:08,796: [5688] m.ethereum:INFO: Generated testcase No. 3 - RETURN
+2018-05-24 17:35:09,352: [5688] m.ethereum:INFO: Generated testcase No. 4 - STOP
+2018-05-24 17:35:10,468: [5423] m.ethereum:INFO: Results in /home/vagrant/mcore_uTZssw
+EXITSTATUS=0

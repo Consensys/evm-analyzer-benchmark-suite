@@ -1,0 +1,17 @@
+==== Integer Overflow  ====
+Type: Warning
+Contract: Benchmark
+Function name: get(bytes)
+PC address: 104
+A possible integer overflow exists in the function `get(bytes)`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: /home/vagrant/host/benchmarks/./integer_overflow_bytes_param.sol:4
+
+function get(bytes key) public pure returns (bytes32) {
+        return keccak256(key);
+    }
+
+--------------------
+
+

@@ -1,0 +1,16 @@
+2018-05-24 17:38:42,981: [17076] m.main:INFO: Beginning analysis
+2018-05-24 17:38:45,054: [17076] m.ethereum:INFO: Starting symbolic transaction: 1
+2018-05-24 17:38:45,444: [17076] m.ethereum:INFO: Generated testcase No. 0 - REVERT
+2018-05-24 17:38:46,167: [17076] m.ethereum:INFO: Generated testcase No. 1 - REVERT
+2018-05-24 17:38:47,061: [17076] m.ethereum:INFO: Generated testcase No. 2 - REVERT
+2018-05-24 17:38:48,701: [17076] m.ethereum:INFO: Generated testcase No. 3 - REVERT
+2018-05-24 17:38:49,430: [17076] m.ethereum:INFO: Generated testcase No. 4 - REVERT
+2018-05-24 17:38:50,137: [17076] m.ethereum:INFO: Generated testcase No. 5 - REVERT
+2018-05-24 17:38:51,375: [17076] m.ethereum:INFO: Generated testcase No. 6 - REVERT
+2018-05-24 17:38:52,692: [17076] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 8 | Alive States: 4
+2018-05-24 17:38:52,717: [17972] m.ethereum:INFO: Generated testcase No. 7 - RETURN
+2018-05-24 17:38:53,397: [17972] m.ethereum:INFO: Generated testcase No. 8 - RETURN
+2018-05-24 17:38:54,109: [17972] m.ethereum:INFO: Generated testcase No. 9 - RETURN
+2018-05-24 17:38:54,863: [17972] m.ethereum:INFO: Generated testcase No. 10 - STOP
+2018-05-24 17:38:56,194: [17076] m.ethereum:INFO: Results in /home/vagrant/mcore_tRMzIl
+EXITSTATUS=0

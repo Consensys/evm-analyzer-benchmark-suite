@@ -1,0 +1,78 @@
+==== Exception state ====
+Type: Informational
+Contract: Benchmark
+Function name: init()
+PC address: 311
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking. 
+--------------------
+In file: /home/vagrant/host/benchmarks/./integer_overflow_dynarray.sol:13
+
+s[2]
+
+--------------------
+
+==== Exception state ====
+Type: Informational
+Contract: Benchmark
+Function name: init()
+PC address: 404
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking. 
+--------------------
+In file: /home/vagrant/host/benchmarks/./integer_overflow_dynarray.sol:14
+
+s[3]
+
+--------------------
+
+==== Exception state ====
+Type: Informational
+Contract: Benchmark
+Function name: init()
+PC address: 218
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking. 
+--------------------
+In file: /home/vagrant/host/benchmarks/./integer_overflow_dynarray.sol:12
+
+s[1]
+
+--------------------
+
+==== Exception state ====
+Type: Informational
+Contract: Benchmark
+Function name: init()
+PC address: 125
+A reachable exception (opcode 0xfe) has been detected. This can be caused by type errors, division by zero, out-of-bounds array access, or assert violations. This is acceptable in most situations. Note however that `assert()` should only be used to check invariants. Use `require()` for regular input checking. 
+--------------------
+In file: /home/vagrant/host/benchmarks/./integer_overflow_dynarray.sol:11
+
+s[0]
+
+--------------------
+
+==== Integer Overflow  ====
+Type: Warning
+Contract: Benchmark
+Function name: init()
+PC address: 498
+A possible integer overflow exists in the function `init()`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: /home/vagrant/host/benchmarks/./integer_overflow_dynarray.sol:5
+
+contract Benchmark {
+
+    uint128[] private s;
+
+    function init() public {
+        s.length = 4;
+        s[0] = 0xAA;
+        s[1] = 0xBB;
+        s[2] = 0xCC;
+        s[3] = 0xDD;
+    }
+}
+
+--------------------
+
+

@@ -1,0 +1,15 @@
+==== Integer Overflow  ====
+Type: Warning
+Contract: Benchmark
+Function name: run(uint256)
+PC address: 174
+A possible integer overflow exists in the function `run(uint256)`.
+The addition or multiplication may result in a value higher than the maximum representable integer.
+--------------------
+In file: /home/vagrant/host/benchmarks/./integer_overflow_add.sol:10
+
+count += input
+
+--------------------
+
+
