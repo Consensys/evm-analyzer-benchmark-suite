@@ -1,7 +1,9 @@
 # EVM Analyzer Benchmark Suite
 
-This repo keeps benchmarks for evaluating the precision of EVM code analysis tools. If you have a benchmark that you would like to contribute, please submit it as a pull request. Please open an issue if you have any suggestions or feedback, or contact diligence-core@consensys.net.
+This repo is a fork of Suhabe Bugara's excellent benchmark suite for evaluating the precision of EVM code analysis tools. If you have a benchmark that you would like to contribute, please submit it as a pull request.
 
 The link below shows the results of running some tools on these benchmarks:
 
 https://diligence.consensys.net/evm-analyzer-benchmark-suite
+
+Eventually these tools will be added to this repository.
