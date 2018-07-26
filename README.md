@@ -7,3 +7,5 @@ The link below shows the results of running some tools on these benchmarks:
 https://diligence.consensys.net/evm-analyzer-benchmark-suite
 
 Eventually these tools will be added to this repository.
+
+See the [wiki](https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-benchmark-suite/wiki) for commentary around the benchmarks.
