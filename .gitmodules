@@ -1,0 +1,3 @@
+[submodule "benchmarks/not-so-smart-contracts"]
+	path = benchmarks/not-so-smart-contracts
+	url = https://github.com/trailofbits/not-so-smart-contracts.git
