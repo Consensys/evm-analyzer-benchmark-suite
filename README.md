@@ -20,7 +20,7 @@ With help, hopefully there will be code to run other tools over the benchmarks.
 Since there is a git submodule in this repository clone using the `--recurse-submodules` option. For example:
 
 ```console
-$ git clone https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-benchmark-suite.git
+$ git clone --recurse-submodules https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-benchmark-suite.git
 ```
 
 ## See also
