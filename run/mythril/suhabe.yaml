@@ -116,7 +116,7 @@ eth_tx_order_dependence_multitx_1:
 eth_tx_order_dependence_puzzle:
   ignore: false
   error: false
-  run_time: 9.0
+  run_time: 120.0
   # Note the dup issues  below
   issues:
     - address: 316
@@ -145,26 +145,27 @@ integer_overflow_add:
 integer_overflow_benign_1:
   ignore: false
   error: false
-  run_time: 30.0
-  issues:
-    - address: 174
-      code: 'count += input'
-      title: 'Integer Overflow'
+  issues: []
 
 integer_overflow_benign_2:
   ignore: false
   error: false
   run_time: 30.0
   issues:
-    - address: 174
-      code: 'count += input'
+    - address: 231
+      code: "sub(a,b)"
+      title: 'Integer Underflow'
+    - address: 246
+      code: "add(res,b)"
       title: 'Integer Overflow'
 
 integer_overflow_bytes_param:
   ignore: false
   error: false
   run_time: 30.0
-  issues: []
+  issues:
+    - address: 104
+      title: 'Integer Overflow'
 
 integer_overflow_dynarray:
   ignore: false
@@ -181,14 +182,15 @@ integer_overflow_mapping_mapping:
 integer_overflow_mapping_staticarray:
   ignore: false
   error: false
-  run_time: 30.0
   issues: []
 
 integer_overflow_mapping_strkey:
   ignore: false
   error: false
-  run_time: 30.0
-  issues: []
+  run_time: 35.0
+  issues:
+    - address: 104
+      title: 'Integer Overflow'
 
 integer_overflow_mapping_struct:
   ignore: false

@@ -181,10 +181,11 @@ def run_benchmark_suite(verbose, timeout):
                     # When the code is too long, we skip it in the YAML
                     if (expected_issue.get('code', issue['code']) != issue['code']
                         or expected_issue['title'] != issue['title']):
-                        print("Mismatched issue datain {}".format(test_name))
+                        print("Mismatched issue data in {}".format(test_name))
                         pp.pprint(expected_issue)
                         print('.' * 40)
                         pp.pprint(issue)
+                        benchmark_success = False
                 else:
                     print("Didn't find {} in {}"
                           .format(issue, test_name))
