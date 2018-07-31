@@ -1,0 +1,230 @@
+# This contains expected results
+# when Mythril runs the suhabe benchmark
+
+# A description of some fields:
+
+# The top-level key is the name and file basename
+# of the subhabe benchmark
+# file without ".sol" extension suffix
+
+# ignore: skip test because there is a known problem.
+# When this field is true, there should be a
+# "reason:" field
+#
+# error: true if this contract should reports some kind
+# of vulnerabiity or error
+#
+# run_time: This field is optional. When given, it suggests a
+# pessimistic amount of time in seconds needed by the analyzer program
+# the to give results. If no value is given, then a value is supplied
+# by either as a command-line option or failing that through the
+# runner's built-in default which is about 7.0 seconds.
+# The value is a floating-point number.
+
+#
+# issues: a list of issues we expect to see
+
+honeypots/GiftBox/GiftBox:
+  ignore: false
+  error: false
+  run_time: 140.0
+  issues:
+    - address: 190
+      title: 'Integer Overflow'
+    - address: 470
+      title: 'Integer Overflow'
+    - address: 575
+      title: 'Integer Overflow'
+    - address: 840
+      code: 'sha3(pass)'
+      title: 'Integer Overflow'
+    - address: 853
+      code: 'sha3(pass)'
+      title: 'Integer Underflow'
+    - address: 943
+      code: 'msg.sender.transfer(this.balance)'
+      title: 'Ether send'
+    - address: 1686
+      code: 'sender.transfer(this.balance)'
+      title: 'Transaction order dependence'
+    - address: 1686
+      code: 'sender.transfer(this.balance)'
+      title: 'Ether send'
+    - address: 1819
+      title: 'Integer Overflow'
+    - address: 1833
+      title: 'Integer Overflow'
+
+honeypots/KOTH/KOTH:
+  ignore: false
+  error: false
+  issues: []
+
+honeypots/Lottery/Lottery:
+  ignore: false
+  error: false
+  run_time: 70.0
+  issues:
+    - address: 1204
+      code: 'block.number - 1'
+      title: 'Integer Underflow'
+    - address: 1242
+      code: 'block.difficulty*(uint)(block.coinbase)'
+      title: 'Integer Overflow'
+    - address: 1254
+      code: 'tx.gasprice * 7'
+      title: 'Integer Overflow'
+
+honeypots/Multiplicator/Multiplicator:
+  ignore: false
+  error: false
+  issues: []
+
+honeypots/PrivateBank/PrivateBank:
+  ignore: false
+  error: false
+  run_time: 180.0
+  issues: []
+
+honeypots/VarLoop/VarLoop:
+  ignore: false
+  error: false
+  issues:
+    - address: 352
+      title: 'Integer Overflow'
+    - address: 464
+      title: 'Ether send'
+
+incorrect_interface/Alice:
+  ignore: false
+  error: false
+  issues: []
+
+incorrect_interface/Bob:
+  ignore: false
+  error: false
+  issues:
+    - address: 330
+      code: 'c.set(42)'
+      title: 'Message call to external contract'
+    - address: 469
+      code: 'c.set_fixed(42)'
+      title: 'Message call to external contract'
+
+integer_overflow/interger_overflow_1:
+  ignore: false
+  error: false
+  issues:
+    - address: 229
+      code: 'sellerBalance += value'
+      title: 'Integer Overflow'
+
+missing_constructor/Missing:
+  ignore: false
+  error: false
+  issues:
+    - address: 388
+      code: 'owner.transfer(this.balance)'
+      title: 'Ether send'
+    - address: 388
+      code: 'owner.transfer(this.balance)'
+      title: 'Transaction order dependence'
+
+missing_constructor/Rubixi_source_code/Rubixi:
+  ignore: false
+  error: false
+  issues:
+    - address: 388
+      code: 'owner.transfer(this.balance)'
+      title: 'Ether send'
+    - address: 388
+      code: 'owner.transfer(this.balance)'
+      title: 'Transaction order dependence'
+
+race_condition/RaceCondition:
+  ignore: false
+  error: false
+  issues:
+    - address: 623
+      code: 'token.transferFrom(msg.sender, owner, price)'
+      title: 'Message call to external contract'
+    - address: 686
+      code: 'price = new_price'
+      title: 'State change after external call'
+    - address: 750
+      code: 'owner = msg.sender'
+      title: 'State change after external call'
+
+reentrancy/DAO_source_code/DAO:
+  ignore: false
+  error: false
+  issues: []
+
+reentrancy/Reentrancy:
+  ignore: false
+  error: false
+  issues:
+    - address: 455
+      code: 'msg.sender.call.value(amount)()'
+      title: 'Ether send'
+    - address: 455
+      code: 'msg.sender.call.value(amount)()'
+      title: 'Message call to external contract'
+    - address: 575
+      code: 'msg.sender.call.value(userBalance[msg.sender])()'
+      title: 'Ether send'
+    - address: 575
+      code: 'msg.sender.call.value(userBalance[msg.sender])()'
+      title: 'Message call to external contract'
+    - address: 657
+      code: 'userBalance[msg.sender] = 0'
+      title: 'State change after external call'
+    - address: 729
+      code: 'userBalance[msg.sender] += msg.value'
+      title: 'Integer Overflow'
+    - address: 848
+      code: 'msg.sender.transfer(userBalance[msg.sender])'
+      title: 'Ether send'
+
+reentrancy/ReentrancyExploit:
+  ignore: false
+  error: false
+  issues:
+    - address: 369
+      code: 'vulnerable_contract.call(bytes4(sha3("withdrawBalance()")))'
+      title: 'Message call to external contract'
+    - address: 369
+      code: 'vulnerable_contract.call(bytes4(sha3("withdrawBalance()")))'
+      title: 'Transaction order dependence'
+    - address: 975
+      code: 'vulnerable_contract.call(bytes4(sha3("withdrawBalance()")))'
+      title: 'Message call to external contract'
+    - address: 975
+      code: 'vulnerable_contract.call(bytes4(sha3("withdrawBalance()")))'
+      title: 'Transaction order dependence'
+    - address: 1106
+      code: 'suicide(owner)'
+      title: 'Unchecked SUICIDE'
+    - address: 1376
+      code: 'vulnerable_contract.call.value(msg.value)(bytes4(sha3("addToBalance()")))'
+      title: 'Message call to external contract'
+
+unchecked_external_call/KotET_source_code/KingOfTheEtherThrone:
+  ignore: false
+  error: false
+  issues: []
+
+unprotected_function/Unprotected:
+  ignore: false
+  error: false
+  issues: []
+
+unprotected_function/WalletLibrary_source_code/WalletLibrary:
+  ignore: false
+  error: false
+  issues: []
+
+variable shadowing/inherited_state:
+  ignore: false
+  error: false
+  issues: []

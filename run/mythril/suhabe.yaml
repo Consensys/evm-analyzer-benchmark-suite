@@ -150,6 +150,7 @@ integer_overflow_benign_1:
 integer_overflow_benign_2:
   ignore: false
   error: false
+  benign: true
   run_time: 30.0
   issues:
     - address: 231
@@ -246,6 +247,7 @@ integer_overflow_multitx_multifunc_feasible:
 integer_overflow_multitx_onefunc_feasible:
   ignore: false
   error: false
+  benign: true
   issues:
     - address: 196
       code: 'count -= input'
@@ -275,6 +277,7 @@ integer_overflow_staticarray:
 integer_overflow_storageinvariant:
   ignore: false
   error: false
+  benign: true
   issues:
     - address: 267
       code: 'balance -= oCredit'

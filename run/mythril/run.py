@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-run  subhabe benchmarks with Mythril
+run  suhabe benchmarks with Mythril
 """
 from pathlib import Path
 from glob import glob
@@ -35,6 +35,19 @@ def elapsed_str(elapsed):
         return ("{:5.2f} second{}"
                 .format(seconds, secs_plural))
 
+def get_contract_name():
+    """See that solidity works and return contract name in the solity file.
+    """
+    myth_prog = os.environ.get('MYTH', 'myth')
+    cmd = [myth_prog, '--version']
+    s = subprocess.run(cmd, stdout=subprocess.PIPE)
+    if s.returncode != 0:
+        print("Failed to get run Mythril with:\n\t{}\n failed with return code {}"
+              .format(' '.join(cmd), s.returncode))
+        return None
+    # FIXME: check version
+    return myth_prog
+
 def get_myth_prog():
     """Return the mythril program name to run. Setting a name inenvironent variable MYTH
     takes precidence of the vanilla name "myth". As a sanity check, try
@@ -51,7 +64,7 @@ def get_myth_prog():
     return myth_prog
 
 def run_myth(myth_prog, sol_file, debug, timeout=DEFAULT_TIMEOUT):
-    cmd = [myth_prog, '-x', '-o', 'json', '{}:Benchmark'.format(sol_file)]
+    cmd = [myth_prog, '-x', '-o', 'json', '{}'.format(sol_file)]
     if debug:
         print(' '.join(cmd))
     start = time.time()
@@ -72,13 +85,27 @@ def get_benchmark_yaml(mydir, suite_name, debug):
         print("-" * 30)
     return testsuite_conf
 
+def gather_benchmark_files(root_dir, suite_name):
+    testsuite_benchdir = root_dir.parents[1] / 'benchmarks' / suite_name
+    os.chdir(testsuite_benchdir)
+    return sorted(glob('**/*.sol', recursive=True))
+
+
+# TODO add json config lint function?
 @click.command()
+@click.option('--suite', '-s', type=click.Choice(['suhabe', 'nssc',
+                                                  'not-so-smart-contracts']),
+              default='suhabe',
+              help="Benchmark suite to run; "
+              "nscc is an abbreviation for not-so-smart-contracts.")
 @click.option('--verbose', '-v', count=True,
               help="More verbose output; use twice for the most verbose output.")
 @click.option('--timeout', '-t', type=float,
               default=DEFAULT_TIMEOUT,
               help="Maximum time allowed on any single benchmark.")
-def run_benchmark_suite(verbose, timeout):
+@click.option('--files/--no-files', default=False,
+              help="List files in benchmark and exit.")
+def run_benchmark_suite(suite, verbose, timeout, files):
     """Run Mythril on a benchmark suite.
 
     If you set environment variable MYTH, that will be used a the myth CLI command to
@@ -88,11 +115,13 @@ def run_benchmark_suite(verbose, timeout):
     if not myth_prog:
         sys.exit(1)
 
-    mydir = Path(__file__).parent.resolve()
+    if suite == 'nssc':
+        suite = 'not-so-smart-contracts'
+
+    project_root_dir = Path(__file__).parent.resolve()
     debug = verbose == 2
-    testsuite_conf = get_benchmark_yaml(mydir, 'suhabe', debug)
-    testsuite_benchdir = mydir.parents[1] / 'benchmarks' / 'suhabe'
-    os.chdir(testsuite_benchdir)
+    testsuite_conf = get_benchmark_yaml(project_root_dir, suite, debug)
+    benchmark_files = gather_benchmark_files(project_root_dir, suite)
 
     # Zero counters
     unconfigured = invalid_execution = error_execution = 0
@@ -100,13 +129,23 @@ def run_benchmark_suite(verbose, timeout):
     timed_out = passed = 0
     total_time = 0.0
 
+    if files:
+        print("Benchmark suite {} contains {} files:".format(suite, len(benchmark_files)))
+        for bench_name in benchmark_files:
+            print("\t", bench_name)
+        sys.exit(0)
+
+    print("Running {} benchmark suite".format(suite))
+
     # for sol_file in ['eth_tx_order_dependence_minimal.sol']:
-    for sol_file in sorted(glob('*.sol')):
+    for sol_file in benchmark_files:
         benchmarks += 1
         print('-' * 40)
         print("Checking {}".format(sol_file))
-        test_name = Path(sol_file).stem
+        sol_path = Path(sol_file)
+        test_name = str(sol_path.parent / sol_path.stem)
         expected_data = testsuite_conf.get(test_name, None)
+
         if expected_data:
             run_time = expected_data.get('run_time', timeout)
             if expected_data.get('ignore', None):
@@ -115,12 +154,13 @@ def run_benchmark_suite(verbose, timeout):
                 ignored_benchmarks += 1
                 continue
             elif timeout < run_time:
-                print('Benchmark "{}" skipped because it is noted to take a long time; {} seconds'
+                print('Benchmark "{}" skipped because it is noted to take a long time; '
+                      '{} seconds'
                       .format(test_name, run_time))
                 ignored_benchmarks += 1
                 continue
 
-        cmd = [myth_prog, '-x', '-o', 'json', '{}:Benchmark'.format(sol_file)]
+        cmd = [myth_prog, '-x', '-o', 'json', '{}'.format(sol_file)]
         if verbose:
             print(' '.join(cmd))
 
@@ -148,10 +188,9 @@ def run_benchmark_suite(verbose, timeout):
             unconfigured += 1
             print('Benchmark "{}" results not configured, '
                   'so I cannot pass judgement on this'.format(test_name))
-            if debug:
-                pp.pprint(data)
-                print("=" * 30)
-            if unconfigured > 2:
+            pp.pprint(data)
+            print("=" * 30)
+            if unconfigured > 5:
                 break
         else:
             if data['error']:
@@ -189,6 +228,7 @@ def run_benchmark_suite(verbose, timeout):
                 else:
                     print("Didn't find {} in {}"
                           .format(issue, test_name))
+                    pp.pprint(data_issues)
                     unfound_issues += 1
                     benchmark_success = False
             if benchmark_success:
@@ -208,7 +248,7 @@ def run_benchmark_suite(verbose, timeout):
         pass
     print('-' * 40)
 
-    print("\nSummary: {} benchmarks; {} passed {}, unconfigured, {} invalid execution, "
+    print("\nSummary: {} benchmarks; {} passed, {} unconfigured, {} invalid execution, "
           "{} errored, {} timed out, {} ignored."
           .format(benchmarks, passed, unconfigured, invalid_execution, error_execution,
                   timed_out, ignored_benchmarks))
