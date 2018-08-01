@@ -1,16 +1,24 @@
 #!/usr/bin/env python
 """
-run  suhabe benchmarks with Mythril
+top-level CLI to run benchmarks
 """
 from pathlib import Path
 from glob import glob
-import json, subprocess, os, sys, time, yaml
+import json, os, sys, yaml
 import click
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
-# Maximim time, in seconds, that we allow Mythril to
+project_root_dir = Path(__file__).parent.resolve()
+
+# Make relative loading work without relative import, which
+# doesn't work with main programs
+sys.path.insert(0, project_root_dir)
+from mythstuff import get_myth_prog, run_myth
+
+
+# Maximum time, in seconds, that we allow the analyzer to
 # take in analyzing a benchmark.
 DEFAULT_TIMEOUT=7.0
 
@@ -35,46 +43,6 @@ def elapsed_str(elapsed):
         return ("{:5.2f} second{}"
                 .format(seconds, secs_plural))
 
-def get_contract_name():
-    """See that solidity works and return contract name in the solity file.
-    """
-    myth_prog = os.environ.get('MYTH', 'myth')
-    cmd = [myth_prog, '--version']
-    s = subprocess.run(cmd, stdout=subprocess.PIPE)
-    if s.returncode != 0:
-        print("Failed to get run Mythril with:\n\t{}\n failed with return code {}"
-              .format(' '.join(cmd), s.returncode))
-        return None
-    # FIXME: check version
-    return myth_prog
-
-def get_myth_prog():
-    """Return the mythril program name to run. Setting a name inenvironent variable MYTH
-    takes precidence of the vanilla name "myth". As a sanity check, try
-    running this command with --version to make sure it does something.
-    """
-    myth_prog = os.environ.get('MYTH', 'myth')
-    cmd = [myth_prog, '--version']
-    s = subprocess.run(cmd, stdout=subprocess.PIPE)
-    if s.returncode != 0:
-        print("Failed to get run Mythril with:\n\t{}\n failed with return code {}"
-              .format(' '.join(cmd), s.returncode))
-        return None
-    # FIXME: check version
-    return myth_prog
-
-def run_myth(myth_prog, sol_file, debug, timeout=DEFAULT_TIMEOUT):
-    cmd = [myth_prog, '-x', '-o', 'json', '{}'.format(sol_file)]
-    if debug:
-        print(' '.join(cmd))
-    start = time.time()
-    try:
-        result = subprocess.run(cmd, stdout=subprocess.PIPE, timeout=timeout)
-    except subprocess.TimeoutExpired:
-        result = None
-    elapsed = (time.time() - start)
-    return elapsed, result
-
 def get_benchmark_yaml(mydir, suite_name, debug):
     testsuite_conf_path = mydir / (suite_name + '.yaml')
     if not testsuite_conf_path.exists():
@@ -86,7 +54,7 @@ def get_benchmark_yaml(mydir, suite_name, debug):
     return testsuite_conf
 
 def gather_benchmark_files(root_dir, suite_name):
-    testsuite_benchdir = root_dir.parents[1] / 'benchmarks' / suite_name
+    testsuite_benchdir = root_dir.parent / 'benchmarks' / suite_name
     os.chdir(testsuite_benchdir)
     return sorted(glob('**/*.sol', recursive=True))
 
@@ -118,7 +86,6 @@ def run_benchmark_suite(suite, verbose, timeout, files):
     if suite == 'nssc':
         suite = 'not-so-smart-contracts'
 
-    project_root_dir = Path(__file__).parent.resolve()
     debug = verbose == 2
     testsuite_conf = get_benchmark_yaml(project_root_dir, suite, debug)
     benchmark_files = gather_benchmark_files(project_root_dir, suite)
@@ -195,6 +162,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         else:
             if data['error']:
                 print('Benchmark "{}" errored'.format(test_name))
+                print(data['error'])
                 error_execution += 1
                 continue
 
@@ -248,8 +216,8 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         pass
     print('-' * 40)
 
-    print("\nSummary: {} benchmarks; {} passed, {} unconfigured, {} invalid execution, "
-          "{} errored, {} timed out, {} ignored."
+    print("\nSummary: {} benchmarks; {} passed, {} unconfigured, {} aborted abnormally, "
+          "{} unexpected results, {} timed out, {} ignored."
           .format(benchmarks, passed, unconfigured, invalid_execution, error_execution,
                   timed_out, ignored_benchmarks))
     print("Total elapsed execution time: {}".format(elapsed_str(total_time)))
