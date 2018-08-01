@@ -10,11 +10,11 @@ import click
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
-project_root_dir = Path(__file__).parent.resolve()
+code_root_dir = Path(__file__).parent.resolve()
 
 # Make relative loading work without relative import, which
 # doesn't work with main programs
-sys.path.insert(0, project_root_dir)
+sys.path.insert(0, code_root_dir)
 from mythstuff import get_myth_prog, run_myth
 
 
@@ -58,7 +58,6 @@ def gather_benchmark_files(root_dir, suite_name):
     os.chdir(testsuite_benchdir)
     return sorted(glob('**/*.sol', recursive=True))
 
-
 # TODO add json config lint function?
 @click.command()
 @click.option('--suite', '-s', type=click.Choice(['suhabe', 'nssc',
@@ -83,12 +82,15 @@ def run_benchmark_suite(suite, verbose, timeout, files):
     if not myth_prog:
         sys.exit(1)
 
+    out_data = {}
     if suite == 'nssc':
         suite = 'not-so-smart-contracts'
 
+    out_data['suite'] = suite
+
     debug = verbose == 2
-    testsuite_conf = get_benchmark_yaml(project_root_dir, suite, debug)
-    benchmark_files = gather_benchmark_files(project_root_dir, suite)
+    testsuite_conf = get_benchmark_yaml(code_root_dir, suite, debug)
+    benchmark_files = gather_benchmark_files(code_root_dir, suite)
 
     # Zero counters
     unconfigured = invalid_execution = error_execution = 0
@@ -96,6 +98,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
     timed_out = passed = 0
     total_time = 0.0
 
+    out_data['benchmark_files'] = benchmark_files
     if files:
         print("Benchmark suite {} contains {} files:".format(suite, len(benchmark_files)))
         for bench_name in benchmark_files:
@@ -104,6 +107,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
 
     print("Running {} benchmark suite".format(suite))
 
+    out_data['benchmarks'] = {}
     # for sol_file in ['eth_tx_order_dependence_minimal.sol']:
     for sol_file in benchmark_files:
         benchmarks += 1
@@ -111,8 +115,9 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         print("Checking {}".format(sol_file))
         sol_path = Path(sol_file)
         test_name = str(sol_path.parent / sol_path.stem)
+        bench_data = out_data['benchmarks'][test_name] = {}
         expected_data = testsuite_conf.get(test_name, None)
-
+        bench_data['expected_data'] = expected_data
         if expected_data:
             run_time = expected_data.get('run_time', timeout)
             if expected_data.get('ignore', None):
@@ -134,12 +139,14 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         elapsed, s = run_myth(myth_prog, sol_file, debug, timeout)
         if s is None:
             print('Benchmark "{}" timed out after {}'.format(test_name, elapsed_str(elapsed)))
+            bench_data['timed_out'] = elapsed
             timed_out += 1
             continue
 
         total_time += elapsed
         print(elapsed_str(elapsed))
 
+        bench_data['execution_returncode'] = s.returncode
         if s.returncode != 0:
             print("mythril invocation:\n\t{}\n failed with return code {}"
                   .format(' '.join(cmd), s.returncode))
@@ -160,6 +167,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
             if unconfigured > 5:
                 break
         else:
+            bench_data['error'] = data['error']
             if data['error']:
                 print('Benchmark "{}" errored'.format(test_name))
                 print(data['error'])
@@ -169,6 +177,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
             expected_issues = {(issue['address'], issue['title']): issue
                                for issue in expected_data['issues']}
             data_issues = data['issues']
+            bench_data['issues'] = data['issues']
             if len(expected_issues) != len(data_issues):
                 print("Expecting to find {} issue(s), got {}"
                       .format(len(expected_issues), len(data_issues)))
@@ -199,6 +208,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
                     pp.pprint(data_issues)
                     unfound_issues += 1
                     benchmark_success = False
+            bench_data['benchmark_success'] = benchmark_success
             if benchmark_success:
                 passed += 1
                 print('Benchmark "{}" checks out'.format(test_name))
@@ -221,6 +231,15 @@ def run_benchmark_suite(suite, verbose, timeout, files):
           .format(benchmarks, passed, unconfigured, invalid_execution, error_execution,
                   timed_out, ignored_benchmarks))
     print("Total elapsed execution time: {}".format(elapsed_str(total_time)))
+
+    for field in """passed unconfigured invalid_execution error_execution
+                     timed_out ignored_benchmarks""".split():
+        out_data[field] = locals()[field]
+    out_data['total_time']= total_time
+    out_data['benchmark_count'] = benchmarks
+    with open(code_root_dir.parent / 'out' / (suite + '.yaml'), 'w') as fp:
+        yaml.dump(out_data, fp)
+
 
 if __name__ == '__main__':
     run_benchmark_suite()
