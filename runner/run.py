@@ -53,16 +53,16 @@ def get_benchmark_yaml(mydir, suite_name, debug):
         print("-" * 30)
     return testsuite_conf
 
-def gather_benchmark_files(root_dir, suite_name):
-    testsuite_benchdir = root_dir.parent / 'benchmarks' / suite_name
+def gather_benchmark_files(root_dir, suite_name, benchmark_subdir):
+    testsuite_benchdir = root_dir.parent / 'benchmarks' / suite_name / benchmark_subdir
     os.chdir(testsuite_benchdir)
     return sorted(glob('**/*.sol', recursive=True))
 
 # TODO add json config lint function?
 @click.command()
-@click.option('--suite', '-s', type=click.Choice(['suhabe', 'nssc',
+@click.option('--suite', '-s', type=click.Choice(['Suhabe', 'nssc',
                                                   'not-so-smart-contracts']),
-              default='suhabe',
+              default='Suhabe',
               help="Benchmark suite to run; "
               "nscc is an abbreviation for not-so-smart-contracts.")
 @click.option('--verbose', '-v', count=True,
@@ -90,7 +90,8 @@ def run_benchmark_suite(suite, verbose, timeout, files):
 
     debug = verbose == 2
     testsuite_conf = get_benchmark_yaml(code_root_dir, suite, debug)
-    benchmark_files = gather_benchmark_files(code_root_dir, suite)
+    benchmark_files = gather_benchmark_files(code_root_dir, suite,
+                                             testsuite_conf['benchmark_subdir'])
 
     # Zero counters
     unconfigured = invalid_execution = error_execution = 0

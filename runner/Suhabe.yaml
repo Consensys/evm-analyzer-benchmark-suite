@@ -24,6 +24,8 @@
 #
 # issues: a list of issues we expect to see
 
+benchmark_subdir: 'benchmarks'
+
 assert_constructor:
   ignore: false
   error: false

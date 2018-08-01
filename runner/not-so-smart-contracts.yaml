@@ -24,6 +24,8 @@
 #
 # issues: a list of issues we expect to see
 
+benchmark_subdir: ''
+
 honeypots/GiftBox/GiftBox:
   ignore: false
   error: false
