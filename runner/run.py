@@ -78,9 +78,14 @@ def run_benchmark_suite(suite, verbose, timeout, files):
     If you set environment variable MYTH, that will be used a the myth CLI command to
     invoke. If that is not set, we run using "myth".
     """
-    myth_prog = get_myth_prog()
-    if not myth_prog:
-        sys.exit(1)
+    analyzer = 'mythril'
+
+    if analyzer == 'mythril':
+        analyzer_prog = get_myth_prog()
+        if not analyzer_prog:
+            sys.exit(1)
+            pass
+        pass
 
     out_data = {}
     if suite == 'nssc':
@@ -133,11 +138,12 @@ def run_benchmark_suite(suite, verbose, timeout, files):
                 ignored_benchmarks += 1
                 continue
 
-        cmd = [myth_prog, '-x', '-o', 'json', '{}'.format(sol_file)]
+        # FIXME: expand to other analyzers
+        cmd = [analyzer_prog, '-x', '-o', 'json', '{}'.format(sol_file)]
         if verbose:
             print(' '.join(cmd))
 
-        elapsed, s = run_myth(myth_prog, sol_file, debug, timeout)
+        elapsed, s = run_myth(analyzer_prog, sol_file, debug, timeout)
         if s is None:
             print('Benchmark "{}" timed out after {}'.format(test_name, elapsed_str(elapsed)))
             bench_data['timed_out'] = elapsed
@@ -238,7 +244,10 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         out_data[field] = locals()[field]
     out_data['total_time']= total_time
     out_data['benchmark_count'] = benchmarks
-    with open(code_root_dir.parent / 'out' / (suite + '.yaml'), 'w') as fp:
+
+    benchdir = code_root_dir.parent / 'benchdata' / suite
+    os.makedirs(benchdir, exist_ok = True)
+    with open(benchdir / (analyzer + '.yaml'), 'w') as fp:
         yaml.dump(out_data, fp)
 
 
