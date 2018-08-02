@@ -1,8 +1,0 @@
-2018-05-24 17:37:08,567: [11746] m.main:INFO: Beginning analysis
-2018-05-24 17:37:08,913: [11746] m.ethereum:INFO: Starting symbolic transaction: 1
-2018-05-24 17:37:09,159: [11746] m.ethereum:INFO: Generated testcase No. 0 - REVERT
-2018-05-24 17:37:10,346: [11746] m.ethereum:INFO: Generated testcase No. 1 - REVERT
-2018-05-24 17:37:11,465: [11746] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 3 | Alive States: 1
-2018-05-24 17:37:11,473: [11987] m.ethereum:INFO: Generated testcase No. 2 - STOP
-2018-05-24 17:37:12,640: [11746] m.ethereum:INFO: Results in /home/vagrant/mcore_aiyQMh
-EXITSTATUS=0

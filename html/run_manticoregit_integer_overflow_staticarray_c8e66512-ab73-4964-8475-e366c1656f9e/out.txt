@@ -1,9 +1,0 @@
-2018-05-24 17:36:54,830: [10686] m.main:INFO: Beginning analysis
-2018-05-24 17:36:55,263: [10686] m.ethereum:INFO: Starting symbolic transaction: 1
-2018-05-24 17:36:55,510: [10686] m.ethereum:INFO: Generated testcase No. 0 - REVERT
-2018-05-24 17:36:56,372: [10686] m.ethereum:INFO: Generated testcase No. 1 - REVERT
-2018-05-24 17:36:57,473: [10686] m.ethereum:INFO: Generated testcase No. 2 - REVERT
-2018-05-24 17:36:59,204: [10686] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 4 | Alive States: 1
-2018-05-24 17:36:59,212: [10977] m.ethereum:INFO: Generated testcase No. 3 - RETURN
-2018-05-24 17:37:00,445: [10686] m.ethereum:INFO: Results in /home/vagrant/mcore_yGydp_
-EXITSTATUS=0

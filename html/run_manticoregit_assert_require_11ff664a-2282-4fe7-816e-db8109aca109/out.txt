@@ -1,9 +1,0 @@
-2018-05-24 17:38:31,560: [16559] m.main:INFO: Beginning analysis
-2018-05-24 17:38:31,910: [16559] m.ethereum:INFO: Starting symbolic transaction: 1
-2018-05-24 17:38:32,157: [16559] m.ethereum:INFO: Generated testcase No. 0 - REVERT
-2018-05-24 17:38:33,016: [16559] m.ethereum:INFO: Generated testcase No. 1 - REVERT
-2018-05-24 17:38:34,088: [16559] m.ethereum:INFO: Generated testcase No. 2 - REVERT
-2018-05-24 17:38:35,236: [16559] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 4 | Alive States: 1
-2018-05-24 17:38:35,245: [16774] m.ethereum:INFO: Generated testcase No. 3 - STOP
-2018-05-24 17:38:36,317: [16559] m.ethereum:INFO: Results in /home/vagrant/mcore_PBDPSn
-EXITSTATUS=0
