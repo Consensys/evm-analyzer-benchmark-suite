@@ -1,5 +1,5 @@
 # This contains expected results
-# when Mythril runs the suhabe benchmark
+# when Mythril runs the Suhabe benchmark suite
 
 # A description of some fields:
 
@@ -11,9 +11,6 @@
 # shen this field is true, there should be a
 # "reason:" field
 #
-# error: true if this contract should reports some kind
-# of vulnerabiity or error
-#
 # run_time: This field is optional. When given, it suggests a
 # pessimistic amount of time in seconds needed by the analyzer program
 # the to give results. If not value is given, then a value is supplied
@@ -21,19 +18,14 @@
 # runner's built-in default which is about 7.0 seconds.
 # The value is a floating-point number.
 
-#
 # issues: a list of issues we expect to see
-
-benchmark_subdir: 'benchmarks'
 
 assert_constructor:
   ignore: false
-  error: false
   issues: []
 
 assert_minimal:
   ignore: false
-  error: false
   issues:
   - address: 96
     code: 'assert(false)'
@@ -41,15 +33,10 @@ assert_minimal:
 
 assert_multitx_1:
   ignore: false
-  error: false
-  issues:
-    - address: 99
-      code: 'assert(param > 0)'
-      title: 'Exception state'
 
 assert_multitx_2:
+  bug_type: 'Assertion'
   ignore: false
-  error: false
   issues:
     - address: 161
       code: 'assert(param > 0)'
@@ -57,12 +44,10 @@ assert_multitx_2:
 
 assert_require:
   ignore: false
-  error: false
   issues: []
 
 assert_sym:
   ignore: false
-  error: false
   issues:
     - address: 120
       code: 'assert(param > 0)'
@@ -70,20 +55,13 @@ assert_sym:
 
 attribute_store:
   ignore: false
-  error: false
   issues: []
 
 eth_tx_order_dependence_2:
   ignore: false
-  error: false
-  issues:
-    - address: 316
-      code: 'owner.transfer(reward)'
-      title: 'Transaction order dependence'
 
 eth_tx_order_dependence_minimal:
   ignore: false
-  error: false
   issues:
     - address: 554
       code: 'owner.transfer(reward)'
@@ -100,24 +78,9 @@ eth_tx_order_dependence_minimal:
 
 eth_tx_order_dependence_multitx_1:
   ignore: false
-  error: false
-  issues:
-    - address: 616
-      code: 'owner.transfer(reward)'
-      title: 'Ether send'
-    - address: 616
-      code: 'owner.transfer(reward)'
-      title: 'Transaction order dependence'
-    - address: 834
-      code': 'msg.sender.transfer(reward)'
-      title: 'Ether send'
-    - address: 834
-      code': 'msg.sender.transfer(reward)'
-      title: 'Transaction order dependence'
 
 eth_tx_order_dependence_puzzle:
   ignore: false
-  error: false
   run_time: 120.0
   # Note the dup issues  below
   issues:
@@ -138,7 +101,6 @@ eth_tx_order_dependence_puzzle:
 
 integer_overflow_add:
   ignore: false
-  error: false
   issues:
     - address: 174
       code: 'count += input'
@@ -146,13 +108,10 @@ integer_overflow_add:
 
 integer_overflow_benign_1:
   ignore: false
-  error: false
   issues: []
 
 integer_overflow_benign_2:
   ignore: false
-  error: false
-  benign: true
   run_time: 30.0
   issues:
     - address: 231
@@ -164,48 +123,28 @@ integer_overflow_benign_2:
 
 integer_overflow_bytes_param:
   ignore: false
-  error: false
   run_time: 30.0
-  issues:
-    - address: 104
-      title: 'Integer Overflow'
 
 integer_overflow_dynarray:
   ignore: false
-  error: false
-  issues:
-    - address: 498
-      title: 'Integer Overflow'
 
 integer_overflow_mapping_mapping:
   ignore: false
-  error: false
   issues: []
 
 integer_overflow_mapping_staticarray:
   ignore: false
-  error: false
   issues: []
 
 integer_overflow_mapping_strkey:
   ignore: false
-  error: false
   run_time: 35.0
-  issues:
-    - address: 104
-      title: 'Integer Overflow'
 
 integer_overflow_mapping_struct:
   ignore: false
-  error: false
-  issues:
-    - address: 145
-      code: 'map[k] -= v'
-      title: 'Integer Underflow'
 
 integer_overflow_mapping_sym_1:
   ignore: false
-  error: false
   issues:
     - address: 145
       code: 'map[k] -= v'
@@ -213,17 +152,18 @@ integer_overflow_mapping_sym_1:
 
 integer_overflow_mapping_sym_2:
   ignore: false
-  error: false
   issues: []
 
-integer_overflow_mapping_word:
+integer_overflow_mapping_mapping:
   ignore: false
-  error: false
+  issues: []
+
+integer_overflow_mapping_words:
+  ignore: false
   issues: []
 
 integer_overflow_minimal:
   ignore: false
-  error: false
   issues:
     - address: 174
       code: 'count -= input'
@@ -231,7 +171,6 @@ integer_overflow_minimal:
 
 integer_overflow_mul:
   ignore: false
-  error: false
   issues:
     - address: 174
       code: 'count *= input'
@@ -239,7 +178,6 @@ integer_overflow_mul:
 
 integer_overflow_multitx_multifunc_feasible:
   ignore: false
-  error: false
   issues:
     - address: 218
       code: 'count -= input'
@@ -248,8 +186,6 @@ integer_overflow_multitx_multifunc_feasible:
 
 integer_overflow_multitx_onefunc_feasible:
   ignore: false
-  error: false
-  benign: true
   issues:
     - address: 196
       code: 'count -= input'
@@ -257,7 +193,6 @@ integer_overflow_multitx_onefunc_feasible:
 
 integer_overflow_multitx_onefunc_infeasible:
   ignore: false
-  error: false
   issues:
     - address: 188
       code: 'count -= input'
@@ -265,12 +200,10 @@ integer_overflow_multitx_onefunc_infeasible:
 
 integer_overflow_path_1:
   ignore: false
-  error: false
   issues: []
 
 integer_overflow_staticarray:
   ignore: false
-  error: false
   issues:
     - address: 196
       code: 'count -= input'
@@ -278,7 +211,6 @@ integer_overflow_staticarray:
 
 integer_overflow_storageinvariant:
   ignore: false
-  error: false
   benign: true
   issues:
     - address: 267
@@ -293,7 +225,6 @@ integer_overflow_storageinvariant:
 
 integer_overflow_storagepacking:
   ignore: false
-  error: false
   issues:
     - address: 267
       code: 'balance -= oCredit'
@@ -307,7 +238,6 @@ integer_overflow_storagepacking:
 
 reentrancy_dao:
   ignore: false
-  error: false
   issues:
     - address: 200
       code: 'balance -= oCredit'
@@ -327,7 +257,6 @@ reentrancy_dao:
 
 reentrancy_dao_fixed:
   ignore: false
-  error: false
   issues:
     - address: 200
       code: 'balance -= oCredit'
@@ -344,7 +273,6 @@ reentrancy_dao_fixed:
 
 reentrancy_nostateeffect:
   ignore: false
-  error: false
   issues:
     - address: 261
       code: 'Runner(base).run(param)'

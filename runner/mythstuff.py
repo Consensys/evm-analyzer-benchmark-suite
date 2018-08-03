@@ -1,4 +1,4 @@
-import os, subprocess, time
+import os, subprocess, time, re
 """Mythril-related things"""
 def get_contract_name():
     """See that solidity works and return contract name in the solity file.
@@ -25,8 +25,11 @@ def get_myth_prog():
         print("Failed to get run Mythril with:\n\t{}\n failed with return code {}"
               .format(' '.join(cmd), s.returncode))
         return None
+    m = re.search('Mythril version (.+)', s.stdout.decode('utf-8'))
+    if m:
+        myth_version = m.group(1)
     # FIXME: check version
-    return myth_prog
+    return myth_prog, myth_version
 
 def run_myth(myth_prog, sol_file, debug, timeout):
     cmd = [myth_prog, '-x', '-o', 'json', '{}'.format(sol_file)]

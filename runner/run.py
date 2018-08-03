@@ -4,13 +4,14 @@ top-level CLI to run benchmarks
 """
 from pathlib import Path
 from glob import glob
-import json, os, sys, yaml
+import json, os, sys, time, yaml
 import click
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 code_root_dir = Path(__file__).parent.resolve()
+project_root_dir = code_root_dir.parent
 
 # Make relative loading work without relative import, which
 # doesn't work with main programs
@@ -23,7 +24,7 @@ from mythstuff import get_myth_prog, run_myth
 DEFAULT_TIMEOUT=7.0
 
 
-def elapsed_str(elapsed):
+def secs_to_human(elapsed):
     "Format `elapsed` into a human-readable string with hours, minutes and seconds"
     hours, rem = divmod(elapsed, 60 * 60)
     minutes, seconds = divmod(rem, 60)
@@ -43,15 +44,25 @@ def elapsed_str(elapsed):
         return ("{:5.2f} second{}"
                 .format(seconds, secs_plural))
 
-def get_benchmark_yaml(mydir, suite_name, debug):
-    testsuite_conf_path = mydir / (suite_name + '.yaml')
+def get_benchmark_yaml(project_root_dir, suite_name, analyzer, debug):
+    testsuite_conf_path = project_root_dir / 'benchconf' / "{}.yaml".format(suite_name)
     if not testsuite_conf_path.exists():
         return {}
     testsuite_conf = yaml.load(open(testsuite_conf_path, 'r'))
+    analyzer_conf_path = project_root_dir / 'benchconf' / "{}-{}.yaml".format(suite_name, analyzer)
+    analyzer_conf  = yaml.load(open(analyzer_conf_path, 'r'))
+    # Merge two configurations
+    conf = {**testsuite_conf, **analyzer_conf}
+    # We still need to values are themselves dictionaries
+    for k, v in conf.items():
+        if isinstance(v, dict):
+            conf[k] = {**v, **testsuite_conf[k]}
+            pass
+        pass
     if debug:
-        pp.pprint(testsuite_conf)
+        pp.pprint(conf)
         print("-" * 30)
-    return testsuite_conf
+    return conf
 
 def gather_benchmark_files(root_dir, suite_name, benchmark_subdir):
     testsuite_benchdir = root_dir.parent / 'benchmarks' / suite_name / benchmark_subdir
@@ -78,23 +89,26 @@ def run_benchmark_suite(suite, verbose, timeout, files):
     If you set environment variable MYTH, that will be used a the myth CLI command to
     invoke. If that is not set, we run using "myth".
     """
-    analyzer = 'mythril'
+    analyzer = 'Mythril'
 
-    if analyzer == 'mythril':
-        analyzer_prog = get_myth_prog()
+    if analyzer == 'Mythril':
+        analyzer_prog, myth_version = get_myth_prog()
         if not analyzer_prog:
             sys.exit(1)
             pass
+        print("Using {} {}".format(analyzer, myth_version))
         pass
 
-    out_data = {}
+    out_data = {'analyzer': analyzer}
+    out_data = {'mythril_version': myth_version}
     if suite == 'nssc':
         suite = 'not-so-smart-contracts'
 
     out_data['suite'] = suite
+    out_data['date'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
 
     debug = verbose == 2
-    testsuite_conf = get_benchmark_yaml(code_root_dir, suite, debug)
+    testsuite_conf = get_benchmark_yaml(project_root_dir, suite, analyzer, debug)
     benchmark_files = gather_benchmark_files(code_root_dir, suite,
                                              testsuite_conf['benchmark_subdir'])
 
@@ -123,6 +137,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         test_name = str(sol_path.parent / sol_path.stem)
         bench_data = out_data['benchmarks'][test_name] = {}
         expected_data = testsuite_conf.get(test_name, None)
+        bench_data['bug_type'] = expected_data.get('bug_type', 'Unknown')
         bench_data['expected_data'] = expected_data
         if expected_data:
             run_time = expected_data.get('run_time', timeout)
@@ -130,12 +145,15 @@ def run_benchmark_suite(suite, verbose, timeout, files):
                 print('Benchmark "{}" marked for ignoring; reason: {}'
                       .format(test_name, expected_data['reason']))
                 ignored_benchmarks += 1
+                bench_data['elapsed_str'] = 'ignored'
+
                 continue
             elif timeout < run_time:
                 print('Benchmark "{}" skipped because it is noted to take a long time; '
                       '{} seconds'
                       .format(test_name, run_time))
                 ignored_benchmarks += 1
+                bench_data['elapsed_str'] = 'too long'
                 continue
 
         # FIXME: expand to other analyzers
@@ -144,21 +162,28 @@ def run_benchmark_suite(suite, verbose, timeout, files):
             print(' '.join(cmd))
 
         elapsed, s = run_myth(analyzer_prog, sol_file, debug, timeout)
+        elapsed_str = secs_to_human(elapsed)
+        bench_data['elapsed'] = elapsed
+        bench_data['elapsed_str'] = elapsed_str
+
         if s is None:
-            print('Benchmark "{}" timed out after {}'.format(test_name, elapsed_str(elapsed)))
-            bench_data['timed_out'] = elapsed
+            print('Benchmark "{}" timed out after {}'.format(test_name, elapsed_str))
+            bench_data['timed_out'] = True
+            bench_data['elapsed_str'] = 'timed out'
             timed_out += 1
             continue
 
         total_time += elapsed
-        print(elapsed_str(elapsed))
+        print(elapsed_str)
 
         bench_data['execution_returncode'] = s.returncode
         if s.returncode != 0:
             print("mythril invocation:\n\t{}\n failed with return code {}"
                   .format(' '.join(cmd), s.returncode))
             invalid_execution += 1
+            bench_data['elapsed_str'] = 'errored'
             continue
+
         data = json.loads(s.stdout)
         if debug:
             pp.pprint(data)
@@ -237,7 +262,11 @@ def run_benchmark_suite(suite, verbose, timeout, files):
           "{} unexpected results, {} timed out, {} ignored."
           .format(benchmarks, passed, unconfigured, invalid_execution, error_execution,
                   timed_out, ignored_benchmarks))
-    print("Total elapsed execution time: {}".format(elapsed_str(total_time)))
+
+    total_time_str = secs_to_human(total_time)
+    out_data['total_time'] = total_time
+    out_data['total_time_str'] = secs_to_human(total_time)
+    print("Total elapsed execution time: {}".format(total_time_str))
 
     for field in """passed unconfigured invalid_execution error_execution
                      timed_out ignored_benchmarks""".split():

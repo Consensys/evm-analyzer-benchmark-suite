@@ -7,7 +7,7 @@ This is suite written by [Trail of
 Bits](https://www.trailofbits.com/). The original is
 [here](https://github.com/trailofbits/not-so-smart-contracts)
 
-suhabe
+Suhabe
 -------
 
-This is suite written by Suhabe Bugrara at ConsenSys. The original is [here](https://github.com/ConsenSys/evm-analyzer-benchmark-suite/)
+This is suitewas  written by Suhabe Bugrara at ConsenSys. The original is [here](https://github.com/ConsenSys/evm-analyzer-benchmark-suite/)

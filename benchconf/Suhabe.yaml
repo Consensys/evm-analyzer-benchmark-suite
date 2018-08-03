@@ -1,0 +1,161 @@
+# This contains expected results for any analyzer runing the Suhabe
+# benchmark suite.
+
+# The top-level key is the name and file basename of the Suhabe
+# benchmark file without ".sol" extension suffix
+
+# A description of some fields:
+
+# benchmark_subdir: where under the project root
+# we'll find the benchmarksbenchmark
+
+# bug_type: a rough classification of what we are testign
+
+# has_bug: true if this contract should reports some kind
+# of vulnerabiity or error, false if not; "benign" if has
+# a bug which doesn't have a serious effect.
+#
+
+benchmark_subdir: 'benchmarks'
+
+assert_constructor:
+  bug_type: 'Assertion'
+  has_bug: true
+
+assert_minimal:
+  bug_type: 'Assertion'
+  has_bug: true
+
+assert_multitx_1:
+  bug_type: 'Assertion'
+  has_bug: false
+
+assert_multitx_2:
+  bug_type: 'Assertion'
+  has_bug: true
+
+assert_require:
+  bug_type: 'Assertion'
+  has_bug: false
+
+assert_sym:
+  bug_type: 'Assertion'
+  has_bug: true
+
+attribute_store:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+eth_tx_order_dependence_2:
+  bug_type: 'Eth Tx-Order Dependence'
+  has_bug: false
+
+eth_tx_order_dependence_minimal:
+  bug_type: 'Eth Tx-Order Dependence'
+  has_bug: true
+
+eth_tx_order_dependence_multitx_1:
+  bug_type: 'Eth Tx-Order Dependence'
+  has_bug: false
+
+eth_tx_order_dependence_puzzle:
+  bug_type: 'Eth Tx-Order Dependence'
+  has_bug: true
+
+integer_overflow_add:
+  bug_type: 'Integer Overflow'
+  has_bug: true
+
+integer_overflow_benign_1:
+  bug_type: 'Integer Overflow'
+  has_bug: 'benign'
+
+integer_overflow_benign_2:
+  bug_type: 'Integer Overflow'
+  has_bug: 'benign'
+
+integer_overflow_bytes_param:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_dynarray:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_mapping_mapping:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_mapping_staticarray:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_mapping_strkey:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_mapping_struct:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_mapping_sym_1:
+  bug_type: 'Integer Overflow'
+  has_bug: true
+
+integer_overflow_mapping_sym_2:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_mapping_words:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_minimal:
+  bug_type: 'Integer Overflow'
+  has_bug: true
+
+integer_overflow_mul:
+  bug_type: 'Integer Overflow'
+  has_bug: true
+
+integer_overflow_multitx_multifunc_feasible:
+  bug_type: 'Integer Overflow'
+  ignore: false
+  has_error: true
+
+integer_overflow_multitx_onefunc_feasible:
+  bug_type: 'Integer Overflow'
+  has_error: true
+
+integer_overflow_multitx_onefunc_infeasible:
+  bug_type: 'Integer Overflow'
+  has_error: false
+
+integer_overflow_path_1:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_staticarray:
+  bug_type: 'Integer Overflow'
+  has_bug: false
+
+integer_overflow_storageinvariant:
+  bug_type: 'Integer Overflow'
+  has_bug: "benign"
+
+integer_overflow_storagepacking:
+  bug_type: 'Integer Overflow'
+  ignore: false
+  has_error: false
+
+reentrancy_dao:
+  bug_type: 'Callback Effect-Free'
+  has_bug: true
+
+reentrancy_dao_fixed:
+  bug_type: 'Callback Effect-Free'
+  has_bug: false
+
+reentrancy_nostateeffect:
+  bug_type: 'Callback Effect-Free'
+  has_bug: false

@@ -1,0 +1,78 @@
+<html>
+  <!--- FIXME: put in css -->
+  <style>
+    table, th, td {
+    border: 1px solid #cccccc;
+    border-collapse: collapse;
+    }
+
+    table {
+    font-size: 12px;
+    }
+
+    td {
+    padding: 5px;
+    align: center;
+    width: 150px;
+    }
+
+    body {
+    font-family: "Arial";
+    }
+
+    h2 {
+    font-size: 1.17em;
+    }
+  </style>
+
+  <head>
+    <title>Analysis Tool Evaluation for the {{suite}} Benchmark </title>
+  </head>
+  <body>
+    <!--- FIXME: use css better -->
+    <h1>Analysis Tool Evaluation for the {{suite}} Benchmark {{data['date']}}</h1>
+
+    <p>This page shows the results EVM code analysis tools when run over the {{suite}} benchmark suite.
+      The code is <a href="https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites">hosted on github</a>.<br>
+      Please suggest or contribute more benchmarks or submit
+      <a href="https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/issues">suggestions or issues</a>.
+      <br></p>
+
+    <h2 id="results">Results</h2>
+
+    <p>Green means the tool gives the expected result, yellow means the analysis program
+      failed or timed out, and red means it did not.</p>
+
+    <p>Click on the benchmark name to see its Solidity code.</p>
+
+    <p>See the project
+    wiki's <a href="https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/Terminology">Terminology</a>
+      entry for definitions used below.</p>
+
+    <table>
+      <tr style="font-weight: bold">
+        <td>Bug Type</td>
+        <td>Benchmark</span></td>
+        <td colspan="2">
+          Mythril
+          <br>
+          <span style="font-size: 10px">{{data['mythril_version']}}</span>
+      </tr>
+      {% for bench_name in data['benchmarks'].keys() %}
+      <tr>
+        <td>{{data['benchmarks'][bench_name]['bug_type']}}</td>
+        <td>{{bench_name}}</td>
+        <td>{{data['benchmarks'][bench_name]['elapsed_str']}}</td>
+        <td>???</td>
+	{% endfor %}
+      </tr>
+      <tr>
+        <td><b>summary stats</b></td>
+        <td>{{data['benchmark_count']}} tests</td>
+        <td>{{data['total_time_str']}}</td>
+        <td>{{data['passed']}} passed, {{data['error_execution']}} errored</td>
+      </tr>
+    </table>
+
+  </body>
+</html>
