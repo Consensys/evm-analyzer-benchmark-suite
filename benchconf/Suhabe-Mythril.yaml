@@ -158,7 +158,7 @@ integer_overflow_mapping_mapping:
   ignore: false
   issues: []
 
-integer_overflow_mapping_words:
+integer_overflow_mapping_word:
   ignore: false
   issues: []
 

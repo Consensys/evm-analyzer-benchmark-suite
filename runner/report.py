@@ -15,10 +15,30 @@ sys.path.insert(0, code_root_dir)
 
 code_dir = Path(__file__).parent.resolve()
 
+RGB_RED    = "rgba(255, 145, 164, .4)"
+RGB_GREEN  = "rgba(80, 200, 120, .4)"
+RGB_YELLOW = "rgba(253, 195, 83, .4)"
+RGB_GREY   = "rgba(128, 128, 128, .4)"
+
 def print_html_report(data, project_root_dir, suite):
     """
     Write an HTML analysis report for `suite`
     """
+    eval_colors = {
+        # Unsupported("rgba(255, 145, 164, .4)", "Unsupported"),
+        'False Positive'     : RGB_RED,
+        'False Negative'     : RGB_RED,
+        'Errored'            : RGB_RED,
+        'Wrong Vulnerability': RGB_RED,
+        'True Positive'      : RGB_GREEN,
+        'True Negative'      : RGB_GREEN,
+        'Analysis Failed'    : RGB_YELLOW,
+        'Ignored'            : RGB_YELLOW,
+        'Timed Out'          : RGB_YELLOW,
+        'Too Long'           : RGB_YELLOW,
+        'Unconfigured'       : RGB_GREY,
+    }
+
     html_dir = project_root_dir / 'html'
     suite_path = html_dir / suite
     os.makedirs(suite_path, exist_ok = True)
@@ -37,7 +57,7 @@ def print_html_report(data, project_root_dir, suite):
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
-analyzer = 'mythril'
+analyzer = 'Mythril'
 suite = 'Suhabe'
 project_root_dir = code_dir.parent
 suite_dir = project_root_dir / 'benchdata' / suite

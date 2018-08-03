@@ -115,7 +115,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
     # Zero counters
     unconfigured = invalid_execution = error_execution = 0
     ignored_benchmarks = unfound_issues = benchmarks = 0
-    timed_out = passed = 0
+    timed_out = expected = 0
     total_time = 0.0
 
     out_data['benchmark_files'] = benchmark_files
@@ -145,15 +145,18 @@ def run_benchmark_suite(suite, verbose, timeout, files):
                 print('Benchmark "{}" marked for ignoring; reason: {}'
                       .format(test_name, expected_data['reason']))
                 ignored_benchmarks += 1
+                bench_data['result'] = 'Ignored'
                 bench_data['elapsed_str'] = 'ignored'
 
                 continue
             elif timeout < run_time:
+                # When the code is too long, we skip it in the YAML
                 print('Benchmark "{}" skipped because it is noted to take a long time; '
                       '{} seconds'
                       .format(test_name, run_time))
                 ignored_benchmarks += 1
-                bench_data['elapsed_str'] = 'too long'
+                bench_data['result'] = 'Too Long'
+                bench_data['elapsed_str'] = secs_to_human(run_time)
                 continue
 
         # FIXME: expand to other analyzers
@@ -168,8 +171,8 @@ def run_benchmark_suite(suite, verbose, timeout, files):
 
         if s is None:
             print('Benchmark "{}" timed out after {}'.format(test_name, elapsed_str))
-            bench_data['timed_out'] = True
-            bench_data['elapsed_str'] = 'timed out'
+            bench_data['elapsed_str'] = elapsed_str
+            bench_data['result'] = 'Timed Out'
             timed_out += 1
             continue
 
@@ -182,6 +185,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
                   .format(' '.join(cmd), s.returncode))
             invalid_execution += 1
             bench_data['elapsed_str'] = 'errored'
+            bench_data['result'] = 'Errored'
             continue
 
         data = json.loads(s.stdout)
@@ -189,9 +193,9 @@ def run_benchmark_suite(suite, verbose, timeout, files):
             pp.pprint(data)
             print("=" * 30)
 
-        benchmark_success = True
         if not expected_data:
             unconfigured += 1
+            bench_data['result'] = 'Unconfigured'
             print('Benchmark "{}" results not configured, '
                   'so I cannot pass judgement on this'.format(test_name))
             pp.pprint(data)
@@ -202,31 +206,42 @@ def run_benchmark_suite(suite, verbose, timeout, files):
             bench_data['error'] = data['error']
             if data['error']:
                 print('Benchmark "{}" errored'.format(test_name))
+                bench_data['result'] = 'Unconfigured'
                 print(data['error'])
                 error_execution += 1
                 continue
 
+            data_issues = data['issues']
+            if not expected_data['has_bug']:
+                if not data_issues:
+                    print("No problems found and none expected")
+                    bench_data['result'] = 'True Negative'
+                    continue
+                else:
+                    print("Found a problem where none was expected")
+                    bench_data['result'] = 'False Positive'
+                    error_execution += 1
+                    continue
+
+            # The test has a bug, and analysis terminated normally
+            # finding some sort of problem. Did we detect the right problem?
+            benchmark_success = True
             expected_issues = {(issue['address'], issue['title']): issue
                                for issue in expected_data['issues']}
-            data_issues = data['issues']
             bench_data['issues'] = data['issues']
             if len(expected_issues) != len(data_issues):
                 print("Expecting to find {} issue(s), got {}"
                       .format(len(expected_issues), len(data_issues)))
+                bench_data['result'] = 'Wrong Vulnerability'
                 error_execution += 1
                 pp.pprint(data_issues)
                 print("=" * 30)
-                continue
-
-            if verbose and not data_issues:
-                print("No problems found and none expected")
                 continue
 
             for issue in data_issues:
                 expected_issue = expected_issues.get((issue['address'], issue['title']),
                                                      None)
                 if expected_issue:
-                    # When the code is too long, we skip it in the YAML
                     if (expected_issue.get('code', issue['code']) != issue['code']
                         or expected_issue['title'] != issue['title']):
                         print("Mismatched issue data in {}".format(test_name))
@@ -241,8 +256,9 @@ def run_benchmark_suite(suite, verbose, timeout, files):
                     unfound_issues += 1
                     benchmark_success = False
             bench_data['benchmark_success'] = benchmark_success
+            bench_data['result'] = 'True Positive'
             if benchmark_success:
-                passed += 1
+                expected += 1
                 print('Benchmark "{}" checks out'.format(test_name))
                 if verbose:
                     for num, issue in enumerate(data_issues):
@@ -258,9 +274,9 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         pass
     print('-' * 40)
 
-    print("\nSummary: {} benchmarks; {} passed, {} unconfigured, {} aborted abnormally, "
+    print("\nSummary: {} benchmarks; {} expected results, {} unconfigured, {} aborted abnormally, "
           "{} unexpected results, {} timed out, {} ignored."
-          .format(benchmarks, passed, unconfigured, invalid_execution, error_execution,
+          .format(benchmarks, expected, unconfigured, invalid_execution, error_execution,
                   timed_out, ignored_benchmarks))
 
     total_time_str = secs_to_human(total_time)
@@ -268,7 +284,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
     out_data['total_time_str'] = secs_to_human(total_time)
     print("Total elapsed execution time: {}".format(total_time_str))
 
-    for field in """passed unconfigured invalid_execution error_execution
+    for field in """expected unconfigured invalid_execution error_execution
                      timed_out ignored_benchmarks""".split():
         out_data[field] = locals()[field]
     out_data['total_time']= total_time

@@ -63,14 +63,20 @@
         <td>{{data['benchmarks'][bench_name]['bug_type']}}</td>
         <td>{{bench_name}}</td>
         <td>{{data['benchmarks'][bench_name]['elapsed_str']}}</td>
-        <td>???</td>
+        <td style="background-color:
+            {{eval_colors[data['benchmarks'][bench_name]['result']]}}">
+	  {{data['benchmarks'][bench_name]['result']}}</td>
 	{% endfor %}
       </tr>
       <tr>
         <td><b>summary stats</b></td>
         <td>{{data['benchmark_count']}} tests</td>
         <td>{{data['total_time_str']}}</td>
-        <td>{{data['passed']}} passed, {{data['error_execution']}} errored</td>
+        <td>{{data['expected']}} expected, {{data['error_execution']}} unexpected
+	  <!-- <br>
+	       {{data['skipped']}}
+	    -->
+	</td>
       </tr>
     </table>
 

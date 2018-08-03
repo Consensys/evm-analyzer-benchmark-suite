@@ -106,7 +106,7 @@ integer_overflow_mapping_sym_2:
   bug_type: 'Integer Overflow'
   has_bug: false
 
-integer_overflow_mapping_words:
+integer_overflow_mapping_word:
   bug_type: 'Integer Overflow'
   has_bug: false
 
@@ -121,15 +121,15 @@ integer_overflow_mul:
 integer_overflow_multitx_multifunc_feasible:
   bug_type: 'Integer Overflow'
   ignore: false
-  has_error: true
+  has_bug: true
 
 integer_overflow_multitx_onefunc_feasible:
   bug_type: 'Integer Overflow'
-  has_error: true
+  has_bug: true
 
 integer_overflow_multitx_onefunc_infeasible:
   bug_type: 'Integer Overflow'
-  has_error: false
+  has_bug: false
 
 integer_overflow_path_1:
   bug_type: 'Integer Overflow'
@@ -146,7 +146,7 @@ integer_overflow_storageinvariant:
 integer_overflow_storagepacking:
   bug_type: 'Integer Overflow'
   ignore: false
-  has_error: false
+  has_bug: false
 
 reentrancy_dao:
   bug_type: 'Callback Effect-Free'
