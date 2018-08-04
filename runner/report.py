@@ -24,24 +24,41 @@ RGB_GREEN  = "rgba(80, 200, 120, .4)"
 RGB_YELLOW = "rgba(253, 195, 83, .4)"
 RGB_GREY   = "rgba(128, 128, 128, .4)"
 
+Eval_colors = {
+    # Unsupported("rgba(255, 145, 164, .4)", "Unsupported"),
+    'False Positive'     : RGB_RED,
+    'False Negative'     : RGB_RED,
+    'Errored'            : RGB_RED,
+    'Wrong Vulnerability': RGB_RED,
+    'True Positive'      : RGB_GREEN,
+    'True Negative'      : RGB_GREEN,
+    'Analysis Failed'    : RGB_YELLOW,
+    'Ignored'            : RGB_YELLOW,
+    'Timed Out'          : RGB_YELLOW,
+    'Too Long'           : RGB_YELLOW,
+    'Unconfigured'       : RGB_GREY,
+}
+
+
 def print_html_report(data, project_root_dir, suite):
     """
     Write an HTML analysis report for `suite`
+
     """
-    eval_colors = {
-        # Unsupported("rgba(255, 145, 164, .4)", "Unsupported"),
-        'False Positive'     : RGB_RED,
-        'False Negative'     : RGB_RED,
-        'Errored'            : RGB_RED,
-        'Wrong Vulnerability': RGB_RED,
-        'True Positive'      : RGB_GREEN,
-        'True Negative'      : RGB_GREEN,
-        'Analysis Failed'    : RGB_YELLOW,
-        'Ignored'            : RGB_YELLOW,
-        'Timed Out'          : RGB_YELLOW,
-        'Too Long'           : RGB_YELLOW,
-        'Unconfigured'       : RGB_GREY,
-    }
+    def link_issue_result(issue_result):
+        return (
+            "<a href=%s/%s>%s</a>" %
+            ("https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki",
+             issue_result.replace(' ','-'), issue_result))
+
+    eval_colors = Eval_colors
+    bug_type_links = {}
+    for bug_type in eval_colors.keys():
+        bug_type_link = (
+            "%s/wiki/%s" %
+            (data['benchmark_link'], bug_type.replace(' ','-'))
+            )
+        pass
 
     html_dir = project_root_dir / 'html'
     suite_path = html_dir / suite
@@ -50,13 +67,16 @@ def print_html_report(data, project_root_dir, suite):
     template_path = jinja2_dir / 'report_template.html'
 
     source_code = {}
+    bug_type_eval = {}
     base_url_dir = data['benchmark_url_dir']
+    bench_data = {}
     for bench_name in data['benchmarks'].keys():
         bench_url = "%s%s%s.sol" % (base_url_dir, os.path.sep, bench_name)
         r = requests.get(bench_url)
         solidity_code = r.text
         source_code[bench_name] = highlight(solidity_code,
                                             SolidityLexer(), HtmlFormatter())
+        bench_data[bench_name] = data['benchmarks'][bench_name]
         pass
 
     t = Template(open(template_path).read(),

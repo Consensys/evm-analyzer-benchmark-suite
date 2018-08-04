@@ -119,6 +119,7 @@
     wiki's <a href="https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/Terminology">Terminology</a>
       entry for definitions used below.</p>
 
+    <!--- Results as a chart ---->
     <table>
       <tr style="font-weight: bold">
         <td>Bug Type</td>
@@ -130,12 +131,12 @@
       </tr>
       {% for bench_name in data['benchmarks'].keys() %}
       <tr>
-        <td>{{data['benchmarks'][bench_name]['bug_type']}}</td>
+        <td>{{bench_data[bench_name]['bug_type']}}</td>
         <td><a href="#{{bench_name}}">{{bench_name}}</td>
-        <td>{{data['benchmarks'][bench_name]['elapsed_str']}}</td>
+        <td>{{bench_data[bench_name]['elapsed_str']}}</td>
         <td style="background-color:
-            {{eval_colors[data['benchmarks'][bench_name]['result']]}}">
-	  {{data['benchmarks'][bench_name]['result']}}</td>
+            {{eval_colors[bench_data[bench_name]['result']]}}">
+	  {{link_issue_result(bench_data[bench_name]['result'])|safe}}</td>
 	{% endfor %}
       </tr>
       <tr>
@@ -150,15 +151,17 @@
       </tr>
     </table>
 
+    <!--- breakout per result ---->
     <h2 id="results">Results Details</h2>
 
     {% for bench_name in data['benchmarks'].keys() %}
+    <hr>
     <h3 id={{bench_name}}>{{bench_name}}</h3>
     <p>
     <table>
       <tr style="font-weight: bold">
         <td>Bug Type</td>
-	  {% if 'link' in data['benchmarks'][bench_name]['expected_data'] %}
+	  {% if 'link' in bench_data[bench_name]['expected_data'] %}
 	<td>Description</td>
 	{% endif %}
         <td colspan="2">
@@ -167,26 +170,27 @@
           <span style="font-size: 10px">{{data['mythril_version']}}</span>
       </tr>
       <tr>
-        <td>{{data['benchmarks'][bench_name]['bug_type']}}</td>
-	{% if 'link' in data['benchmarks'][bench_name]['expected_data'] %}
+        <td>{{bench_data[bench_name]['bug_type']}}</td>
+	{% if 'link' in bench_data[bench_name]['expected_data'] %}
 	<td>
-	  <a href="{{data['benchmarks'][bench_name]['expected_data']['link']}}">link</a>
+	  <a href="{{bench_data[bench_name]['expected_data']['link']}}">link</a>
 	</td>
 	{% endif %}
         <td style="background-color:
-		   {{eval_colors[data['benchmarks'][bench_name]['result']]}}">
-	  {{data['benchmarks'][bench_name]['result']}}</td>
+		   {{eval_colors[bench_data[bench_name]['result']]}}">
+	  {{link_issue_result(bench_data[bench_name]['result'])|safe}}</td>
       </tr>
     </table>
     <h4>Source Code</h4>
     {{source_code[bench_name]|safe}}
-    {% if data['benchmarks'][bench_name]['issues']%}
-    <h4>{{analyzer}} Report</h4>
-    {% for issue in data['benchmarks'][bench_name]['issues']: %}
+    {% if bench_data[bench_name]['issues']%}
+    <h4>{{data['analyzer']}} Report</h4>
+    {% for issue in bench_data[bench_name]['issues']: %}
     <h5>Issue {{issue['title']}} ({{issue['type']}})</h5>
       {{issue['description']}}
     {% endfor %}
     {% endif %}
     {% endfor %}
+
   </body>
 </html>
