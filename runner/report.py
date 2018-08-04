@@ -45,11 +45,14 @@ def print_html_report(data, project_root_dir, suite):
     Write an HTML analysis report for `suite`
 
     """
+    def link_to(link, text):
+        return '<a href="%s">%s</a>' % (link, text)
+
     def link_issue_result(issue_result):
-        return (
-            "<a href=%s/%s>%s</a>" %
-            ("https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki",
-             issue_result.replace(' ','-'), issue_result))
+        return link_to("%s/%s>" %
+                       ("https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki",
+                        issue_result.replace(' ','-')),
+                       issue_result)
 
     eval_colors = Eval_colors
     bug_type_links = {}
@@ -68,15 +71,18 @@ def print_html_report(data, project_root_dir, suite):
 
     source_code = {}
     bug_type_eval = {}
-    base_url_dir = data['benchmark_url_dir']
+    base_url_dir_raw = data['benchmark_url_dir']
+    base_url_dir = "%s/tree/master/benchmarks" % data['benchmark_link']
     bench_data = {}
     for bench_name in data['benchmarks'].keys():
+        bench_url_raw = "%s%s%s.sol" % (base_url_dir_raw, os.path.sep, bench_name)
         bench_url = "%s%s%s.sol" % (base_url_dir, os.path.sep, bench_name)
-        r = requests.get(bench_url)
+        r = requests.get(bench_url_raw)
         solidity_code = r.text
         source_code[bench_name] = highlight(solidity_code,
                                             SolidityLexer(), HtmlFormatter())
         bench_data[bench_name] = data['benchmarks'][bench_name]
+        bench_data[bench_name]['bench_url'] = bench_url
         pass
 
     t = Template(open(template_path).read(),

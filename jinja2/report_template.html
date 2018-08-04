@@ -156,8 +156,9 @@
 
     {% for bench_name in data['benchmarks'].keys() %}
     <hr>
-    <h3 id={{bench_name}}>{{bench_name}}</h3>
-    <p>
+    <h3 id={{bench_name}}>
+      {{link_to(bench_data[bench_name]['bench_url'],bench_name)|safe}}
+    </h3>
     <table>
       <tr style="font-weight: bold">
         <td>Bug Type</td>
