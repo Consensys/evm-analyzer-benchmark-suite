@@ -7,6 +7,10 @@ top-level CLI to create an HTML benchmark report
 from pathlib import Path
 import os, yaml, sys
 from jinja2 import select_autoescape, Template
+import requests
+from pygments_lexer_solidity import SolidityLexer
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
 
 code_root_dir = Path(__file__).parent.resolve()
 # Make relative loading work without relative import, which
@@ -44,6 +48,17 @@ def print_html_report(data, project_root_dir, suite):
     os.makedirs(suite_path, exist_ok = True)
     jinja2_dir = project_root_dir / 'jinja2'
     template_path = jinja2_dir / 'report_template.html'
+
+    source_code = {}
+    base_url_dir = data['benchmark_url_dir']
+    for bench_name in data['benchmarks'].keys():
+        bench_url = "%s%s%s.sol" % (base_url_dir, os.path.sep, bench_name)
+        r = requests.get(bench_url)
+        solidity_code = r.text
+        source_code[bench_name] = highlight(solidity_code,
+                                            SolidityLexer(), HtmlFormatter())
+        pass
+
     t = Template(open(template_path).read(),
                  autoescape=select_autoescape(['html']),
                  trim_blocks=True)

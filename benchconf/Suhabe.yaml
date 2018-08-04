@@ -16,15 +16,19 @@
 # a bug which doesn't have a serious effect.
 #
 
-benchmark_subdir: 'benchmarks'
+benchmark_subdir: benchmarks
+benchmark_link: https://github.com/ConsenSys/evm-analyzer-benchmark-suite
+benchmark_url_dir: https://raw.githubusercontent.com/ConsenSys/evm-analyzer-benchmark-suite/master/benchmarks/
 
 assert_constructor:
   bug_type: 'Assertion'
   has_bug: true
+  link: https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-assert_constructor
 
 assert_minimal:
   bug_type: 'Assertion'
   has_bug: true
+  link: https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-assert_minimal
 
 assert_multitx_1:
   bug_type: 'Assertion'
@@ -65,14 +69,17 @@ eth_tx_order_dependence_puzzle:
 integer_overflow_add:
   bug_type: 'Integer Overflow'
   has_bug: true
+  link: "https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-integer_overflow_add"
 
 integer_overflow_benign_1:
   bug_type: 'Integer Overflow'
   has_bug: 'benign'
+  link: "https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-integer_overflow_benign_1"
 
 integer_overflow_benign_2:
   bug_type: 'Integer Overflow'
   has_bug: 'benign'
+  link: "https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-integer_overflow_benign_2"
 
 integer_overflow_bytes_param:
   bug_type: 'Integer Overflow'
@@ -130,6 +137,7 @@ integer_overflow_multitx_onefunc_feasible:
 integer_overflow_multitx_onefunc_infeasible:
   bug_type: 'Integer Overflow'
   has_bug: false
+  link: "https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-integer_overflow_multitex_onefuc_infeasible"
 
 integer_overflow_path_1:
   bug_type: 'Integer Overflow'
@@ -142,6 +150,7 @@ integer_overflow_staticarray:
 integer_overflow_storageinvariant:
   bug_type: 'Integer Overflow'
   has_bug: "benign"
+  link: "https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-integer_overflow_storageinvariant"
 
 integer_overflow_storagepacking:
   bug_type: 'Integer Overflow'
@@ -159,3 +168,4 @@ reentrancy_dao_fixed:
 reentrancy_nostateeffect:
   bug_type: 'Callback Effect-Free'
   has_bug: false
+  link: "https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-reentrancy_nostateeffect"

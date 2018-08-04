@@ -84,7 +84,7 @@ def gather_benchmark_files(root_dir, suite_name, benchmark_subdir):
 @click.option('--files/--no-files', default=False,
               help="List files in benchmark and exit.")
 def run_benchmark_suite(suite, verbose, timeout, files):
-    """Run Mythril on a benchmark suite.
+    """Run an analyzer (like Mythril) on a benchmark suite.
 
     If you set environment variable MYTH, that will be used a the myth CLI command to
     invoke. If that is not set, we run using "myth".
@@ -99,18 +99,23 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         print("Using {} {}".format(analyzer, myth_version))
         pass
 
-    out_data = {'analyzer': analyzer}
-    out_data = {'mythril_version': myth_version}
     if suite == 'nssc':
         suite = 'not-so-smart-contracts'
-
-    out_data['suite'] = suite
-    out_data['date'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
 
     debug = verbose == 2
     testsuite_conf = get_benchmark_yaml(project_root_dir, suite, analyzer, debug)
     benchmark_files = gather_benchmark_files(code_root_dir, suite,
                                              testsuite_conf['benchmark_subdir'])
+
+    out_data = {
+        'analyzer': analyzer,
+        'date': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),
+        'mythril_version': myth_version,
+        'suite': suite,
+    }
+
+    for field in 'benchmark_subdir benchmark_link benchmark_url_dir'.split():
+        out_data[field] = testsuite_conf[field]
 
     # Zero counters
     unconfigured = invalid_execution = error_execution = 0
@@ -212,10 +217,12 @@ def run_benchmark_suite(suite, verbose, timeout, files):
                 continue
 
             data_issues = data['issues']
+
             if not expected_data['has_bug']:
                 if not data_issues:
                     print("No problems found and none expected")
                     bench_data['result'] = 'True Negative'
+                    expected += 1
                     continue
                 else:
                     print("Found a problem where none was expected")
