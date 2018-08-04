@@ -185,13 +185,17 @@
     <h4>Source Code</h4>
     {{source_code[bench_name]|safe}}
     {% if bench_data[bench_name]['issues']%}
-    <h4>{{data['analyzer']}} Report</h4>
-    {% for issue in bench_data[bench_name]['issues']: %}
-    <h5>Issue {{issue['title']}} ({{issue['type']}})</h5>
-      {{issue['description']}}
-    {% endfor %}
+      <h4>{{data['analyzer']}} Report</h4>
+      {% for issue in bench_data[bench_name]['issues']: %}
+         {% if issue['code']%}
+           <h5>Location</h5>
+           <pre>Line {{issue['lineno']}}: {{issue['code']}}</pre>
+         {% endif %}
+         <h5>Issue {{issue['title']}} ({{issue['type']}})</h5>
+         {{issue['description']}}
+      {% endfor %}
     {% endif %}
-    {% endfor %}
+  {% endfor %}
 
   </body>
 </html>
