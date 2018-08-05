@@ -1,9 +1,6 @@
-[submodule "benchmarks/not-so-smart-contracts"]
-	path = benchmarks/not-so-smart-contracts
-	url = https://github.com/trailofbits/not-so-smart-contracts.git
-[submodule "benchmarks/suhabe"]
-	path = benchmarks/suhabe
-	url = https://github.com/ConsenSys/evm-analyzer-benchmark-suite.git
 [submodule "benchmarks/Suhabe"]
 	path = benchmarks/Suhabe
 	url = https://github.com/ConsenSys/evm-analyzer-benchmark-suite.git
+[submodule "benchmarks/nssc"]
+	path = benchmarks/nssc
+	url = https://github.com/trailofbits/not-so-smart-contracts.git

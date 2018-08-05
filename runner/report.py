@@ -4,6 +4,7 @@
 top-level CLI to create an HTML benchmark report
 """
 
+import click
 from pathlib import Path
 import os, yaml, sys
 from jinja2 import select_autoescape, Template
@@ -49,7 +50,7 @@ def print_html_report(data, project_root_dir, suite):
         return '<a href="%s">%s</a>' % (link, text)
 
     def link_issue_result(issue_result):
-        return link_to("%s/%s>" %
+        return link_to("%s/%s" %
                        ("https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki",
                         issue_result.replace(' ','-')),
                        issue_result)
@@ -72,7 +73,7 @@ def print_html_report(data, project_root_dir, suite):
     source_code = {}
     bug_type_eval = {}
     base_url_dir_raw = data['benchmark_url_dir']
-    base_url_dir = "%s/tree/master/benchmarks" % data['benchmark_link']
+    base_url_dir = "%s/tree/master/%s" % (data['benchmark_link'], data['benchmark_subdir'])
     bench_data = {}
     for bench_name in data['benchmarks'].keys():
         bench_url_raw = "%s%s%s.sol" % (base_url_dir_raw, os.path.sep, bench_name)
@@ -98,18 +99,29 @@ def print_html_report(data, project_root_dir, suite):
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
-analyzer = 'Mythril'
-suite = 'Suhabe'
-project_root_dir = code_dir.parent
-suite_dir = project_root_dir / 'benchdata' / suite
+# TODO add more analyzers
+@click.command()
+@click.option('--suite', '-s', type=click.Choice(['Suhabe', 'nssc']),
+              default='Suhabe',
+              help="Benchmark suite to run; "
+              "nscc is an abbreviation for not-so-smart-contracts.")
+def generate_benchmark_report(suite):
+    analyzer = 'Mythril'
+    project_root_dir = code_dir.parent
+    suite_dir = project_root_dir / 'benchdata' / suite
 
-# FIXME: loop over analyzers
-yaml_file = suite_dir / (analyzer + ".yaml")
-with open(yaml_file, 'r') as fp:
-    try:
-        data = yaml.load(fp)
-        # pp.pprint(data)
-    except yaml.YAMLError as exc:
-        print(exc)
+    # FIXME: loop over analyzers
+    yaml_file = suite_dir / (analyzer + ".yaml")
+    with open(yaml_file, 'r') as fp:
+        try:
+            data = yaml.load(fp)
+            # pp.pprint(data)
+        except yaml.YAMLError as exc:
+            print(exc)
+            pass
+        pass
 
-print_html_report(data, project_root_dir, suite)
+    print_html_report(data, project_root_dir, suite)
+
+if __name__ == '__main__':
+    generate_benchmark_report()

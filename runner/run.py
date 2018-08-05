@@ -71,8 +71,7 @@ def gather_benchmark_files(root_dir, suite_name, benchmark_subdir):
 
 # TODO add json config lint function?
 @click.command()
-@click.option('--suite', '-s', type=click.Choice(['Suhabe', 'nssc',
-                                                  'not-so-smart-contracts']),
+@click.option('--suite', '-s', type=click.Choice(['Suhabe', 'nssc']),
               default='Suhabe',
               help="Benchmark suite to run; "
               "nscc is an abbreviation for not-so-smart-contracts.")
@@ -99,9 +98,6 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         print("Using {} {}".format(analyzer, myth_version))
         pass
 
-    if suite == 'nssc':
-        suite = 'not-so-smart-contracts'
-
     debug = verbose == 2
     testsuite_conf = get_benchmark_yaml(project_root_dir, suite, analyzer, debug)
     benchmark_files = gather_benchmark_files(code_root_dir, suite,
@@ -111,7 +107,7 @@ def run_benchmark_suite(suite, verbose, timeout, files):
         'analyzer': analyzer,
         'date': time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()),
         'mythril_version': myth_version,
-        'suite': suite,
+        'suite': testsuite_conf['suite'],
     }
 
     for field in 'benchmark_subdir benchmark_link benchmark_url_dir'.split():

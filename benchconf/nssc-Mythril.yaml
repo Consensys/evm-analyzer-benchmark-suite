@@ -1,5 +1,5 @@
 # This contains expected results
-# when Mythril runs the suhabe benchmark
+# when Mythril runs the (Not so) Smark Contracts benchmark
 
 # A description of some fields:
 
@@ -11,24 +11,17 @@
 # When this field is true, there should be a
 # "reason:" field
 #
-# error: true if this contract should reports some kind
-# of vulnerabiity or error
-#
 # run_time: This field is optional. When given, it suggests a
 # pessimistic amount of time in seconds needed by the analyzer program
-# the to give results. If no value is given, then a value is supplied
+# the to give results. If not value is given, then a value is supplied
 # by either as a command-line option or failing that through the
 # runner's built-in default which is about 7.0 seconds.
 # The value is a floating-point number.
 
-#
 # issues: a list of issues we expect to see
-
-benchmark_subdir: ''
 
 honeypots/GiftBox/GiftBox:
   ignore: false
-  error: false
   run_time: 140.0
   issues:
     - address: 190
@@ -59,12 +52,10 @@ honeypots/GiftBox/GiftBox:
 
 honeypots/KOTH/KOTH:
   ignore: false
-  error: false
   issues: []
 
 honeypots/Lottery/Lottery:
   ignore: false
-  error: false
   run_time: 70.0
   issues:
     - address: 1204
@@ -79,18 +70,15 @@ honeypots/Lottery/Lottery:
 
 honeypots/Multiplicator/Multiplicator:
   ignore: false
-  error: false
   issues: []
 
 honeypots/PrivateBank/PrivateBank:
   ignore: false
-  error: false
   run_time: 180.0
   issues: []
 
 honeypots/VarLoop/VarLoop:
   ignore: false
-  error: false
   issues:
     - address: 352
       title: 'Integer Overflow'
@@ -99,12 +87,10 @@ honeypots/VarLoop/VarLoop:
 
 incorrect_interface/Alice:
   ignore: false
-  error: false
   issues: []
 
 incorrect_interface/Bob:
   ignore: false
-  error: false
   issues:
     - address: 330
       code: 'c.set(42)'
@@ -115,7 +101,6 @@ incorrect_interface/Bob:
 
 integer_overflow/interger_overflow_1:
   ignore: false
-  error: false
   issues:
     - address: 229
       code: 'sellerBalance += value'
@@ -123,7 +108,6 @@ integer_overflow/interger_overflow_1:
 
 missing_constructor/Missing:
   ignore: false
-  error: false
   issues:
     - address: 388
       code: 'owner.transfer(this.balance)'
@@ -134,7 +118,6 @@ missing_constructor/Missing:
 
 missing_constructor/Rubixi_source_code/Rubixi:
   ignore: false
-  error: false
   issues:
     - address: 388
       code: 'owner.transfer(this.balance)'
@@ -145,7 +128,6 @@ missing_constructor/Rubixi_source_code/Rubixi:
 
 race_condition/RaceCondition:
   ignore: false
-  error: false
   issues:
     - address: 623
       code: 'token.transferFrom(msg.sender, owner, price)'
@@ -159,12 +141,10 @@ race_condition/RaceCondition:
 
 reentrancy/DAO_source_code/DAO:
   ignore: false
-  error: false
   issues: []
 
 reentrancy/Reentrancy:
   ignore: false
-  error: false
   issues:
     - address: 455
       code: 'msg.sender.call.value(amount)()'
@@ -190,7 +170,6 @@ reentrancy/Reentrancy:
 
 reentrancy/ReentrancyExploit:
   ignore: false
-  error: false
   issues:
     - address: 369
       code: 'vulnerable_contract.call(bytes4(sha3("withdrawBalance()")))'
@@ -213,20 +192,16 @@ reentrancy/ReentrancyExploit:
 
 unchecked_external_call/KotET_source_code/KingOfTheEtherThrone:
   ignore: false
-  error: false
   issues: []
 
 unprotected_function/Unprotected:
   ignore: false
-  error: false
   issues: []
 
 unprotected_function/WalletLibrary_source_code/WalletLibrary:
   ignore: false
-  error: false
   issues: []
 
 variable shadowing/inherited_state:
   ignore: false
-  error: false
   issues: []

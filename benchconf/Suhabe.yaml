@@ -4,10 +4,17 @@
 # The top-level key is the name and file basename of the Suhabe
 # benchmark file without ".sol" extension suffix
 
-# A description of some fields:
+# A description of some fields under the top-level key:
 
-# benchmark_subdir: where under the project root
-# we'll find the benchmarksbenchmark
+# sute: name of benchmark
+# benchmark_link: URL were the main (git) repository is found
+
+# benchmark_subdir: where under the project root where
+# we'll find the benchmarks
+
+# benchmark_url_dir: URL where we can find the source
+# code for the files in the benchmark. In github this
+# has a different prefix than for browsing the source code.
 
 # bug_type: a rough classification of what we are testign
 
@@ -16,9 +23,11 @@
 # a bug which doesn't have a serious effect.
 #
 
-benchmark_subdir: benchmarks
+suite: Suhabe
+
 benchmark_link: https://github.com/ConsenSys/evm-analyzer-benchmark-suite
-benchmark_url_dir: https://raw.githubusercontent.com/ConsenSys/evm-analyzer-benchmark-suite/master/benchmarks/
+benchmark_subdir: benchmarks
+benchmark_url_dir: https://raw.githubusercontent.com/ConsenSys/evm-analyzer-benchmark-suite/master
 
 assert_constructor:
   bug_type: 'Assertion'
