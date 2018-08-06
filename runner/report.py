@@ -65,9 +65,12 @@ def print_html_report(data, project_root_dir, suite):
         return link_to("%s#L%d" % (source_url, line_number),
                        'Location')
 
-    def location_info(function_name, line_number, bytecode_offset):
+    def location_info(function_name, line_number,
+                      bytecode_offset, bench_url):
         result = '' if not function_name else 'Function: <code>%s</code>, ' % function_name
-        result += 'Line: %s, Bytecode offset: %s' % (line_number, bytecode_offset)
+        bench_line_url = "%s#L%s" % (bench_url, line_number)
+        linked_lineno = link_to(bench_line_url, "Line %d" % line_number)
+        result += '%s, Bytecode offset: %s' % (linked_lineno, bytecode_offset)
         return result
 
     def highlight_code(code):

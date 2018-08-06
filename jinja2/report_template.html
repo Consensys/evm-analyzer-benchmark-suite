@@ -24,6 +24,10 @@
     font-size: 1.17em;
     }
 
+    h5 {
+    font-size: 1.0em;
+    }
+
     .highlight .hll { background-color: #ffffcc }
     .highlight  { background: #f8f8f8; }
     .highlight .c { color: #408080; font-style: italic } /* Comment */
@@ -185,18 +189,25 @@
     <h4>Source Code</h4>
     {{source_code[bench_name]|safe}}
     {% if bench_data[bench_name]['issues']%}
-      <h4>{{data['analyzer']}} Report</h4>
+    <h4>{{data['analyzer']}} Report</h4>
+    <div style="margin-left: 1em">
       {% for issue in bench_data[bench_name]['issues']: %}
          {% if issue['code']%}
-      <h5>{{link_source_line(bench_data[bench_name]['bench_url'],
-	                     issue['lineno'])|safe}}</h5>
-      <p>{{location_info(issue['function'], issue['lineno'], issue['address'])|safe}}:</br>
-{{highlight_code(issue['code'])|safe}}
+            <h5>Issue #{{loop.index}}</h5>
+            <div style="margin-left: 1em">
+            <p>{{location_info(issue['function'], issue['lineno'],
+                      issue['address'], bench_data[bench_name]['bench_url'])|safe}}:</p>
+            <p>{{highlight_code(issue['code'])|safe}}</p>
          {% endif %}
-         <h5>Issue {{issue['title']}} ({{issue['type']}})</h5>
-         {{markdown_to_html(issue['description'])|safe}}
+	 </div>
+         <h5>{{issue['title']}} ({{issue['type']}})</h5>
+            <div style="margin-left: 1em">
+            <p>{{markdown_to_html(issue['description'])|safe}}</p>
+            </div>
       {% endfor %}
+    </div>
     {% endif %}
+
   {% endfor %}
 
   </body>
