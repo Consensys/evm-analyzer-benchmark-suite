@@ -188,11 +188,13 @@
       <h4>{{data['analyzer']}} Report</h4>
       {% for issue in bench_data[bench_name]['issues']: %}
          {% if issue['code']%}
-           <h5>Location</h5>
-           <pre>Line {{issue['lineno']}}: {{issue['code']}}</pre>
+      <h5>{{link_source_line(bench_data[bench_name]['bench_url'],
+	                     issue['lineno'])|safe}}</h5>
+      <p>{{location_info(issue['function'], issue['lineno'], issue['address'])|safe}}:</br>
+{{highlight_code(issue['code'])|safe}}
          {% endif %}
          <h5>Issue {{issue['title']}} ({{issue['type']}})</h5>
-         {{issue['description']}}
+         {{markdown_to_html(issue['description'])|safe}}
       {% endfor %}
     {% endif %}
   {% endfor %}

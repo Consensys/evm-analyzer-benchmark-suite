@@ -8,6 +8,7 @@ import click
 from pathlib import Path
 import os, yaml, sys
 from jinja2 import select_autoescape, Template
+from markdown2 import markdown
 import requests
 from pygments_lexer_solidity import SolidityLexer
 from pygments import highlight
@@ -46,14 +47,31 @@ def print_html_report(data, project_root_dir, suite):
     Write an HTML analysis report for `suite`
 
     """
+
+    # Some controller function used in the jinja2 template
     def link_to(link, text):
         return '<a href="%s">%s</a>' % (link, text)
+
+    def markdown_to_html(md):
+        return markdown(md)
 
     def link_issue_result(issue_result):
         return link_to("%s/%s" %
                        ("https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki",
                         issue_result.replace(' ','-')),
                        issue_result)
+
+    def link_source_line(source_url, line_number):
+        return link_to("%s#L%d" % (source_url, line_number),
+                       'Location')
+
+    def location_info(function_name, line_number, bytecode_offset):
+        result = '' if not function_name else 'Function: <code>%s</code>, ' % function_name
+        result += 'Line: %s, Bytecode offset: %s' % (line_number, bytecode_offset)
+        return result
+
+    def highlight_code(code):
+        return highlight(code, SolidityLexer(), HtmlFormatter())
 
     eval_colors = Eval_colors
     bug_type_links = {}
@@ -80,8 +98,7 @@ def print_html_report(data, project_root_dir, suite):
         bench_url = "%s%s%s.sol" % (base_url_dir, os.path.sep, bench_name)
         r = requests.get(bench_url_raw)
         solidity_code = r.text
-        source_code[bench_name] = highlight(solidity_code,
-                                            SolidityLexer(), HtmlFormatter())
+        source_code[bench_name] = highlight_code(solidity_code)
         bench_data[bench_name] = data['benchmarks'][bench_name]
         bench_data[bench_name]['bench_url'] = bench_url
         pass
