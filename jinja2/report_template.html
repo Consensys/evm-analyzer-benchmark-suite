@@ -192,18 +192,18 @@
     <h4>{{data['analyzer']}} Report</h4>
     <div style="margin-left: 1em">
       {% for issue in bench_data[bench_name]['issues']: %}
+         <h5>Issue #{{loop.index}}</h5>
          {% if issue['code']%}
-            <h5>Issue #{{loop.index}}</h5>
             <div style="margin-left: 1em">
             <p>{{location_info(issue['function'], issue['lineno'],
                       issue['address'], bench_data[bench_name]['bench_url'])|safe}}:</p>
             <p>{{highlight_code(issue['code'])|safe}}</p>
          {% endif %}
-	 </div>
-         <h5>{{issue['title']}} ({{issue['type']}})</h5>
+         <p><i>{{issue['title']}} ({{issue['type']}})</i></p>
             <div style="margin-left: 1em">
             <p>{{markdown_to_html(issue['description'])|safe}}</p>
             </div>
+	 </div>
       {% endfor %}
     </div>
     {% endif %}
