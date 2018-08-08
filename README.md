@@ -1,4 +1,4 @@
-# Solidity Benchmark suites for evaluating EVM code analysis tools, and code to run the suites
+# Solidity Benchmark Suites for Evaluating EVM Code-Analysis tools, and Code to Run them
 
 ## Introduction
 
