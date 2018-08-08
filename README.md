@@ -1,4 +1,4 @@
-# EVM Analyzer Benchmark Suite
+# Solidity Benchmark suites for evaluating EVM code analysis tools, and code to run the suites
 
 ## Introduction
 
