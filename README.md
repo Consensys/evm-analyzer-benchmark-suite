@@ -37,7 +37,7 @@ Here is an example of complete report generation using Mythril on the Suhabe ben
 
 ```console
 $ python runner/run.py --timeout 30 --suite Suhabe
-$ python runner/report --suite Suhabe
+$ python runner/report.py --suite Suhabe
 ```
 
 When done the directory `html/Suhabe/index.html` directory will contain the results.
