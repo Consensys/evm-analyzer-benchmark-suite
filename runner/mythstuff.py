@@ -1,17 +1,6 @@
 import os, subprocess, time, re
+
 """Mythril-related things"""
-def get_contract_name():
-    """See that solidity works and return contract name in the solity file.
-    """
-    myth_prog = os.environ.get('MYTH', 'myth')
-    cmd = [myth_prog, '--version']
-    s = subprocess.run(cmd, stdout=subprocess.PIPE)
-    if s.returncode != 0:
-        print("Failed to get run Mythril with:\n\t{}\n failed with return code {}"
-              .format(' '.join(cmd), s.returncode))
-        return None
-    # FIXME: check version
-    return myth_prog
 
 def get_myth_prog():
     """Return the mythril program name to run. Setting a name inenvironent variable MYTH
@@ -42,3 +31,4 @@ def run_myth(myth_prog, sol_file, debug, timeout):
         result = None
     elapsed = (time.time() - start)
     return elapsed, result
+
