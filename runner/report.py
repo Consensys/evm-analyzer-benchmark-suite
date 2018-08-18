@@ -6,14 +6,18 @@ top-level CLI to create an HTML benchmark report
 
 import click
 from pathlib import Path
-import os, yaml, sys
+import os
+import yaml
+import sys
 from jinja2 import select_autoescape, Template
 from markdown2 import markdown
+import pprint
 import requests
 from pygments_lexer_solidity import SolidityLexer
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
 
+pp = pprint.PrettyPrinter(indent=4)
 code_root_dir = Path(__file__).parent.resolve()
 # Make relative loading work without relative import, which
 # doesn't work with main programs
@@ -58,7 +62,7 @@ def print_html_report(data, project_root_dir, suite):
     def link_issue_result(issue_result):
         return link_to("%s/%s" %
                        ("https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki",
-                        issue_result.replace(' ','-')),
+                        issue_result.replace(' ', '-')),
                        issue_result)
 
     def link_source_line(source_url, line_number):
@@ -81,13 +85,13 @@ def print_html_report(data, project_root_dir, suite):
     for bug_type in eval_colors.keys():
         bug_type_link = (
             "%s/wiki/%s" %
-            (data['benchmark_link'], bug_type.replace(' ','-'))
-            )
+            (data['benchmark_link'], bug_type.replace(' ', '-'))
+        )
         pass
 
     html_dir = project_root_dir / 'html'
     suite_path = html_dir / suite
-    os.makedirs(suite_path, exist_ok = True)
+    os.makedirs(suite_path, exist_ok=True)
     jinja2_dir = project_root_dir / 'jinja2'
     template_path = jinja2_dir / 'report_template.html'
 
@@ -116,8 +120,6 @@ def print_html_report(data, project_root_dir, suite):
 
     open(html_path, 'w').write(t.render())
 
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
 
 # TODO add more analyzers
 @click.command()

@@ -1,4 +1,7 @@
-import os, subprocess, time, re
+import os
+import re
+import subprocess
+import time
 
 """Mythril-related things"""
 
@@ -31,4 +34,3 @@ def run_myth(myth_prog, sol_file, debug, timeout):
         result = None
     elapsed = (time.time() - start)
     return elapsed, result
-

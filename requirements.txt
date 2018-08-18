@@ -1,4 +1,6 @@
+click
 jinja2
-pygments-lexer-solidity
-pygments
 markdown2
+mythril
+pygments
+pygments-lexer-solidity

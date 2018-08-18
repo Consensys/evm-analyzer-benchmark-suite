@@ -4,8 +4,12 @@ top-level CLI to run benchmarks
 """
 from pathlib import Path
 from glob import glob
-import json, os, sys, time, yaml
 import click
+import json
+import os
+import sys
+import time
+import yaml
 
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -18,11 +22,9 @@ project_root_dir = code_root_dir.parent
 sys.path.insert(0, code_root_dir)
 from mythstuff import get_myth_prog, run_myth
 
-
 # Maximum time, in seconds, that we allow the analyzer to
 # take in analyzing a benchmark.
-DEFAULT_TIMEOUT=7.0
-
+DEFAULT_TIMEOUT = 7.0
 
 def secs_to_human(elapsed):
     "Format `elapsed` into a human-readable string with hours, minutes and seconds"
@@ -50,7 +52,7 @@ def get_benchmark_yaml(project_root_dir, suite_name, analyzer, debug):
         return {}
     testsuite_conf = yaml.load(open(testsuite_conf_path, 'r'))
     analyzer_conf_path = project_root_dir / 'benchconf' / "{}-{}.yaml".format(suite_name, analyzer)
-    analyzer_conf  = yaml.load(open(analyzer_conf_path, 'r'))
+    analyzer_conf = yaml.load(open(analyzer_conf_path, 'r'))
     # Merge two configurations
     conf = {**testsuite_conf, **analyzer_conf}
     # We still need to values are themselves dictionaries
@@ -245,8 +247,8 @@ def run_benchmark_suite(suite, verbose, timeout, files):
                 expected_issue = expected_issues.get((issue['address'], issue['title']),
                                                      None)
                 if expected_issue:
-                    if (expected_issue.get('code', issue['code']) != issue['code']
-                        or expected_issue['title'] != issue['title']):
+                    if (expected_issue.get('code', issue['code']) != issue['code'] or
+                        expected_issue['title'] != issue['title']):
                         print("Mismatched issue data in {}".format(test_name))
                         pp.pprint(expected_issue)
                         print('.' * 40)
@@ -290,11 +292,11 @@ def run_benchmark_suite(suite, verbose, timeout, files):
     for field in """expected unconfigured invalid_execution error_execution
                      timed_out ignored_benchmarks""".split():
         out_data[field] = locals()[field]
-    out_data['total_time']= total_time
+    out_data['total_time'] = total_time
     out_data['benchmark_count'] = benchmarks
 
     benchdir = code_root_dir.parent / 'benchdata' / suite
-    os.makedirs(benchdir, exist_ok = True)
+    os.makedirs(benchdir, exist_ok=True)
     with open(benchdir / (analyzer + '.yaml'), 'w') as fp:
         yaml.dump(out_data, fp)
 
