@@ -1,5 +1,18 @@
 # Solidity Benchmark Suites for Evaluating EVM Code-Analysis tools, and Code to Run them
 
+<!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
+**Table of Contents**
+
+- [Solidity Benchmark Suites for Evaluating EVM Code-Analysis tools, and Code to Run them](#solidity-benchmark-suites-for-evaluating-evm-code-analysis-tools-and-code-to-run-them)
+    - [Introduction](#introduction)
+    - [Cloning](#cloning)
+    - [Creating reports for the existing Benchmarks](#creating-reports-for-the-existing-benchmarks)
+    - [About Python Code to Run Benchmarks and Create Reports](#about-python-code-to-run-benchmarks-and-create-reports)
+    - [See also](#see-also)
+
+<!-- markdown-toc end -->
+
+
 ## Introduction
 
 This repo aims to be a collection of benchmarks suites for evaluating the precision of EVM code analysis tools
@@ -41,6 +54,52 @@ $ python runner/report.py --suite Suhabe
 ```
 
 When done the directory `html/Suhabe/index.html` directory will contain the results.
+
+## About Python Code to Run Benchmarks and Create Reports
+
+We assme the benchmark suite repositories is set up using in git via the `--recurse-submodules` switch described above. With this in place, the two Python programs are run in sequence to:
+
+* run an analyzer over a benchmark suite, and
+* generate HTML reports for a benchmark suite that we have gathered data for in the previous step
+
+The first program `runner/run.py` takes a number of command-line
+arguments; one of them is the name of a benchmark suite. From that it
+reads two YAML configuration files for the benchmark. The first YAML
+file has information about the benchmark suite: the names of the files
+in the benchmarks, whether the benchmark is supposed to succeed or
+fail with a vulnerability, and possibly other information. An example
+of such a YAML file is
+[benchconf/Suhabe.yaml](https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/blob/master/benchconf/Suhabe.yaml). The
+other YAML input configuration file is specific to the analyzer. For
+Mythril on the Suhabe benchmark, it is called
+[benchconf/Suhabe-Mythril.yaml](https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/blob/master/benchconf/Suhabe-Mythril.yaml)
+
+For each new Benchmark suite, these two YAML files will need to
+exist. The second one you can start out with an empty file.
+
+The output of
+[`runner/run.py`](https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/blob/master/runner/run.py)
+is a YAML file which is stored in the folder
+[`benchdata`](https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/tree/master/benchdata)
+with a subfolder under that with the name of the benchmark. For
+example the output of `run.py` for the Suhabe benchmark suite will be a
+file called `benchdata/Suhabe/Mythril.yaml`.
+
+The second program, called
+[`runner/report.py`](https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/blob/master/runner/report.py),
+takes the aforementioned data YAML file and creates a report from
+that.  Currently it reads the data from a single analyzer. It needs to
+be extended to read in data from all analyzers.
+
+Python module dependencies are listed in
+[`requirements.txt`](https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/blob/master/requirements.txt)
+so you can install python modules with:
+
+```console
+$ pip install -e requirements.txt
+```
+
+from the github project root.
 
 ## See also
 
