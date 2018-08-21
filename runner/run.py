@@ -191,7 +191,15 @@ def run_benchmark_suite(suite, verbose, timeout, files):
             bench_data['result'] = 'Errored'
             continue
 
-        data = json.loads(s.stdout)
+        try:
+            data = json.loads(s.stdout)
+        except:
+            print('Benchmark "{}" JSON read error: {}'.format(test_name, s.stdout))
+            bench_data['elapsed_str'] = elapsed_str
+            bench_data['result'] = 'JSON read error'
+            invalid_execution += 1
+            continue
+
         if debug:
             pp.pprint(data)
             print("=" * 30)

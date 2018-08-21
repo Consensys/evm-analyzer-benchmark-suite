@@ -35,6 +35,24 @@ Since there is a git submodule in this repository clone using the `--recurse-sub
 $ git clone --recurse-submodules https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites.git
 ```
 
+### Forgot to `--recurse-submodules` on clone
+
+_Only_ If you forget the `--recurse-submodules` on the `git clone` do the following:
+
+```console
+$ git submodule init
+Submodule 'benchmarks/Suhabe' (https://github.com/ConsenSys/evm-analyzer-benchmark-suite.git) registered for path 'benchmarks/Suhabe'
+Submodule 'benchmarks/nssc' (https://github.com/trailofbits/not-so-smart-contracts.git) registered for path 'benchmarks/nssc'
+$ git submodule update
+Cloning into '/src/external-vcs/github/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/benchmarks/Suhabe'...
+Cloning into '/src/external-vcs/github/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/nchmarks/nssc'...
+...
+```
+
+## Benchmarks have changed?
+
+If benchmarks change and you want to pull in the new benchmark code, use `git submodule update`.
+
 ## Creating reports for the existing Benchmarks
 
 The reports programs are written in Python 3.6 or better. To install dependent Python packages, run:
