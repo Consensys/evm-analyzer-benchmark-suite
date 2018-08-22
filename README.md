@@ -15,7 +15,9 @@
 
 ## Introduction
 
-This repo aims to be a collection of benchmarks suites for evaluating the precision of EVM code analysis tools
+This repo aims to be a collection of benchmarks suites for evaluating the precision of EVM code analysis tools.
+
+If you just want to see the reports created as a result of running the various analyzers over the benchmark suites, you can find that [here](https://ethereumanalysisbenchmarks.github.io/). 
 
 It started out as is a fork of Suhabe Bugara's excellent benchmark
 suite, and [this
