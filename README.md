@@ -109,16 +109,6 @@ takes the aforementioned data YAML file and creates a report from
 that.  Currently it reads the data from a single analyzer. It needs to
 be extended to read in data from all analyzers.
 
-Python module dependencies are listed in
-[`requirements.txt`](https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/blob/master/requirements.txt)
-so you can install python modules with:
-
-```console
-$ pip install -e requirements.txt
-```
-
-from the github project root.
-
 ## See also
 
 Pull Pequests and suggestions and are welcome.
