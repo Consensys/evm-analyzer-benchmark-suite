@@ -1,0 +1,118 @@
+# This contains expected results
+# when Mythril runs the (Not so) Smark Contracts benchmark
+
+# A description of some fields:
+
+# The top-level key is the name and file basename
+# of the subhabe benchmark
+# file without ".sol" extension suffix
+
+# ignore: skip test because there is a known problem.
+# When this field is true, there should be a
+# "reason:" field
+#
+# run_time: This field is optional. When given, it suggests a
+# pessimistic amount of time in seconds needed by the analyzer program
+# the to give results. If not value is given, then a value is supplied
+# by either as a command-line option or failing that through the
+# runner's built-in default which is about 7.0 seconds.
+# The value is a floating-point number.
+
+# issues: a list of issues we expect to see
+
+honeypots/GiftBox/GiftBox:
+  ignore: true
+  reason: 'Manticore hangs with an exception: NameError: name "EthereumError" is not defined'
+  run_time: 140.0
+  issues: []
+
+honeypots/KOTH/KOTH:
+  ignore: false
+  issues: []
+
+honeypots/Lottery/Lottery:
+  ignore: false
+  run_time: 70.0
+  issues:
+    - address: 1204
+      code: 'block.number - 1'
+      title: 'Unsigned integer overflow at SUB instruction'
+    - address: 1242
+      code: 'block.difficulty*(uint)(block.coinbase)'
+      title: 'Unsigned integer overflow at MUL instruction'
+    - address: 1254
+      code: 'tx.gasprice * 7'
+      title: 'Unsigned integer overflow at MUL instruction'
+
+honeypots/Multiplicator/Multiplicator:
+  ignore: false
+  issues: []
+
+honeypots/PrivateBank/PrivateBank:
+  ignore: false
+  run_time: 180.0
+  issues: []
+
+honeypots/VarLoop/VarLoop:
+  ignore: false
+  issues:
+    - address: 352
+      title: 'Integer Overflow'
+    - address: 464
+      title: 'Ether send'
+
+incorrect_interface/Alice:
+  ignore: false
+  issues: []
+
+incorrect_interface/Bob:
+  ignore: false
+  issues: []
+
+integer_overflow/interger_overflow_1:
+  ignore: false
+  issues:
+    - address: 229
+      code: 'sellerBalance += value'
+      title: 'Unsigned integer overflow at ADD instruction'
+
+missing_constructor/Missing:
+  ignore: false
+  issues: []
+
+missing_constructor/Rubixi_source_code/Rubixi:
+  ignore: false
+  issues: []
+
+race_condition/RaceCondition:
+  ignore: false
+  issues: []
+
+reentrancy/DAO_source_code/DAO:
+  ignore: false
+  issues: []
+
+reentrancy/Reentrancy:
+  ignore: false
+  issues: []
+
+reentrancy/ReentrancyExploit:
+  ignore: true
+  reason: 'Manticore hangs with an exception: ValueError: Name already used'
+  issues: []
+
+unchecked_external_call/KotET_source_code/KingOfTheEtherThrone:
+  ignore: false
+  issues: []
+
+unprotected_function/Unprotected:
+  ignore: false
+  issues: []
+
+unprotected_function/WalletLibrary_source_code/WalletLibrary:
+  ignore: false
+  issues: []
+
+variable shadowing/inherited_state:
+  ignore: false
+  issues: []

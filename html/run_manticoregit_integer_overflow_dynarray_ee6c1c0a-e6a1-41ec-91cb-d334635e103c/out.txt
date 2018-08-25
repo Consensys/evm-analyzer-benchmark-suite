@@ -1,8 +1,0 @@
-2018-05-24 17:37:02,573: [11048] m.main:INFO: Beginning analysis
-2018-05-24 17:37:04,100: [11048] m.ethereum:INFO: Starting symbolic transaction: 1
-2018-05-24 17:37:04,401: [11048] m.ethereum:INFO: Generated testcase No. 0 - REVERT
-2018-05-24 17:37:05,265: [11048] m.ethereum:INFO: Generated testcase No. 1 - REVERT
-2018-05-24 17:37:05,860: [11048] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 3 | Alive States: 1
-2018-05-24 17:37:05,871: [11678] m.ethereum:INFO: Generated testcase No. 2 - STOP
-2018-05-24 17:37:06,421: [11048] m.ethereum:INFO: Results in /home/vagrant/mcore_bgtJqu
-EXITSTATUS=0

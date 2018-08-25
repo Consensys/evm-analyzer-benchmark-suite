@@ -1,0 +1,286 @@
+# This contains expected results
+# when Mythril runs the Suhabe benchmark suite
+
+# A description of some fields:
+
+# The top-level key is the name and file basename
+# of the subhabe benchmark
+# file without ".sol" extension suffix
+
+# ignore: skip test because there is a known problem
+# shen this field is true, there should be a
+# "reason:" field
+#
+# run_time: This field is optional. When given, it suggests a
+# pessimistic amount of time in seconds needed by the analyzer program
+# the to give results. If not value is given, then a value is supplied
+# by either as a command-line option or failing that through the
+# runner's built-in default which is about 7.0 seconds.
+# The value is a floating-point number.
+
+# issues: a list of issues we expect to see
+
+assert_constructor:
+  ignore: false
+  issues:
+    - address: 96
+      code: assert(false)
+      title: Exception state
+
+assert_minimal:
+  ignore: false
+  issues:
+  - address: 96
+    code: 'assert(false)'
+    title: 'Exception state'
+
+assert_multitx_1:
+  ignore: false
+  issues:
+    - address: 99
+      code: assert(param > 0)
+      title: Exception state
+
+assert_multitx_2:
+  bug_type: 'Assertion'
+  ignore: false
+  issues:
+    - address: 161
+      code: 'assert(param > 0)'
+      title: 'Exception state'
+
+assert_require:
+  ignore: false
+  issues: []
+
+assert_sym:
+  ignore: false
+  issues:
+    - address: 120
+      code: 'assert(param > 0)'
+      title: 'Exception state'
+
+attribute_store:
+  ignore: false
+  issues: []
+
+eth_tx_order_dependence_2:
+  ignore: false
+  issues: []
+
+eth_tx_order_dependence_minimal:
+  ignore: false
+  issues:
+    - address: 554
+      code: 'owner.transfer(reward)'
+      title: 'Ether send'
+    - address: 554
+      code: 'owner.transfer(reward)'
+      title: 'Transaction order dependence'
+    - address: 716
+      code: 'msg.sender.transfer(reward)'
+      title: 'Ether send'
+    - address: 716
+      code: 'msg.sender.transfer(reward)'
+      title: 'Transaction order dependence'
+
+eth_tx_order_dependence_multitx_1:
+  ignore: false
+
+eth_tx_order_dependence_puzzle:
+  ignore: false
+  run_time: 120.0
+  # Note the dup issues  below
+  issues:
+    - address: 316
+      code: 'owner.transfer(reward)'
+      title: 'Ether send'
+    - address: 316
+      code: 'owner.transfer(reward)'
+      title: 'Transaction order dependence'
+    - address: 551
+      code: 'owner.transfer(reward)'
+      title: 'Transaction order dependence'
+    - address: 551
+      code: 'owner.transfer(reward)'
+      title: 'Transaction order dependence'
+    - address: 1416
+      title: 'Integer Overflow'
+
+integer_overflow_add:
+  ignore: false
+  issues:
+    - address: 174
+      code: 'count += input'
+      title: 'Integer Overflow'
+
+integer_overflow_benign_1:
+  ignore: false
+  issues: []
+
+integer_overflow_benign_2:
+  ignore: false
+  run_time: 30.0
+  issues:
+    - address: 231
+      code: "sub(a,b)"
+      title: 'Integer Underflow'
+    - address: 246
+      code: "add(res,b)"
+      title: 'Integer Overflow'
+
+integer_overflow_bytes_param:
+  ignore: false
+  run_time: 30.0
+
+integer_overflow_dynarray:
+  ignore: false
+  issues:
+    - title: Integer Overflow
+      address: 498
+
+integer_overflow_mapping_staticarray:
+  ignore: false
+  issues: []
+
+integer_overflow_mapping_strkey:
+  ignore: false
+  run_time: 35.0
+
+integer_overflow_mapping_struct:
+  ignore: false
+
+integer_overflow_mapping_sym_1:
+  ignore: false
+  issues:
+    - address: 145
+      code: 'map[k] -= v'
+      title: 'Integer Underflow'
+
+integer_overflow_mapping_sym_2:
+  ignore: false
+  issues: []
+
+integer_overflow_mapping_mapping:
+  ignore: false
+  issues: []
+
+integer_overflow_mapping_word:
+  ignore: false
+  issues: []
+
+integer_overflow_minimal:
+  ignore: false
+  issues:
+    - address: 174
+      code: 'count -= input'
+      title: 'Integer Underflow'
+
+integer_overflow_mul:
+  ignore: false
+  issues:
+    - address: 174
+      code: 'count *= input'
+      title: 'Integer Overflow'
+
+integer_overflow_multitx_multifunc_feasible:
+  ignore: false
+  issues:
+    - address: 218
+      code: 'count -= input'
+      title: 'Integer Underflow'
+
+
+integer_overflow_multitx_onefunc_feasible:
+  ignore: false
+  issues:
+    - address: 196
+      code: 'count -= input'
+      title: 'Integer Underflow'
+
+integer_overflow_multitx_onefunc_infeasible:
+  ignore: false
+  issues:
+    - address: 188
+      code: 'count -= input'
+      title: 'Integer Underflow'
+
+integer_overflow_path_1:
+  ignore: false
+  issues: []
+
+integer_overflow_staticarray:
+  ignore: false
+  issues:
+    - address: 196
+      code: 'count -= input'
+      title: 'Integer Underflow'
+
+integer_overflow_storageinvariant:
+  ignore: false
+  benign: true
+  issues:
+    - address: 267
+      code: 'balance -= oCredit'
+      title: 'Integer Underflow'
+    - address: 418
+      code: 'credit[msg.sender] += msg.value'
+      title: 'Integer Overflow'
+    - address: 434
+      code: 'balance += msg.value'
+      title: 'Integer Overflow'
+
+integer_overflow_storagepacking:
+  ignore: false
+  issues:
+    - address: 267
+      code: 'balance -= oCredit'
+      title: 'Integer Underflow'
+    - address: 418
+      code: 'credit[msg.sender] += msg.value'
+      title: 'Integer Overflow'
+    - address: 434
+      code: 'balance += msg.value'
+      title: 'Integer Overflow'
+
+reentrancy_dao:
+  ignore: false
+  issues:
+    - address: 200
+      code: 'balance -= oCredit'
+      title: 'Integer Underflow'
+    - address: 247
+      code: 'msg.sender.call.value(oCredit)()'
+      title: 'Message call to external contract'
+    - address: 332
+      code: 'credit[msg.sender] = 0'
+      title: 'State change after external call'
+    - address: 407
+      code: 'credit[msg.sender] += msg.value'
+      title: 'Integer Overflow'
+    - address: 423
+      code: 'balance += msg.value'
+      title: 'Integer Overflow'
+
+reentrancy_dao_fixed:
+  ignore: false
+  issues:
+    - address: 200
+      code: 'balance -= oCredit'
+      title: 'Integer Underflow'
+    - address: 315
+      code: 'msg.sender.call.value(oCredit)()'
+      title: 'Message call to external contract'
+    - address: 407
+      code: 'credit[msg.sender] += msg.value'
+      title: 'Integer Overflow'
+    - address: 423
+      code: 'balance += msg.value'
+      title: 'Integer Overflow'
+
+reentrancy_nostateeffect:
+  ignore: false
+  issues:
+    - address: 261
+      code: 'Runner(base).run(param)'
+      title: 'Message call to external contract'

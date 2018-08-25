@@ -1,9 +1,0 @@
-2018-05-24 17:37:27,358: [12709] m.main:INFO: Beginning analysis
-2018-05-24 17:37:27,753: [12709] m.ethereum:INFO: Starting symbolic transaction: 1
-2018-05-24 17:37:28,002: [12709] m.ethereum:INFO: Generated testcase No. 0 - REVERT
-2018-05-24 17:37:30,837: [12709] m.ethereum:WARNING: Integer overflow at ADD instruction
-2018-05-24 17:37:30,963: [12709] m.ethereum:INFO: Generated testcase No. 1 - REVERT
-2018-05-24 17:37:32,254: [12709] m.ethereum:INFO: Finished symbolic transaction: 1 | Code Coverage: 0% | Terminated States: 3 | Alive States: 1
-2018-05-24 17:37:32,264: [13037] m.ethereum:INFO: Generated testcase No. 2 - STOP
-2018-05-24 17:37:33,796: [12709] m.ethereum:INFO: Results in /home/vagrant/mcore_fatqvA
-EXITSTATUS=0

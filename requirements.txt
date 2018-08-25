@@ -1,0 +1,8 @@
+click
+jinja2
+markdown2
+PyYAML
+click
+mythril
+pygments
+pygments-lexer-solidity
