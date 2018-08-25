@@ -41,7 +41,7 @@ assert_minimal:
 
 assert_multitx_1:
   bug_type: 'Assertion'
-  has_bug: false
+  has_bug: true
 
 assert_multitx_2:
   bug_type: 'Assertion'
@@ -96,7 +96,7 @@ integer_overflow_bytes_param:
 
 integer_overflow_dynarray:
   bug_type: 'Integer Overflow'
-  has_bug: false
+  has_bug: true
 
 integer_overflow_mapping_mapping:
   bug_type: 'Integer Overflow'
@@ -145,7 +145,7 @@ integer_overflow_multitx_onefunc_feasible:
 
 integer_overflow_multitx_onefunc_infeasible:
   bug_type: 'Integer Overflow'
-  has_bug: false
+  has_bug: true
   link: "https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-integer_overflow_multitex_onefuc_infeasible"
 
 integer_overflow_path_1:
@@ -154,17 +154,17 @@ integer_overflow_path_1:
 
 integer_overflow_staticarray:
   bug_type: 'Integer Overflow'
-  has_bug: false
+  has_bug: true
 
 integer_overflow_storageinvariant:
   bug_type: 'Integer Overflow'
-  has_bug: "benign"
+  has_bug: true
   link: "https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites/wiki/suhabe-integer_overflow_storageinvariant"
 
 integer_overflow_storagepacking:
   bug_type: 'Integer Overflow'
   ignore: false
-  has_bug: false
+  has_bug: true
 
 reentrancy_dao:
   bug_type: 'Callback Effect-Free'

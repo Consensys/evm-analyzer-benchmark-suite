@@ -1,5 +1,5 @@
 # This contains expected results
-# when Mythril runs the Suhabe benchmark suite
+# when Manticore runs the Suhabe benchmark suite
 
 # A description of some fields:
 
@@ -8,7 +8,7 @@
 # file without ".sol" extension suffix
 
 # ignore: skip test because there is a known problem
-# shen this field is true, there should be a
+# When this field is true, there should be a
 # "reason:" field
 #
 # run_time: This field is optional. When given, it suggests a
@@ -23,31 +23,29 @@
 assert_constructor:
   ignore: false
   issues:
-    - address: 96
-      code: assert(false)
-      title: Exception state
+    - address: 24
+      code: 'assert(false)'
+      title: 'INVALID instruction'
 
 assert_minimal:
   ignore: false
   issues:
-  - address: 96
-    code: 'assert(false)'
-    title: 'Exception state'
+    - address: 96
+      code: 'assert(false)'
+      title: 'INVALID instruction'
 
 assert_multitx_1:
+  run_time: 120.0
   ignore: false
-  issues:
-    - address: 99
-      code: assert(param > 0)
-      title: Exception state
 
 assert_multitx_2:
   bug_type: 'Assertion'
+  run_time: 120.0
   ignore: false
   issues:
     - address: 161
       code: 'assert(param > 0)'
-      title: 'Exception state'
+      title: 'INVALID instruction'
 
 assert_require:
   ignore: false
@@ -58,10 +56,11 @@ assert_sym:
   issues:
     - address: 120
       code: 'assert(param > 0)'
-      title: 'Exception state'
+      title: 'INVALID instruction'
 
 attribute_store:
-  ignore: false
+  ignore: true
+  reason: Manticore bug
   issues: []
 
 eth_tx_order_dependence_2:
@@ -70,19 +69,7 @@ eth_tx_order_dependence_2:
 
 eth_tx_order_dependence_minimal:
   ignore: false
-  issues:
-    - address: 554
-      code: 'owner.transfer(reward)'
-      title: 'Ether send'
-    - address: 554
-      code: 'owner.transfer(reward)'
-      title: 'Transaction order dependence'
-    - address: 716
-      code: 'msg.sender.transfer(reward)'
-      title: 'Ether send'
-    - address: 716
-      code: 'msg.sender.transfer(reward)'
-      title: 'Transaction order dependence'
+  issues: []
 
 eth_tx_order_dependence_multitx_1:
   ignore: false
@@ -91,28 +78,14 @@ eth_tx_order_dependence_puzzle:
   ignore: false
   run_time: 120.0
   # Note the dup issues  below
-  issues:
-    - address: 316
-      code: 'owner.transfer(reward)'
-      title: 'Ether send'
-    - address: 316
-      code: 'owner.transfer(reward)'
-      title: 'Transaction order dependence'
-    - address: 551
-      code: 'owner.transfer(reward)'
-      title: 'Transaction order dependence'
-    - address: 551
-      code: 'owner.transfer(reward)'
-      title: 'Transaction order dependence'
-    - address: 1416
-      title: 'Integer Overflow'
+  issues: []
 
 integer_overflow_add:
   ignore: false
   issues:
-    - address: 174
+    - address: 175
       code: 'count += input'
-      title: 'Integer Overflow'
+      title: 'Unsigned integer overflow at ADD instruction'
 
 integer_overflow_benign_1:
   ignore: false
@@ -124,10 +97,10 @@ integer_overflow_benign_2:
   issues:
     - address: 231
       code: "sub(a,b)"
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at ADD instruction'
     - address: 246
       code: "add(res,b)"
-      title: 'Integer Overflow'
+      title: 'Unsigned integer overflow at ADD instruction'
 
 integer_overflow_bytes_param:
   ignore: false
@@ -136,8 +109,12 @@ integer_overflow_bytes_param:
 integer_overflow_dynarray:
   ignore: false
   issues:
-    - title: Integer Overflow
+    - title: 'Unsigned integer overflow at SET instruction'
       address: 498
+
+integer_overflow_mapping_mapping:
+  ignore: false
+  issues: []
 
 integer_overflow_mapping_staticarray:
   ignore: false
@@ -153,15 +130,11 @@ integer_overflow_mapping_struct:
 integer_overflow_mapping_sym_1:
   ignore: false
   issues:
-    - address: 145
+    - address: 146
       code: 'map[k] -= v'
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at SUB instruction'
 
 integer_overflow_mapping_sym_2:
-  ignore: false
-  issues: []
-
-integer_overflow_mapping_mapping:
   ignore: false
   issues: []
 
@@ -172,38 +145,38 @@ integer_overflow_mapping_word:
 integer_overflow_minimal:
   ignore: false
   issues:
-    - address: 174
+    - address: 175
       code: 'count -= input'
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at SUB instruction'
 
 integer_overflow_mul:
   ignore: false
   issues:
-    - address: 174
+    - address: 175
       code: 'count *= input'
-      title: 'Integer Overflow'
+      title: 'Unsigned integer overflow at MUL instruction'
 
 integer_overflow_multitx_multifunc_feasible:
   ignore: false
   issues:
-    - address: 218
+    - address: 219
       code: 'count -= input'
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at SUB instruction'
 
 
 integer_overflow_multitx_onefunc_feasible:
   ignore: false
   issues:
-    - address: 196
+    - address: 197
       code: 'count -= input'
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at SUB instruction'
 
 integer_overflow_multitx_onefunc_infeasible:
   ignore: false
   issues:
-    - address: 188
+    - address: 189
       code: 'count -= input'
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at SUB instruction'
 
 integer_overflow_path_1:
   ignore: false
@@ -214,73 +187,70 @@ integer_overflow_staticarray:
   issues:
     - address: 196
       code: 'count -= input'
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at SUB instruction'
 
 integer_overflow_storageinvariant:
   ignore: false
   benign: true
   issues:
-    - address: 267
+    - address: 268
       code: 'balance -= oCredit'
-      title: 'Integer Underflow'
-    - address: 418
+      title: 'Unsigned integer overflow at SUB instruction'
+    - address: 419
       code: 'credit[msg.sender] += msg.value'
-      title: 'Integer Overflow'
-    - address: 434
+      title: 'Unsigned integer overflow at ADD instruction'
+    - address: 435
       code: 'balance += msg.value'
-      title: 'Integer Overflow'
+      title: 'Unsigned integer overflow at ADD instruction'
 
 integer_overflow_storagepacking:
   ignore: false
   issues:
     - address: 267
       code: 'balance -= oCredit'
-      title: 'Integer Underflow'
-    - address: 418
+      title: 'Unsigned integer overflow at SUB instruction'
+    - address: 419
       code: 'credit[msg.sender] += msg.value'
-      title: 'Integer Overflow'
-    - address: 434
+      title: 'Unsigned integer overflow at ADD instruction'
+    - address: 435
       code: 'balance += msg.value'
-      title: 'Integer Overflow'
+      title: 'Unsigned integer overflow at ADD instruction'
 
 reentrancy_dao:
   ignore: false
   issues:
-    - address: 200
+    - address: 201
       code: 'balance -= oCredit'
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at SUB instruction'
     - address: 247
       code: 'msg.sender.call.value(oCredit)()'
       title: 'Message call to external contract'
     - address: 332
       code: 'credit[msg.sender] = 0'
       title: 'State change after external call'
-    - address: 407
+    - address: 408
       code: 'credit[msg.sender] += msg.value'
-      title: 'Integer Overflow'
-    - address: 423
+      title: 'Unsigned integer overflow at ADD instruction'
+    - address: 424
       code: 'balance += msg.value'
-      title: 'Integer Overflow'
+      title: 'Unsigned integer overflow at ADD instruction'
 
 reentrancy_dao_fixed:
   ignore: false
   issues:
     - address: 200
       code: 'balance -= oCredit'
-      title: 'Integer Underflow'
+      title: 'Unsigned integer overflow at SUB instruction'
     - address: 315
       code: 'msg.sender.call.value(oCredit)()'
       title: 'Message call to external contract'
-    - address: 407
+    - address: 408
       code: 'credit[msg.sender] += msg.value'
-      title: 'Integer Overflow'
-    - address: 423
+      title: 'Unsigned integer overflow at ADD instruction'
+    - address: 424
       code: 'balance += msg.value'
-      title: 'Integer Overflow'
+      title: 'Unsigned integer overflow at ADD instruction'
 
 reentrancy_nostateeffect:
   ignore: false
-  issues:
-    - address: 261
-      code: 'Runner(base).run(param)'
-      title: 'Message call to external contract'
+  issues: []

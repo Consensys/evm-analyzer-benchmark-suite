@@ -104,7 +104,7 @@
   </head>
   <body>
     <!--- FIXME: use css better -->
-    <h1>Analysis Tool Evaluation for the <a href="{{data['benchmark_link']}}">{{data['suite']}}</a> Benchmark {{data['date']}}</h1>
+    <h1>Analysis Tool Evaluation for the <a href="{{data['benchmark_link']}}">{{data['suite']}}</a> Benchmark</h1>
 
     <p>This page shows the results EVM code analysis tools when run over the <a href="{{data['benchmark_link']}}">{{data['suite']}}</a> benchmark suite.
       The code is <a href="https://github.com/EthereumAnalysisBenchmarks/evm-analyzer-bench-suites">hosted on github</a>.<br>
@@ -128,85 +128,100 @@
       <tr style="font-weight: bold">
         <td>Bug Type</td>
         <td>Benchmark</td>
-        <td colspan="2">
-          {{data['analyzer']}}
-          <br>
-          <span style="font-size: 10px">{{data['mythril_version']}}</span>
+        {% for analyzer in data['analyzers'].keys() %}
+          <td colspan="2">
+            {{analyzer}}
+            <br>
+            <span style="font-size: 10px">{{data['analyzers'][analyzer]['version']}}</span>
+          </td>
+        {% endfor %}
       </tr>
       {% for bench_name in data['benchmarks'].keys() %}
       <tr>
-        <td>{{bench_data[bench_name]['bug_type']}}</td>
+        <td>{{data['benchmarks'][bench_name]['bug_type']}}</td>
         <td><a href="#{{bench_name}}">{{bench_name}}</td>
-        <td>{{bench_data[bench_name]['elapsed_str']}}</td>
-        <td style="background-color:
-            {{eval_colors[bench_data[bench_name]['result']]}}">
-	  {{link_issue_result(bench_data[bench_name]['result'])|safe}}</td>
-	{% endfor %}
+        {% for analyzer in data['analyzers'].keys() %}
+          <td>{{bench_data[bench_name][analyzer]['elapsed_str']}}</td>
+          <td style="background-color:
+              {{eval_colors[bench_data[bench_name][analyzer]['result']]}}">
+          {{link_issue_result(bench_data[bench_name][analyzer]['result'])|safe}}</td>
+        {% endfor %}
+	    {% endfor %}
       </tr>
       <tr>
         <td><b>summary stats</b></td>
         <td>{{data['benchmark_count']}} tests</td>
-        <td>{{data['total_time_str']}}</td>
-        <td>{{data['expected']}} expected, {{data['error_execution']}} unexpected
-	  <!-- <br>
-	       {{data['skipped']}}
-	    -->
-	</td>
+        {% for analyzer, result in data['analyzers'].items() %}
+          <td>{{result['total_time_str']}}</td>
+          <td>{{result['expected']}} expected, {{result['error_execution']}} unexpected</td>
+        {% endfor %}
       </tr>
     </table>
 
-    <!--- breakout per result ---->
-    <h2 id="results">Results Details</h2>
+  <!--- breakout per result ---->
 
-    {% for bench_name in data['benchmarks'].keys() %}
+  <h2 id="results">Results Details</h2>
+
+  {% for bench_name in data['benchmarks'].keys() %}
     <hr>
     <h3 id={{bench_name}}>
-      {{link_to(bench_data[bench_name]['bench_url'],bench_name)|safe}}
+      {{link_to(bench_data[bench_name]['bench_url'], bench_name)|safe}}
     </h3>
     <table>
       <tr style="font-weight: bold">
         <td>Bug Type</td>
-	  {% if 'link' in bench_data[bench_name]['expected_data'] %}
-	<td>Description</td>
-	{% endif %}
-        <td colspan="2">
-          {{data['analyzer']}}
-          <br>
-          <span style="font-size: 10px">{{data['mythril_version']}}</span>
+        {% if 'link' in bench_data[bench_name] %}
+          <td>Description</td>
+        {% endif %}
+        {% for analyzer in data['analyzers'].keys() %}
+          <td>
+            {{analyzer}}
+            <br>
+            <span style="font-size: 10px">{{data['analyzers'][analyzer]['version']}}</span>
+          </td>
+        {% endfor %}
       </tr>
       <tr>
-        <td>{{bench_data[bench_name]['bug_type']}}</td>
-	{% if 'link' in bench_data[bench_name]['expected_data'] %}
-	<td>
-	  <a href="{{bench_data[bench_name]['expected_data']['link']}}">link</a>
-	</td>
-	{% endif %}
-        <td style="background-color:
-		   {{eval_colors[bench_data[bench_name]['result']]}}">
-	  {{link_issue_result(bench_data[bench_name]['result'])|safe}}</td>
+        <td>{{data['benchmarks'][bench_name]['bug_type']}}</td>
+        {% if 'link' in bench_data[bench_name] %}
+          <td>
+            <a href="{{bench_data[bench_name]['link']}}">link</a>
+          </td>
+        {% endif %}
+        {% for analyzer in data['analyzers'].keys() %}
+          <td style="background-color:
+              {{eval_colors[bench_data[bench_name][analyzer]['result']]}}">
+            {{link_issue_result(bench_data[bench_name][analyzer]['result'])|safe}}
+          </td>
+        {% endfor %}
       </tr>
     </table>
     <h4>Source Code</h4>
-    {{source_code[bench_name]|safe}}
-    {% if bench_data[bench_name]['issues']%}
-    <h4>{{data['analyzer']}} Report</h4>
-    <div style="margin-left: 1em">
-      {% for issue in bench_data[bench_name]['issues']: %}
-         <h5>Issue #{{loop.index}}</h5>
-         {% if issue['code']%}
-            <div style="margin-left: 1em">
-            <p>{{location_info(issue['function'], issue['lineno'],
-                      issue['address'], bench_data[bench_name]['bench_url'])|safe}}:</p>
-            <p>{{highlight_code(issue['code'])|safe}}</p>
-         {% endif %}
-         <p><i>{{issue['title']}} ({{issue['type']}})</i></p>
-            <div style="margin-left: 1em">
-            <p>{{markdown_to_html(issue['description'])|safe}}</p>
-            </div>
-	 </div>
+      {{source_code[bench_name]|safe}}
+
+      {% for analyzer in data['analyzers'].keys() %}
+        {% if bench_data[bench_name][analyzer]['issues']%}
+          <h4>{{analyzer}} Report</h4>
+          <div style="margin-left: 1em">
+            {% for issue in bench_data[bench_name][analyzer]['issues']: %}
+              <h5>Issue #{{loop.index}}</h5>
+              {% if issue['code']%}
+                <div style="margin-left: 1em">
+                  <p>{{location_info(issue['function'], issue['lineno'],
+                            issue['address'], bench_data[bench_name]['bench_url'])|safe}}:</p>
+                  <p>{{highlight_code(issue['code'])|safe}}</p>
+                </div>
+              {% endif %}
+              <p><i>{{issue['title']}} ({{issue['type']}})</i></p>
+              {% if issue['description'] %}
+                <div style="margin-left: 1em">
+                  <p>{{markdown_to_html(issue['description'])|safe}}</p>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
       {% endfor %}
-    </div>
-    {% endif %}
 
   {% endfor %}
 

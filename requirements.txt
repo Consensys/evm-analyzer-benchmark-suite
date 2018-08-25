@@ -2,3 +2,5 @@ jinja2
 pygments-lexer-solidity
 pygments
 markdown2
+PyYAML
+click
