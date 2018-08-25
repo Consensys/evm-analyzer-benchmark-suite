@@ -2,7 +2,6 @@
 """
 top-level CLI to run benchmarks
 """
-
 import os, sys, time
 import yaml
 import click
@@ -19,7 +18,6 @@ project_root_dir = code_root_dir.parent
 # Make relative loading work without relative import, which
 # doesn't work with main programs
 sys.path.insert(0, code_root_dir)
-
 
 # Maximum time, in seconds, that we allow the analyzer to
 # take in analyzing a benchmark.

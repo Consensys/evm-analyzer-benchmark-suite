@@ -19,7 +19,6 @@ from pygments.formatters import HtmlFormatter
 from analysers import list_analysers
 
 pp = pprint.PrettyPrinter(indent=4)
-
 code_root_dir = Path(__file__).parent.resolve()
 # Make relative loading work without relative import, which
 # doesn't work with main programs
@@ -27,24 +26,24 @@ sys.path.insert(0, code_root_dir)
 
 code_dir = Path(__file__).parent.resolve()
 
-RGB_RED = "rgba(255, 145, 164, .4)"
-RGB_GREEN = "rgba(80, 200, 120, .4)"
+RGB_RED    = "rgba(255, 145, 164, .4)"
+RGB_GREEN  = "rgba(80, 200, 120, .4)"
 RGB_YELLOW = "rgba(253, 195, 83, .4)"
-RGB_GREY = "rgba(128, 128, 128, .4)"
+RGB_GREY   = "rgba(128, 128, 128, .4)"
 
 Eval_colors = {
     # Unsupported("rgba(255, 145, 164, .4)", "Unsupported"),
-    'False Positive': RGB_RED,
-    'False Negative': RGB_RED,
-    'Errored': RGB_RED,
+    'False Positive'     : RGB_RED,
+    'False Negative'     : RGB_RED,
+    'Errored'            : RGB_RED,
     'Wrong Vulnerability': RGB_RED,
-    'True Positive': RGB_GREEN,
-    'True Negative': RGB_GREEN,
-    'Analysis Failed': RGB_YELLOW,
-    'Ignored': RGB_YELLOW,
-    'Timed Out': RGB_YELLOW,
-    'Too Long': RGB_YELLOW,
-    'Unconfigured': RGB_GREY,
+    'True Positive'      : RGB_GREEN,
+    'True Negative'      : RGB_GREEN,
+    'Analysis Failed'    : RGB_YELLOW,
+    'Ignored'            : RGB_YELLOW,
+    'Timed Out'          : RGB_YELLOW,
+    'Too Long'           : RGB_YELLOW,
+    'Unconfigured'       : RGB_GREY,
 }
 
 
