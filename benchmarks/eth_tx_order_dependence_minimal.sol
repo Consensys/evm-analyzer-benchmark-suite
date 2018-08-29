@@ -5,7 +5,7 @@ contract EthTxOrderDependenceMinimal {
     bool public claimed;
     uint public reward;
 
-    function Benchmark() public {
+    function EthTxOrderDependenceMinimal() public {
         owner = msg.sender;
     }
 

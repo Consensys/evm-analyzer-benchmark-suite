@@ -1,6 +1,6 @@
 pragma solidity ^0.4.19;
 
-contract Benchmark {
+contract AssertConstructor {
     function AssertConstructor() public {
         assert(false);
     }

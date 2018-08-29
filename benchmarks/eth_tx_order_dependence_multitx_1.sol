@@ -6,7 +6,7 @@ contract EtxTxOrderDependenceMultiTx1 {
     uint256 public reward;
     bool public freezeReward;
 
-    function Benchmark() public {
+    function EtxTxOrderDependenceMultiTx1() public {
         owner = msg.sender;
     }
 
