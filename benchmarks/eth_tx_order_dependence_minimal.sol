@@ -1,6 +1,6 @@
 pragma solidity ^0.4.16;
 
-contract Benchmark {
+contract EthTxOrderDependenceMinimal {
     address public owner;
     bool public claimed;
     uint public reward;

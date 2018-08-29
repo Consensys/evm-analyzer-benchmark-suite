@@ -1,7 +1,7 @@
 //Adapted from Oyente paper
 pragma solidity ^0.4.16;
 
-contract Benchmark {
+contract EtxTxOrderDependencePuzzle {
     address public owner ;
     bool public locked ;
     uint public reward ;

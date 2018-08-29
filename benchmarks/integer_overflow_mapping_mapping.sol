@@ -2,7 +2,7 @@
 //  keccak(bytes32(k) + bytes32(position['tuples']))+offset['a']
 pragma solidity ^0.4.11;
 
-contract Benchmark {
+contract IntegerOverflowMapping {
     mapping(uint256 => mapping (uint256 => Tuple)) maps;
 
     struct Tuple {

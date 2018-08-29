@@ -1,6 +1,6 @@
 pragma solidity ^0.4.19;
 
-contract Benchmark {
+contract AssertMultiTx {
     uint256 private param;
 
     function Benchmark(uint256 _param) public {

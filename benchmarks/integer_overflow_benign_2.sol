@@ -3,7 +3,7 @@
 
 pragma solidity ^0.4.19;
 
-contract Benchmark {
+contract IntegerOverflowBenign2 {
     uint public count;
 
     function run(uint256 input) public {

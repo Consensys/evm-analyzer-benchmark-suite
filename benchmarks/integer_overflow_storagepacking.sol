@@ -2,7 +2,7 @@
 //solc generates MUL instruction that operates on compile-time constants to
 //  extract variable a (or b) from packed storage slot.
 pragma solidity ^0.4.11;
-contract C {
+contract IntegerOverflowStoragePackaging {
     uint128 a;
     uint128 b;
     function C() public {

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.16;
 
-contract Benchmark {
+contract EthTxOrderDependence2 {
     uint256 public reward;
     address owner;
 
