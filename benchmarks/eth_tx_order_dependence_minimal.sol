@@ -1,11 +1,11 @@
 pragma solidity ^0.4.16;
 
-contract Benchmark {
+contract EthTxOrderDependenceMinimal {
     address public owner;
     bool public claimed;
     uint public reward;
 
-    function Benchmark() public {
+    function EthTxOrderDependenceMinimal() public {
         owner = msg.sender;
     }
 

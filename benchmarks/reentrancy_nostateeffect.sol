@@ -4,7 +4,7 @@ interface Runner {
     function run(uint256 param) external;
 }
 
-contract Benchmark {
+contract ReentrancyNoStateEffect {
 
     function run(address base, uint256 param) public {
         Runner(base).run(param);

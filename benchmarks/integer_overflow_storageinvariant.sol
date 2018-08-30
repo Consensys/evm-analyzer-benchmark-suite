@@ -1,7 +1,7 @@
 //No underflow because of credit/balance invariant: sum (credit.values) = balance
 pragma solidity ^0.4.19;
 
-contract Benchmark {
+contract IntegerOverflowStorageInvariant {
     mapping (address => uint) credit;
     uint balance;
 

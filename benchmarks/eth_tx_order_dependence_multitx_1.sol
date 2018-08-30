@@ -1,12 +1,12 @@
 pragma solidity ^0.4.16;
 
-contract Benchmark {
+contract EtxTxOrderDependenceMultiTx1 {
     address public owner;
     bool public claimed;
     uint256 public reward;
     bool public freezeReward;
 
-    function Benchmark() public {
+    function EtxTxOrderDependenceMultiTx1() public {
         owner = msg.sender;
     }
 

@@ -2,7 +2,7 @@
 //
 pragma solidity ^0.4.11;
 
-contract Benchmark {
+contract IntegerOverflowDynArray {
 
     uint128[] private s;
 

@@ -3,7 +3,7 @@
 
 pragma solidity ^0.4.19;
 
-contract Benchmark {
+contract IntegerOverflowMultiTxMultiFuncFeasible {
     uint256 private initialized = 0;
     uint256 public count = 1;
 
