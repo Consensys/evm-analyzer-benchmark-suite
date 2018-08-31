@@ -3,7 +3,7 @@ https://github.com/Modular-Network/ethereum-libraries/blob/master/BasicMathLib/B
 
 ```solidity
 //Single transaction overflow
-//Post-transaction effect: overflow never escapes function
+//Post-transaction effect: underflow never escapes function
 ```
 
 Note that
@@ -14,7 +14,7 @@ Note that
     }
 ```
 
-is equivalent to
+is equivalent to:
 
 ```solidity
     function run(uint256 input) public {
@@ -23,5 +23,4 @@ is equivalent to
 ```
 
 
-Ideally tools wouldn't report an overflow bug on this benchmark, even
-though the variable, `res` itself actually overflows.
+See also https://github.com/EthereumAnalysisBenchmarks/ethereum-analyzer-suites-runner/wiki/Benign
